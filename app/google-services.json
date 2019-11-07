@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285740881901",
+    "firebase_url": "https://marketplace-desa.firebaseio.com",
+    "project_id": "marketplace-desa",
+    "storage_bucket": "marketplace-desa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285740881901:android:277aa8bf6e0b443abab9e4",
+        "android_client_info": {
+          "package_name": "c.m.marketplacedesa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285740881901-bhl7aq7365esks7n37s1f227qlb9buba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "c.m.marketplacedesa",
+            "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
+          }
+        },
+        {
+          "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoJLwoalP8jF4VeAiH0tgSfMCv-7MkCZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
