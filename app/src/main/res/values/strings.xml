@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Marketplace Desa</string>
+    <string name="user">User</string>
+    <string name="cart">Cart</string>
+    <string name="setting">Setting</string>
 </resources>
