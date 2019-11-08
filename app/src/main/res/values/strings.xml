@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Marketplace Desa</string>
-    <string name="user">User</string>
+    <string name="profile">Profile</string>
     <string name="cart">Cart</string>
     <string name="setting">Setting</string>
+    <string name="no_data">No Data</string>
+    <string name="image_store_description">Image Store</string>
+    <string name="background_gradient_description">Background Gradient</string>
+    <string name="search">Search</string>
 </resources>
