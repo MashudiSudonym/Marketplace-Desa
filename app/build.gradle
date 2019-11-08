@@ -89,10 +89,11 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     // Badge
     implementation 'com.mikepenz:actionitembadge:4.0.0'
-
     //SUB-DEPENDENCIES
     //Android-Iconics - used to provide an easy API for icons
     implementation 'com.mikepenz:iconics-core:4.0.0@aar'
+    // Permission Library
+    implementation 'pub.devrel:easypermissions:3.0.0'
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'
