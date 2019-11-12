@@ -1,0 +1,19 @@
+{
+  "store": {
+    "id": {
+      "owner": "BFaZz6QigLxHAS86N0vR",
+      "name": "Toko Listrik Andalan",
+      "uid": "IGYwNVyZWsMZ0nlW2VD4",
+      "edited_at": {
+        "_seconds": 1573139340,
+        "_nanoseconds": 0
+      },
+      "created_at": {
+        "_seconds": 1573136760,
+        "_nanoseconds": 0
+      },
+      "address": "Jl.R.M.Sosro Diningrat. Ngabul. Tahunan. Jepara",
+      "image_profile_store": "https://firebasestorage.googleapis.com/v0/b/marketplace-desa.appspot.com/o/trial%2Fandroid10hero.jpg?alt=media&token=dd84e07f-f729-4e5c-95b9-86c0557da8c7"
+    }
+  }
+}
