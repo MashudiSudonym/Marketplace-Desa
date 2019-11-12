@@ -1,7 +1,8 @@
-package c.m.marketplacedesa
+package c.m.marketplacedesa.ui.product
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import c.m.marketplacedesa.R
 import kotlinx.android.synthetic.main.activity_product.*
 
 class ProductActivity : AppCompatActivity() {

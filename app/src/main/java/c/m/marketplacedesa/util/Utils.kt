@@ -1,4 +1,4 @@
-package c.m.marketplacedesa
+package c.m.marketplacedesa.util
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -12,6 +12,8 @@ import android.os.Build
 import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import c.m.marketplacedesa.R
+import c.m.marketplacedesa.ui.main.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 

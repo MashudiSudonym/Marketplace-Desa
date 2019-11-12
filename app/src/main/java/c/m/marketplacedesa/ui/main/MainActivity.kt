@@ -1,10 +1,11 @@
-package c.m.marketplacedesa
+package c.m.marketplacedesa.ui.main
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import c.m.marketplacedesa.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
