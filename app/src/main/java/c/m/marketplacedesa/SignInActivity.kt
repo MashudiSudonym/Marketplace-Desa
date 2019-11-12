@@ -13,7 +13,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         setSupportActionBar(toolbar_sign_in)
-        supportActionBar?.apply { title = "" }
+        supportActionBar?.apply { title = getString(R.string.app_name) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -5,6 +5,14 @@
     <string name="setting">Setting</string>
     <string name="no_data">No Data</string>
     <string name="image_store_description">Image Store</string>
+    <string name="image_product_description">Image Product</string>
     <string name="background_gradient_description">Background Gradient</string>
     <string name="search">Search</string>
+    <string name="product_title">Product Title</string>
+    <string name="stock_title">Stock : </string>
+    <string name="number_of_stock">-</string>
+    <string name="price_title">Price : Rp.</string>
+    <string name="number_of_price">-</string>
+    <string name="search_product_query_hint">Search product here…</string>
+    <string name="search_store_query_hint">Search store here…</string>
 </resources>

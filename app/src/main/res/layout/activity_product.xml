@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ProductActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_main"
+        android:id="@+id/app_bar_product"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_main"
+            android:id="@+id/toolbar_product"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="true"
@@ -22,17 +22,17 @@
             app:titleTextColor="@android:color/black">
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/sv_main"
+                android:id="@+id/sv_product"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:iconifiedByDefault="false"
-                app:queryHint="@string/search_store_query_hint" />
+                app:queryHint="@string/search_product_query_hint" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_main"
+        android:id="@+id/swipe_refresh_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -42,43 +42,41 @@
             android:layout_height="match_parent">
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_frame_main"
+                android:id="@+id/shimmer_frame_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:shimmer_auto_start="false"
-                app:shimmer_duration="800"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:shimmer_auto_start="false"
+                app:shimmer_duration="800">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
 
-                    <include layout="@layout/item_shimmer_store_mock" />
-
-                    <include layout="@layout/item_shimmer_store_mock" />
+                    <include layout="@layout/item_shimmer_product_mock" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
-                android:id="@+id/tv_no_data_main"
+                android:id="@+id/tv_no_data_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -95,30 +93,31 @@
                 tools:text="@string/no_data" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_store"
+                android:id="@+id/rv_product"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:isScrollContainer="true"
                 android:overScrollMode="ifContentScrolls"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_store"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_product" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_search_store"
+                android:id="@+id/rv_search_product"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:isScrollContainer="true"
                 android:overScrollMode="ifContentScrolls"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_store"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_product" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
