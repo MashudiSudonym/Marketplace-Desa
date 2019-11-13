@@ -14,7 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.details.DetailsActivity"></activity>
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:parentActivityName=".ui.main.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.details.DetailsActivity"
+            android:parentActivityName=".ui.product.ProductActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.product.ProductActivity" />
+        </activity>
         <activity
             android:name=".ui.product.ProductActivity"
             android:parentActivityName=".ui.main.MainActivity">
