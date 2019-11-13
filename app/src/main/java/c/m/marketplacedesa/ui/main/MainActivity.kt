@@ -6,7 +6,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
+import c.m.marketplacedesa.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +28,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_cart -> true
-            R.id.menu_user -> true
+            R.id.menu_user -> {
+                startActivity<ProfileActivity>()
+                true
+            }
             R.id.menu_setting -> true
             else -> super.onOptionsItemSelected(item)
         }
