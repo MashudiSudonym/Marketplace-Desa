@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.ui.profile.ProfileActivity
+import c.m.marketplacedesa.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
@@ -32,7 +33,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity<ProfileActivity>()
                 true
             }
-            R.id.menu_setting -> true
+            R.id.menu_setting -> {
+                startActivity<SettingsActivity>()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

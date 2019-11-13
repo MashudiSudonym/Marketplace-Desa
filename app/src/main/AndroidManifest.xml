@@ -15,6 +15,15 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:value=".ui.main.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity
             android:name=".ui.profile.ProfileActivity"
             android:parentActivityName=".ui.main.MainActivity">
 
