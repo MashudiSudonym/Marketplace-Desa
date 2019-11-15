@@ -1,4 +1,4 @@
-package c.m.marketplacedesa.ui.profile
+package c.m.marketplacedesa.ui.userprofile
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,15 +6,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.ui.editprofile.EditProfileActivity
-import kotlinx.android.synthetic.main.activity_profile.*
+import c.m.marketplacedesa.ui.edituserprofile.EditUserProfileActivity
+import kotlinx.android.synthetic.main.activity_user_profile.*
 import org.jetbrains.anko.startActivity
 
-class ProfileActivity : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_user_profile)
         setSupportActionBar(toolbar_profile)
         supportActionBar?.apply {
             title = ""
@@ -32,7 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_edit_profile -> {
-                startActivity<EditProfileActivity>()
+                startActivity<EditUserProfileActivity>()
                 true
             }
             R.id.menu_sign_out -> true
