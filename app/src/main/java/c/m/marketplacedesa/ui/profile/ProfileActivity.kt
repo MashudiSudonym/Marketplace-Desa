@@ -6,7 +6,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
+import c.m.marketplacedesa.ui.editprofile.EditProfileActivity
 import kotlinx.android.synthetic.main.activity_profile.*
+import org.jetbrains.anko.startActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -29,7 +31,10 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_edit_profile -> true
+            R.id.menu_edit_profile -> {
+                startActivity<EditProfileActivity>()
+                true
+            }
             R.id.menu_sign_out -> true
             else -> super.onOptionsItemSelected(item)
         }
