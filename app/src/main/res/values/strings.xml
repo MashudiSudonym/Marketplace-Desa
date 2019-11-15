@@ -41,4 +41,7 @@
     <string name="phone_number">+6289647990167</string>
     <string name="edit_profile">edit profile</string>
     <string name="sign_out">sign out</string>
+
+    <string name="language_setting">Language Setting</string>
+    <string name="choose_language_menu">Choose Language</string>
 </resources>
