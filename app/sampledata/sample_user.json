@@ -1,0 +1,21 @@
+{
+  "users": {
+    "BFaZz6QigLxHAS86N0vR": {
+      "login_status": false,
+      "address": "Jl.R.M.Sosro Diningrat. Ngabul. Tahunan. Jepara",
+      "image_profile": "https://firebasestorage.googleapis.com/v0/b/marketplace-desa.appspot.com/o/trial%2Fandroid10hero.jpg?alt=media&token=dd84e07f-f729-4e5c-95b9-86c0557da8c7",
+      "name": "Mashudi",
+      "uid": "BFaZz6QigLxHAS86N0vR",
+      "edited_at": {
+        "_seconds": 1573138980,
+        "_nanoseconds": 0
+      },
+      "seller": true,
+      "created_at": {
+        "_seconds": 1573127400,
+        "_nanoseconds": 0
+      },
+      "phone": "+6289647990167"
+    }
+  }
+}
