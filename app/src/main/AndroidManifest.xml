@@ -42,16 +42,16 @@
                 android:value=".ui.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.details.DetailsActivity"
-            android:parentActivityName=".ui.product.ProductActivity">
+            android:name=".ui.product.ProductActivity"
+            android:parentActivityName=".ui.store.StoreActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.product.ProductActivity" />
+                android:value=".ui.store.StoreActivity" />
         </activity>
         <activity
-            android:name=".ui.product.ProductActivity"
+            android:name=".ui.store.StoreActivity"
             android:parentActivityName=".ui.main.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
