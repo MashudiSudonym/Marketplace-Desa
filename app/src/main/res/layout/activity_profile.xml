@@ -168,7 +168,7 @@
                         app:layout_constraintTop_toTopOf="@+id/img_phone_icon" />
 
                     <Button
-                        android:id="@+id/btn_registration_seller"
+                        android:id="@+id/btn_store"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
