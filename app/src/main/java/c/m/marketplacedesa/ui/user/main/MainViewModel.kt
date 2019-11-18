@@ -1,4 +1,4 @@
-package c.m.marketplacedesa.ui.main
+package c.m.marketplacedesa.ui.user.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

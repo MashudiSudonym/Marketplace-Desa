@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.*
 
 class FirebaseQueryLiveData(private val query: Query) : LiveData<QuerySnapshot>() {
-    private val listener = MyValueEventListener()
+    private val valueEventListener = ValueEventListener()
     private var listenerRegistration: ListenerRegistration? = null
 
     private var listenerRemovePending = false
@@ -26,7 +26,7 @@ class FirebaseQueryLiveData(private val query: Query) : LiveData<QuerySnapshot>(
         if (listenerRemovePending) {
             handler.removeCallbacks(removeListener)
         } else {
-            listenerRegistration = query.addSnapshotListener(listener)
+            listenerRegistration = query.addSnapshotListener(valueEventListener)
         }
         listenerRemovePending = false
     }
@@ -41,7 +41,7 @@ class FirebaseQueryLiveData(private val query: Query) : LiveData<QuerySnapshot>(
         listenerRemovePending = true
     }
 
-    private inner class MyValueEventListener : EventListener<QuerySnapshot> {
+    private inner class ValueEventListener : EventListener<QuerySnapshot> {
         override fun onEvent(@Nullable querySnapshot: QuerySnapshot?, @Nullable e: FirebaseFirestoreException?) {
             if (e != null) {
                 Log.e("Error", "Can't listen to query snapshots: %s", e)

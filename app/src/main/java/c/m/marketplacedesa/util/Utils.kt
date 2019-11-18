@@ -13,7 +13,7 @@ import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.ui.main.MainActivity
+import c.m.marketplacedesa.ui.user.main.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 

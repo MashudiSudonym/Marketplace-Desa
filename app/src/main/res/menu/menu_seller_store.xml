@@ -3,6 +3,6 @@
 
     <item
         android:id="@+id/menu_edit_info_store"
-        android:icon="@drawable/ic_retail"
+        android:icon="@drawable/ic_edit"
         android:title="@string/edit_info_store" />
 </menu>

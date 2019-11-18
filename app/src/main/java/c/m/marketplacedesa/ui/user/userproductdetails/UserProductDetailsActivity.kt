@@ -1,13 +1,13 @@
-package c.m.marketplacedesa.ui.edituserprofile
+package c.m.marketplacedesa.ui.user.userproductdetails
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 
-class EditUserProfileActivity : AppCompatActivity() {
+class UserProductDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_user_profile)
+        setContentView(R.layout.activity_user_product_details)
     }
 }

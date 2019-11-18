@@ -16,13 +16,13 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.edituserprofile.EditUserProfileActivity"
-            android:parentActivityName=".ui.userprofile.UserProfileActivity">
+            android:name="c.m.marketplacedesa.ui.user.usereditprofile.UserEditProfileActivity"
+            android:parentActivityName="c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.userprofile.UserProfileActivity" />
+                android:value="c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity" />
         </activity>
         <activity
             android:name=".ui.settings.SettingsActivity"
@@ -30,38 +30,38 @@
             android:value=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
+                android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.userprofile.UserProfileActivity"
-            android:parentActivityName=".ui.main.MainActivity"
+            android:name="c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity"
+            android:parentActivityName="c.m.marketplacedesa.ui.user.main.MainActivity"
             android:theme="@style/ProfileTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
+                android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.product.ProductActivity"
-            android:parentActivityName=".ui.store.StoreActivity">
+            android:name="c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity"
+            android:parentActivityName="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.store.StoreActivity" />
+                android:value="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity" />
         </activity>
         <activity
-            android:name=".ui.store.StoreActivity"
-            android:parentActivityName=".ui.main.MainActivity">
+            android:name="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity"
+            android:parentActivityName="c.m.marketplacedesa.ui.user.main.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
+                android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
         <activity android:name=".ui.signin.SignInActivity" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name="c.m.marketplacedesa.ui.user.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

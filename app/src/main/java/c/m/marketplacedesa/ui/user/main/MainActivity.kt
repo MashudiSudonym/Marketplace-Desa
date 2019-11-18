@@ -1,4 +1,4 @@
-package c.m.marketplacedesa.ui.main
+package c.m.marketplacedesa.ui.user.main
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,12 +9,12 @@ import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.data.remote.response.StoreResponse
 import c.m.marketplacedesa.ui.settings.SettingsActivity
-import c.m.marketplacedesa.ui.userprofile.UserProfileActivity
+import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
+import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +40,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupStoreRecyclerView() {
-        mainAdapter = MainAdapter(contentStore) { toast("${it.name}") }
+        mainAdapter = MainAdapter(contentStore) { response ->
+            startActivity<UserStoreActivity>(
+                "uid" to response.uid,
+                "name" to response.name,
+                "address" to response.address,
+                "owner" to response.owner
+            )
+        }
 
         observeGetStoreViewModel()
 
@@ -92,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
+        inflater.inflate(R.menu.menu_user_main, menu)
         return true
     }
 
