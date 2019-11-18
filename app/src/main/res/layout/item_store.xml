@@ -2,33 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_store_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <ImageView
-        android:id="@+id/img_store"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/image_store_description"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_retail"
-        tools:srcCompat="@drawable/ic_retail" />
-
-    <ImageView
-        android:id="@+id/img_background_gradient"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/background_gradient_description"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/img_store"
-        app:layout_constraintStart_toStartOf="@+id/img_store"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_background_gradient"
-        tools:srcCompat="@drawable/ic_background_gradient" />
 
     <TextView
         android:id="@+id/tv_store_title"
@@ -41,7 +18,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="end"
-        android:textColor="#000000"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,4 +26,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_store"
         tools:text="@sample/sample_store.json/store/id/name" />
+
+    <ImageView
+        android:id="@+id/img_store"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:contentDescription="@string/image_store_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_retail"
+        tools:srcCompat="@drawable/ic_retail" />
+
+    <ImageView
+        android:id="@+id/img_background_gradient"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/background_gradient_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_store"
+        app:layout_constraintStart_toStartOf="@+id/img_store"
+        app:layout_constraintTop_toTopOf="@id/img_store"
+        app:srcCompat="@drawable/ic_background_gradient"
+        tools:srcCompat="@drawable/ic_background_gradient" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
