@@ -19,21 +19,6 @@
     <string name="title_activity_settings">Settings</string>
     <string name="seller">Seller</string>
     <string name="not_a_seller">Not a seller</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="user_name">Your Name</string>
     <string name="seller_status_title">Seller Status</string>
     <string name="dummy_address">User Address, St. 8888. Ngabul. Tahunan. Jepara. Jawa Tengah. Indonesia</string>
@@ -41,7 +26,6 @@
     <string name="phone_number">+6289647990167</string>
     <string name="edit_profile">edit profile</string>
     <string name="sign_out">sign out</string>
-
     <string name="language_setting">Language Setting</string>
     <string name="choose_language_menu">Choose Language</string>
     <string name="edit_info_store">Edit Store Information</string>
