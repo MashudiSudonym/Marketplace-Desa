@@ -2,6 +2,7 @@ package c.m.marketplacedesa.di
 
 import c.m.marketplacedesa.data.remote.RemoteRepository
 import c.m.marketplacedesa.ui.user.main.MainViewModel
+import c.m.marketplacedesa.ui.user.userstore.UserStoreViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -11,4 +12,5 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
+    viewModel { UserStoreViewModel(get()) }
 }

@@ -3,10 +3,11 @@ package c.m.marketplacedesa.data.remote.response
 import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-class StoreResponse {
-    var address: String? = ""
-    var image_profile_store: String? = ""
+class ProductsResponse {
+    var image_product: String? = ""
     var name: String? = ""
-    var owner: String? = ""
+    var price: String? = ""
+    var stock: String? = ""
+    var store: String? = ""
     var uid: String? = ""
 }
