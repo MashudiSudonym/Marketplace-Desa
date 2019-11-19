@@ -42,14 +42,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
-        <activity
-            android:name="c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity"
-            android:parentActivityName="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity" />
+        <activity android:name="c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity">
         </activity>
         <activity
             android:name="c.m.marketplacedesa.ui.user.userstore.UserStoreActivity"

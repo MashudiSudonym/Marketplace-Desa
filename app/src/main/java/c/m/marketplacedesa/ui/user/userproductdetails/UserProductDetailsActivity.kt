@@ -33,7 +33,7 @@ class UserProductDetailsActivity : AppCompatActivity() {
         supportActionBar?.apply {
             title = name
             setDisplayHomeAsUpEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
 
         tv_name_product_details.text = name
@@ -48,5 +48,10 @@ class UserProductDetailsActivity : AppCompatActivity() {
                     .error(R.drawable.ic_broken_image)
             )
             .into(img_product_details)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

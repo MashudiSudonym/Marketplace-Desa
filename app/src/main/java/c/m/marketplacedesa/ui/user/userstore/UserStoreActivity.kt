@@ -31,9 +31,8 @@ class UserStoreActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_store)
         setSupportActionBar(toolbar_product)
         supportActionBar?.apply {
-            title = ""
             setDisplayHomeAsUpEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
 
         val intent = intent
