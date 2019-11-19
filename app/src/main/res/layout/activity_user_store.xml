@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:iconifiedByDefault="false"
+                android:padding="0dp"
                 app:queryHint="@string/search_product_query_hint" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
