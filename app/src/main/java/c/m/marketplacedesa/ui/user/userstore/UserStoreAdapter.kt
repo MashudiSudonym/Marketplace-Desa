@@ -45,8 +45,8 @@ class UserStoreAdapter(
                 .into(img_product)
 
             tv_product_title.text = contentProduct.name
-            tv_number_of_stock.text = contentProduct.stock
-            tv_number_of_price.text = contentProduct.price
+            tv_number_of_stock.text = contentProduct.stock.toString()
+            tv_number_of_price.text = contentProduct.price.toString()
         }
     }
 }

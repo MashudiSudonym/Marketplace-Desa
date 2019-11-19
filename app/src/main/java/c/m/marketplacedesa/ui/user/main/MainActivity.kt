@@ -11,6 +11,7 @@ import c.m.marketplacedesa.data.remote.response.StoreResponse
 import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
 import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
+import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,10 +43,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupStoreRecyclerView() {
         mainAdapter = MainAdapter(contentStore) { response ->
             startActivity<UserStoreActivity>(
-                "uid" to response.uid,
-                "name" to response.name,
-                "address" to response.address,
-                "owner" to response.owner
+                Constants.UID to response.uid,
+                Constants.NAME to response.name,
+                Constants.ADDRESS to response.address,
+                Constants.OWNER_UID to response.owner
             )
         }
 

@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.data.remote.response.ProductsResponse
+import c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity
+import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_user_store.*
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserStoreActivity : AppCompatActivity() {
@@ -19,7 +21,7 @@ class UserStoreActivity : AppCompatActivity() {
     private var uid: String? = ""
     private var name: String? = ""
     private var address: String? = ""
-    private var owner: String? = ""
+    private var ownerUID: String? = ""
     private val userStoreViewModel: UserStoreViewModel by viewModel()
     private lateinit var userStoreAdapter: UserStoreAdapter
     private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
@@ -35,10 +37,10 @@ class UserStoreActivity : AppCompatActivity() {
         }
 
         val intent = intent
-        uid = intent.getStringExtra("uid")
-        name = intent.getStringExtra("name")
-        address = intent.getStringExtra("address")
-        owner = intent.getStringExtra("owner")
+        uid = intent.getStringExtra(Constants.UID)
+        name = intent.getStringExtra(Constants.NAME)
+        address = intent.getStringExtra(Constants.ADDRESS)
+        ownerUID = intent.getStringExtra(Constants.OWNER_UID)
 
         tv_store_name.text = name
         tv_store_address.text = address
@@ -54,7 +56,16 @@ class UserStoreActivity : AppCompatActivity() {
     }
 
     private fun setupProductRecyclerView() {
-        userStoreAdapter = UserStoreAdapter(contentProduct) { toast("${it.name}") }
+        userStoreAdapter = UserStoreAdapter(contentProduct) { response ->
+            startActivity<UserProductDetailsActivity>(
+                Constants.UID to response.uid,
+                Constants.NAME to response.name,
+                Constants.IMG_PRODUCT to response.image_product,
+                Constants.PRICE to response.price,
+                Constants.STOCK to response.stock,
+                Constants.STORE_UID to response.store
+            )
+        }
 
         observeGetProductsViewModel()
 
