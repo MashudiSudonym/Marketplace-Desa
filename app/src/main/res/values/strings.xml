@@ -38,4 +38,6 @@
     <string name="choose_image">Choose Image</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
+    <string name="caution_phone_number_cannot_edit">telephone number cannot be changed</string>
+    <string name="complete_your_profile">Complete your profile</string>
 </resources>
