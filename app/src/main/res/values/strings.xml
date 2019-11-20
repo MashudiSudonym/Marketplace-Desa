@@ -35,4 +35,7 @@
     <string name="order_count">0</string>
     <string name="add_to_shopping_basket">add to shopping basket</string>
     <string name="save">Save</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
 </resources>
