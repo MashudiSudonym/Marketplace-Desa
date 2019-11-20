@@ -30,7 +30,7 @@
     <ImageView
         android:id="@+id/img_store"
         android:layout_width="0dp"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/image_store_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
