@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.data.remote.response.ProductsResponse
 import c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity
+import c.m.marketplacedesa.ui.user.userstoredetails.UserStoreDetailsActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
@@ -22,6 +23,8 @@ class UserStoreActivity : AppCompatActivity() {
     private var name: String? = ""
     private var address: String? = ""
     private var ownerUID: String? = ""
+    private var storeLatitude: Double? = 0.0
+    private var storeLongitude: Double? = 0.0
     private val userStoreViewModel: UserStoreViewModel by viewModel()
     private lateinit var userStoreAdapter: UserStoreAdapter
     private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
@@ -40,6 +43,8 @@ class UserStoreActivity : AppCompatActivity() {
         name = intent.getStringExtra(Constants.NAME)
         address = intent.getStringExtra(Constants.ADDRESS)
         ownerUID = intent.getStringExtra(Constants.OWNER_UID)
+        storeLatitude = intent.getDoubleExtra(Constants.STORE_LATITUDE, 0.0)
+        storeLongitude = intent.getDoubleExtra(Constants.STORE_LONGITUDE, 0.0)
 
         tv_store_name.text = name
         tv_store_address.text = address
@@ -125,7 +130,15 @@ class UserStoreActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_cart -> true
-            R.id.menu_details_store -> true
+            R.id.menu_details_store -> {
+                startActivity<UserStoreDetailsActivity>(
+                    Constants.NAME to name,
+                    Constants.ADDRESS to address,
+                    Constants.STORE_LATITUDE to storeLatitude,
+                    Constants.STORE_LONGITUDE to storeLongitude
+                )
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

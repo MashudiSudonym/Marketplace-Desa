@@ -1,12 +1,10 @@
 package c.m.marketplacedesa.util
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
 import android.graphics.Color
 import android.os.Build
 import android.view.View
@@ -14,6 +12,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.ui.user.main.MainActivity
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -95,4 +99,49 @@ fun notificationSetup(
     with(NotificationManagerCompat.from(context)) {
         notify(channelId as Int, notificationBuilder.build())
     }
+}
+
+@Suppress("DEPRECATION", "UNUSED_VARIABLE")
+fun displayLocationSettingRequest(context: Context) {
+    val mGoogleApiClient = GoogleApiClient.Builder(context)
+        .addApi(LocationServices.API)
+        .build()
+    mGoogleApiClient.connect()
+
+    val locationRequest = LocationRequest.create()
+    locationRequest.apply {
+        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        interval = 10000
+        fastestInterval = 10000 / 2
+    }
+
+    val builder = LocationSettingsRequest.Builder()
+        .addLocationRequest(locationRequest)
+    builder.setAlwaysShow(true)
+
+    val result = LocationServices.getSettingsClient(context)
+        .checkLocationSettings(builder.build())
+    result.addOnCompleteListener(object : OnCompleteListener<LocationSettingsResponse> {
+        override fun onComplete(task: Task<LocationSettingsResponse>) {
+            try {
+                val response = task.getResult(ApiException::class.java)
+            } catch (ex: ApiException) {
+                when (ex.statusCode) {
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+                        val resolvableApiException = ex as ResolvableApiException
+                        resolvableApiException.startResolutionForResult(
+                            context as Activity,
+                            Constants.REQUEST_PERMISSION_CODE
+                        )
+                    } catch (e: IntentSender.SendIntentException) {
+
+                    }
+
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                    }
+                }
+            }
+
+        }
+    })
 }
