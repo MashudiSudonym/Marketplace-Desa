@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
                 Constants.ADDRESS to response.address,
                 Constants.OWNER_UID to response.owner,
                 Constants.STORE_LATITUDE to response.store_geopoint.latitude,
-                Constants.STORE_LONGITUDE to response.store_geopoint.longitude
+                Constants.STORE_LONGITUDE to response.store_geopoint.longitude,
+                Constants.PHONE to response.phone
             )
         }
 

@@ -13,5 +13,6 @@ class Constants {
         const val STORE_LATITUDE = "storeLatitude"
         const val STORE_LONGITUDE = "storeLongitude"
         const val REQUEST_PERMISSION_CODE = 101
+        const val PHONE = "phone"
     }
 }

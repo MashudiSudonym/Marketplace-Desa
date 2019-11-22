@@ -26,6 +26,7 @@ class UserStoreDetailsActivity : AppCompatActivity() {
 
     private var name: String? = ""
     private var address: String? = ""
+    private var phone: String? = ""
     private var storeLatitude: Double? = 0.0
     private var storeLongitude: Double? = 0.0
     private lateinit var locationManager: LocationManager
@@ -42,6 +43,7 @@ class UserStoreDetailsActivity : AppCompatActivity() {
         val intent = intent
         name = intent.getStringExtra(Constants.NAME)
         address = intent.getStringExtra(Constants.ADDRESS)
+        phone = intent.getStringExtra(Constants.PHONE)
         storeLatitude = intent.getDoubleExtra(Constants.STORE_LATITUDE, 0.0)
         storeLongitude = intent.getDoubleExtra(Constants.STORE_LONGITUDE, 0.0)
 
@@ -54,6 +56,7 @@ class UserStoreDetailsActivity : AppCompatActivity() {
 
         tv_store_name.text = name
         tv_store_address.text = address
+        tv_store_phone_number.text = phone
 
         mv_user_store_details.onCreate(savedInstanceState)
 

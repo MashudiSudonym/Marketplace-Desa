@@ -23,6 +23,7 @@ class UserStoreActivity : AppCompatActivity() {
     private var name: String? = ""
     private var address: String? = ""
     private var ownerUID: String? = ""
+    private var phone: String? = ""
     private var storeLatitude: Double? = 0.0
     private var storeLongitude: Double? = 0.0
     private val userStoreViewModel: UserStoreViewModel by viewModel()
@@ -43,6 +44,7 @@ class UserStoreActivity : AppCompatActivity() {
         name = intent.getStringExtra(Constants.NAME)
         address = intent.getStringExtra(Constants.ADDRESS)
         ownerUID = intent.getStringExtra(Constants.OWNER_UID)
+        phone = intent.getStringExtra(Constants.PHONE)
         storeLatitude = intent.getDoubleExtra(Constants.STORE_LATITUDE, 0.0)
         storeLongitude = intent.getDoubleExtra(Constants.STORE_LONGITUDE, 0.0)
 
@@ -134,6 +136,7 @@ class UserStoreActivity : AppCompatActivity() {
                 startActivity<UserStoreDetailsActivity>(
                     Constants.NAME to name,
                     Constants.ADDRESS to address,
+                    Constants.PHONE to phone,
                     Constants.STORE_LATITUDE to storeLatitude,
                     Constants.STORE_LONGITUDE to storeLongitude
                 )

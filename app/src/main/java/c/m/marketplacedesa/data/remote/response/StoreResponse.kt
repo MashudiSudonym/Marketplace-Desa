@@ -11,4 +11,5 @@ class StoreResponse {
     var owner: String? = ""
     var uid: String? = ""
     var store_geopoint = GeoPoint(0.0, 0.0)
+    var phone: String? = ""
 }
