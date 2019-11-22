@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package c.m.marketplacedesa.util
 
 import android.annotation.SuppressLint

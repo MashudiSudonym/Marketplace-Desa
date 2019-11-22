@@ -101,6 +101,8 @@ dependencies {
     // Google Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    // Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.5.0'
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'

@@ -197,4 +197,19 @@ class UserStoreDetailsActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    override fun onResume() {
+        super.onResume()
+        mv_user_store_details.onResume()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mv_user_store_details.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mv_user_store_details.onDestroy()
+    }
 }
