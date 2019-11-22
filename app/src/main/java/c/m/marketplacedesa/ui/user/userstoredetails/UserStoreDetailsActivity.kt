@@ -35,7 +35,6 @@ class UserStoreDetailsActivity : AppCompatActivity() {
     private var locationGps: Location? = null
     private var locationNetwork: Location? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_store_details)
@@ -58,11 +57,16 @@ class UserStoreDetailsActivity : AppCompatActivity() {
         tv_store_address.text = address
         tv_store_phone_number.text = phone
 
+        // maps UI initiate
         mv_user_store_details.onCreate(savedInstanceState)
 
+        // if gps not turn on open settings location request
         displayLocationSettingRequest(this)
+
+        // get gps hardware coordinate
         getGPSCoordinate()
 
+        // maps UI launch
         mv_user_store_details.getMapAsync { googleMap ->
             googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
@@ -91,7 +95,7 @@ class UserStoreDetailsActivity : AppCompatActivity() {
                                 storeLongitude as Double
                             )
                         )
-                            .zoom(13f).build()
+                            .zoom(18f).build()
                     )
                 )
 
