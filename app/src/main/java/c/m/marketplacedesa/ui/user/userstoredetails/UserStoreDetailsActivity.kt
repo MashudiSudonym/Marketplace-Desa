@@ -29,6 +29,8 @@ class UserStoreDetailsActivity : AppCompatActivity() {
     private var phone: String? = ""
     private var storeLatitude: Double? = 0.0
     private var storeLongitude: Double? = 0.0
+    private var userLatitude: Double? = 0.0
+    private var userLongitude: Double? = 0.0
     private lateinit var locationManager: LocationManager
     private var hasGps = false
     private var hasNetwork = false
@@ -125,8 +127,8 @@ class UserStoreDetailsActivity : AppCompatActivity() {
                             override fun onLocationChanged(location: Location?) {
                                 if (location != null) {
                                     locationGps = location
-                                    storeLatitude = locationGps?.latitude
-                                    storeLongitude = locationGps?.longitude
+                                    userLatitude = locationGps?.latitude
+                                    userLongitude = locationGps?.longitude
                                 }
                             }
 
@@ -154,8 +156,8 @@ class UserStoreDetailsActivity : AppCompatActivity() {
                             override fun onLocationChanged(location: Location?) {
                                 if (location != null) {
                                     locationNetwork = location
-                                    storeLatitude = locationNetwork?.latitude
-                                    storeLongitude = locationNetwork?.longitude
+                                    userLatitude = locationNetwork?.latitude
+                                    userLongitude = locationNetwork?.longitude
                                 }
                             }
 
@@ -180,11 +182,11 @@ class UserStoreDetailsActivity : AppCompatActivity() {
 
                 if (locationGps != null && locationNetwork != null) {
                     if (locationGps?.accuracy as Float > locationNetwork?.accuracy as Float) {
-                        storeLatitude = locationNetwork?.latitude
-                        storeLongitude = locationNetwork?.longitude
+                        userLatitude = locationNetwork?.latitude
+                        userLongitude = locationNetwork?.longitude
                     } else {
-                        storeLatitude = locationNetwork?.latitude
-                        storeLongitude = locationNetwork?.longitude
+                        userLatitude = locationNetwork?.latitude
+                        userLongitude = locationNetwork?.longitude
                     }
                 }
             } else {
