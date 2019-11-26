@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ui.user.userordercart.OrderCartActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -30,9 +31,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_maps" />
 
-        <activity android:name=".ui.user.userstoredetails.UserStoreDetailsActivity">
-
-        </activity>
+        <activity android:name=".ui.user.userstoredetails.UserStoreDetailsActivity" />
         <activity
             android:name=".ui.user.completeuserprofile.CompleteUserProfileActivity"
             android:parentActivityName=".ui.user.main.MainActivity">
@@ -69,9 +68,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.user.userproductdetails.UserProductDetailsActivity">
-
-        </activity>
+        <activity android:name=".ui.user.userproductdetails.UserProductDetailsActivity" />
         <activity
             android:name=".ui.user.userstore.UserStoreActivity"
             android:parentActivityName=".ui.user.main.MainActivity">

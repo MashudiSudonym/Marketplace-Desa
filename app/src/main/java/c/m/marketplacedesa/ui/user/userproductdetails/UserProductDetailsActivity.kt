@@ -6,10 +6,12 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
+import c.m.marketplacedesa.ui.user.userordercart.OrderCartActivity
 import c.m.marketplacedesa.util.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_user_product_details.*
+import org.jetbrains.anko.startActivity
 
 class UserProductDetailsActivity : AppCompatActivity() {
 
@@ -67,7 +69,10 @@ class UserProductDetailsActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_cart -> true
+            R.id.menu_cart -> {
+                startActivity<OrderCartActivity>()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
