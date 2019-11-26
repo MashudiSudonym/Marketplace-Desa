@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
@@ -58,6 +59,15 @@ class UserStoreDetailsActivity : AppCompatActivity() {
         tv_store_name.text = name
         tv_store_address.text = address
         tv_store_phone_number.text = phone
+
+        // fab button open dialler application
+        fab_call.setOnClickListener {
+            val intentActionDial = Intent(Intent.ACTION_DIAL).apply {
+                setData(Uri.parse("tel:$phone"))
+            }
+
+            startActivity(intentActionDial)
+        }
 
         // maps UI initiate
         mv_user_store_details.onCreate(savedInstanceState)
