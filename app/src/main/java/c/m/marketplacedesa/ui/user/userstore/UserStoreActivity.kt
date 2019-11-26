@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.data.remote.response.ProductsResponse
-import c.m.marketplacedesa.ui.user.userordercart.OrderCartActivity
+import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity
 import c.m.marketplacedesa.ui.user.userstoredetails.UserStoreDetailsActivity
 import c.m.marketplacedesa.util.Constants
@@ -133,7 +133,7 @@ class UserStoreActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_cart -> {
-                startActivity<OrderCartActivity>()
+                startActivity<UserOrderCartActivity>()
                 true
             }
             R.id.menu_details_store -> {

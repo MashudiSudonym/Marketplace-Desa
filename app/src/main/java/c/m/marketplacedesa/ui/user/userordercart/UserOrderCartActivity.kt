@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 
-class OrderCartActivity : AppCompatActivity() {
+class UserOrderCartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_order_cart)
+        setContentView(R.layout.activity_user_order_cart)
     }
 }

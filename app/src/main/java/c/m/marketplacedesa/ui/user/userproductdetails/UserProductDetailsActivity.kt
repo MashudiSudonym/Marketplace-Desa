@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.ui.user.userordercart.OrderCartActivity
+import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.util.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -70,7 +70,7 @@ class UserProductDetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_cart -> {
-                startActivity<OrderCartActivity>()
+                startActivity<UserOrderCartActivity>()
                 true
             }
             else -> super.onOptionsItemSelected(item)
