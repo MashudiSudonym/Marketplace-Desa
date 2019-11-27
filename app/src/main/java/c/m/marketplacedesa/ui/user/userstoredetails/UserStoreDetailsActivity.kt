@@ -63,7 +63,7 @@ class UserStoreDetailsActivity : AppCompatActivity() {
         // fab button open dialler application
         fab_call.setOnClickListener {
             val intentActionDial = Intent(Intent.ACTION_DIAL).apply {
-                setData(Uri.parse("tel:$phone"))
+                data = Uri.parse("tel:$phone")
             }
 
             startActivity(intentActionDial)

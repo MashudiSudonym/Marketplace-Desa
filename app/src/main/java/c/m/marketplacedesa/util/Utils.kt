@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -17,9 +18,10 @@ import c.m.marketplacedesa.ui.user.main.MainActivity
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -123,27 +125,24 @@ fun displayLocationSettingRequest(context: Context) {
 
     val result = LocationServices.getSettingsClient(context)
         .checkLocationSettings(builder.build())
-    result.addOnCompleteListener(object : OnCompleteListener<LocationSettingsResponse> {
-        override fun onComplete(task: Task<LocationSettingsResponse>) {
-            try {
-                val response = task.getResult(ApiException::class.java)
-            } catch (ex: ApiException) {
-                when (ex.statusCode) {
-                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
-                        val resolvableApiException = ex as ResolvableApiException
-                        resolvableApiException.startResolutionForResult(
-                            context as Activity,
-                            Constants.REQUEST_PERMISSION_CODE
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
+    result.addOnCompleteListener { task ->
+        try {
+            val response = task.getResult(ApiException::class.java)
+        } catch (ex: ApiException) {
+            when (ex.statusCode) {
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+                    val resolvableApiException = ex as ResolvableApiException
+                    resolvableApiException.startResolutionForResult(
+                        context as Activity,
+                        Constants.REQUEST_PERMISSION_CODE
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e("Error", "$e")
+                }
 
-                    }
-
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                    }
+                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
                 }
             }
-
         }
-    })
+    }
 }
