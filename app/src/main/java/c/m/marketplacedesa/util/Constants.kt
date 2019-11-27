@@ -14,5 +14,6 @@ class Constants {
         const val STORE_LONGITUDE = "storeLongitude"
         const val REQUEST_PERMISSION_CODE = 101
         const val PHONE = "phone"
+        const val REQUEST_SIGN_IN_CODE = 123
     }
 }

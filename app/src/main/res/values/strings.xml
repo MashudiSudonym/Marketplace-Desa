@@ -59,4 +59,5 @@
     <string name="checkout_order">Checkout Order</string>
     <string name="order_confirmation">Order Confirmation</string>
     <string name="no_changes_to_orders">no changes to orders?</string>
+    <string name="id_defaut_country">id</string>
 </resources>
