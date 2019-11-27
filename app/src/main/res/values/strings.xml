@@ -42,4 +42,21 @@
     <string name="complete_your_profile">Complete your profile</string>
     <string name="key_maps">AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U</string>
     <string name="my_order">My Order</string>
+    <string name="order_list">Order List</string>
+    <string name="total_price_title">Total Price : Rp.</string>
+    <string name="order_quantity_title">Order Quantity</string>
+    <string name="order_number">Order Number</string>
+    <string name="dummy_user_order_number">md00001</string>
+    <string name="user_order">Order by</string>
+    <string name="dummy_name_user_order">User 001</string>
+    <string name="choose_a_shipping_method">Choose a Shipping Method</string>
+    <string name="take_it_by_yourself">Take it by yourself</string>
+    <string name="delivered_to_home">Delivered to home</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="estimated_total_price">Estimated total price</string>
+    <string name="total">Total</string>
+    <string name="checkout">Checkout</string>
+    <string name="checkout_order">Checkout Order</string>
+    <string name="order_confirmation">Order Confirmation</string>
+    <string name="no_changes_to_orders">no changes to orders?</string>
 </resources>

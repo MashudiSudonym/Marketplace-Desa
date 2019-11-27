@@ -2,6 +2,8 @@
   <dictionary name="masrobot">
     <words>
       <w>desa</w>
+      <w>userordercart</w>
+      <w>userproductdetails</w>
     </words>
   </dictionary>
 </component>
