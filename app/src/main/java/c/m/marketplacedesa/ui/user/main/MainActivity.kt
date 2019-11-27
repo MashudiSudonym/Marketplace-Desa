@@ -118,6 +118,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity<UserProfileActivity>()
                 true
             }
+            R.id.menu_my_order -> {
+                true
+            }
             R.id.menu_setting -> {
                 startActivity<SettingsActivity>()
                 true
