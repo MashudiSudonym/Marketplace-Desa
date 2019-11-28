@@ -60,4 +60,11 @@
     <string name="order_confirmation">Order Confirmation</string>
     <string name="no_changes_to_orders">no changes to orders?</string>
     <string name="id_defaut_country">id</string>
+    <string name="name_field_error">Name cannot be empty</string>
+    <string name="address_field_error">Address cannot be empty</string>
+    <string name="permission_checked">Permission Checked</string>
+    <string name="take_or_choose">Take Photo or Choose from Gallery</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="take_from_camera">Take from Camera</string>
+    <string name="upload_data_title">Upload data…</string>
 </resources>

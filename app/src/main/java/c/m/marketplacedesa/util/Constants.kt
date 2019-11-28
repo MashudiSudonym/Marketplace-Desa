@@ -15,5 +15,7 @@ class Constants {
         const val REQUEST_PERMISSION_CODE = 101
         const val PHONE = "phone"
         const val REQUEST_SIGN_IN_CODE = 123
+        const val PICK_PHOTO_CODE = 666
+        const val CAMERA_REQUEST_CODE = 888
     }
 }
