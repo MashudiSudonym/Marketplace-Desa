@@ -13,7 +13,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "c.m.marketplacedesa"
-        minSdkVersion 16
+        minSdkVersion 20
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -85,7 +85,7 @@ dependencies {
     //Android-Iconics - used to provide an easy API for icons
     implementation 'com.mikepenz:iconics-core:4.0.0@aar'
     // Permission Library
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.sagar:dslpermission:2.0.0'
     // Google Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
