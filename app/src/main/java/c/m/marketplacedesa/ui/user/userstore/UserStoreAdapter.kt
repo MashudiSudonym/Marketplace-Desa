@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.data.remote.response.ProductsResponse
+import c.m.marketplacedesa.model.ProductsResponse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.extensions.LayoutContainer

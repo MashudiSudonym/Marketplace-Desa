@@ -5,9 +5,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.data.remote.response.ProductsResponse
+import c.m.marketplacedesa.model.ProductsResponse
+import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity
 import c.m.marketplacedesa.ui.user.userstoredetails.UserStoreDetailsActivity
@@ -16,9 +16,8 @@ import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_user_store.*
 import org.jetbrains.anko.startActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserStoreActivity : AppCompatActivity() {
+class UserStoreActivity : AppCompatActivity(), UserStoreView {
 
     private var uid: String? = ""
     private var name: String? = ""
@@ -27,7 +26,7 @@ class UserStoreActivity : AppCompatActivity() {
     private var phone: String? = ""
     private var storeLatitude: Double? = 0.0
     private var storeLongitude: Double? = 0.0
-    private val userStoreViewModel: UserStoreViewModel by viewModel()
+    private lateinit var presenter: UserStorePresenter
     private lateinit var userStoreAdapter: UserStoreAdapter
     private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
 
@@ -35,6 +34,15 @@ class UserStoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_store)
         setSupportActionBar(toolbar_product)
+
+        initPresenter()
+        onAttachView()
+    }
+
+    override fun onAttachView() {
+        presenter.onAttach(this)
+        presenter.initFirebase()
+
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -52,14 +60,70 @@ class UserStoreActivity : AppCompatActivity() {
         tv_store_name.text = name
         tv_store_address.text = address
 
+        // get product content data
+        presenter.getProduct(uid.toString())
+
         // Setup Store RecyclerView
         setupProductRecyclerView()
 
         // Refresh data with SwipeRefresh
         swipe_refresh_product.setOnRefreshListener {
             swipe_refresh_product.isRefreshing = false
-            observeGetProductsViewModel()
+            // refresh product content data
+            presenter.getProduct(uid.toString())
         }
+    }
+
+    override fun onDetachView() {
+        presenter.onDetach()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        onDetachView()
+    }
+
+    override fun showLoading() {
+        shimmerStart()
+        tv_no_data_product.gone()
+        rv_search_product.gone()
+        rv_product.gone()
+    }
+
+    override fun hideLoading() {
+        shimmerStop()
+        tv_no_data_product.gone()
+        rv_product.visible()
+        rv_search_product.gone()
+    }
+
+    override fun hideSearchLoading() {
+        shimmerStop()
+        tv_no_data_product.gone()
+        rv_product.gone()
+        rv_search_product.visible()
+    }
+
+    override fun showNoDataResult() {
+        shimmerStop()
+        tv_no_data_product.visible()
+        rv_search_product.gone()
+        rv_product.gone()
+    }
+
+    override fun getProduct(productData: List<ProductsResponse>) {
+        contentProduct.clear()
+        contentProduct.addAll(productData)
+        userStoreAdapter.notifyDataSetChanged()
+    }
+
+    override fun returnToSignInActivity() {
+        finish() // close this activity
+        startActivity<SignInActivity>() // open sign in activity
+    }
+
+    private fun initPresenter() {
+        presenter = UserStorePresenter()
     }
 
     private fun setupProductRecyclerView() {
@@ -74,41 +138,8 @@ class UserStoreActivity : AppCompatActivity() {
             )
         }
 
-        observeGetProductsViewModel()
-
         rv_product.setHasFixedSize(true)
         rv_product.adapter = userStoreAdapter
-    }
-
-    private fun observeGetProductsViewModel() {
-        userStoreViewModel.getStoreUID(uid.toString())
-        userStoreViewModel.getProducts.observe(this, Observer { data ->
-            // on UI loading
-            shimmerStart()
-            rv_search_product.gone()
-            rv_product.gone()
-            tv_no_data_product.gone()
-
-            if (!data.isNullOrEmpty()) {
-                // on UI have data
-                shimmerStop()
-                rv_search_product.gone()
-                rv_product.visible()
-                tv_no_data_product.gone()
-
-                // Initiate data to adapter
-                contentProduct.clear()
-                contentProduct.addAll(data)
-                userStoreAdapter.notifyDataSetChanged()
-
-            } else {
-                // on UI don't have data
-                shimmerStop()
-                rv_search_product.gone()
-                rv_product.gone()
-                tv_no_data_product.visible()
-            }
-        })
     }
 
     // shimmer loading animation start

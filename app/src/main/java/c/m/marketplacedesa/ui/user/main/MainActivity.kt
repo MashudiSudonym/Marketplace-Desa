@@ -5,10 +5,10 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.data.remote.response.StoreResponse
+import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.settings.SettingsActivity
+import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
 import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
@@ -17,19 +17,30 @@ import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
-    private val mainViewModel: MainViewModel by viewModel()
+    private lateinit var presenter: MainPresenter
     private lateinit var mainAdapter: MainAdapter
     private val contentStore: MutableList<StoreResponse> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initPresenter()
+        onAttachView()
+    }
+
+    override fun onAttachView() {
+        presenter.onAttach(this)
+        presenter.initFirebase()
+
         setSupportActionBar(toolbar_main)
         supportActionBar?.apply { title = getString(R.string.app_name) }
+
+        // get store content data
+        presenter.getStore()
 
         // Setup Store RecyclerView
         setupStoreRecyclerView()
@@ -37,8 +48,61 @@ class MainActivity : AppCompatActivity() {
         // Refresh data with SwipeRefresh
         swipe_refresh_main.setOnRefreshListener {
             swipe_refresh_main.isRefreshing = false
-            observeGetStoreViewModel()
+            // refresh store content data
+            presenter.getStore()
         }
+    }
+
+    override fun onDetachView() {
+        presenter.onDetach()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        onDetachView()
+    }
+
+    override fun showLoading() {
+        shimmerStart()
+        tv_no_data_main.gone()
+        rv_search_store.gone()
+        rv_store.gone()
+    }
+
+    override fun hideLoading() {
+        shimmerStop()
+        tv_no_data_main.gone()
+        rv_store.visible()
+        rv_search_store.gone()
+    }
+
+    override fun hideSearchLoading() {
+        shimmerStop()
+        tv_no_data_main.gone()
+        rv_store.gone()
+        rv_search_store.visible()
+    }
+
+    override fun showNoDataResult() {
+        shimmerStop()
+        tv_no_data_main.visible()
+        rv_search_store.gone()
+        rv_store.gone()
+    }
+
+    override fun getStore(storeData: List<StoreResponse>) {
+        contentStore.clear()
+        contentStore.addAll(storeData)
+        mainAdapter.notifyDataSetChanged()
+    }
+
+    override fun returnToSignInActivity() {
+        finish() // close this activity
+        startActivity<SignInActivity>() // open sign in activity
+    }
+
+    private fun initPresenter() {
+        presenter = MainPresenter()
     }
 
     private fun setupStoreRecyclerView() {
@@ -54,39 +118,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        observeGetStoreViewModel()
-
         rv_store.setHasFixedSize(true)
         rv_store.adapter = mainAdapter
-    }
-
-    private fun observeGetStoreViewModel() {
-        mainViewModel.getStoreContent().observe(this, Observer { data ->
-            // on UI loading
-            shimmerStart()
-            rv_search_store.gone()
-            rv_store.gone()
-            tv_no_data_main.gone()
-
-            if (!data.isNullOrEmpty()) {
-                // on UI have data
-                shimmerStop()
-                rv_search_store.gone()
-                rv_store.visible()
-                tv_no_data_main.gone()
-
-                // Initiate data to adapter
-                contentStore.clear()
-                contentStore.addAll(data)
-                mainAdapter.notifyDataSetChanged()
-            } else {
-                // on UI don't have data
-                shimmerStop()
-                rv_search_store.gone()
-                rv_store.gone()
-                tv_no_data_main.visible()
-            }
-        })
     }
 
     // shimmer loading animation start

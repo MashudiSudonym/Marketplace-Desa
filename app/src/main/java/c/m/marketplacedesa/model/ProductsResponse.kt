@@ -1,4 +1,4 @@
-package c.m.marketplacedesa.data.remote.response
+package c.m.marketplacedesa.model
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 
