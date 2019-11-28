@@ -9,6 +9,7 @@ import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
+import c.m.marketplacedesa.ui.user.completeuserprofile.CompleteUserProfileActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
 import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
@@ -53,6 +54,12 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // for new user check user profile data
+        presenter.checkUserData()
+    }
+
     override fun onDetachView() {
         presenter.onDetach()
     }
@@ -94,6 +101,11 @@ class MainActivity : AppCompatActivity(), MainView {
         contentStore.clear()
         contentStore.addAll(storeData)
         mainAdapter.notifyDataSetChanged()
+    }
+
+    override fun returnToCompleteUserProfile() {
+        finish() // close this activity
+        startActivity<CompleteUserProfileActivity>() // open complete user profile activity
     }
 
     override fun returnToSignInActivity() {

@@ -14,11 +14,7 @@ class CompleteUserProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_user_profile)
         setSupportActionBar(toolbar_complete_user_profile)
-        supportActionBar?.apply {
-            title = getString(R.string.complete_your_profile)
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
+        supportActionBar?.apply { title = getString(R.string.complete_your_profile) }
     }
 
     // app bar menu

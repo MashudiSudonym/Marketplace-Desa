@@ -1,6 +1,8 @@
 package c.m.marketplacedesa.ui.user.main
 
+import android.util.Log
 import c.m.marketplacedesa.model.StoreResponse
+import c.m.marketplacedesa.model.UsersResponse
 import c.m.marketplacedesa.util.base.Presenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,6 +42,22 @@ class MainPresenter : Presenter<MainView> {
                     mView?.showNoDataResult()
                 }
             }
+        } else {
+            mView?.returnToSignInActivity()
+        }
+    }
+
+    fun checkUserData() {
+        if (userAuthentication()) {
+            db?.collection("users")
+                ?.whereEqualTo("uid", authentication?.currentUser?.uid.toString())
+                ?.addSnapshotListener { snapshot, exception ->
+                    if (exception != null) Log.e("Error!!", "$exception")
+
+                    val userList = snapshot?.toObjects(UsersResponse::class.java)
+
+                    if (userList.isNullOrEmpty()) mView?.returnToCompleteUserProfile()
+                }
         } else {
             mView?.returnToSignInActivity()
         }

@@ -9,5 +9,6 @@ interface MainView : View {
     fun hideSearchLoading()
     fun showNoDataResult()
     fun getStore(storeData: List<StoreResponse>)
+    fun returnToCompleteUserProfile()
     fun returnToSignInActivity()
 }
