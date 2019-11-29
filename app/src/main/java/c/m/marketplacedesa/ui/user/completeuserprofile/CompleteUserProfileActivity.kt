@@ -30,10 +30,7 @@ import kotlinx.android.synthetic.main.activity_complete_user_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.progressDialog
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -130,9 +127,7 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) {
-                checked {
-                    toast(getString(R.string.permission_checked))
-                }
+                checked { }
             }
         }
     }
@@ -253,25 +248,40 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_save -> {
-                val nameField = findViewById<FormEditText>(R.id.edt_name_complete_user)
-                val addressField = findViewById<FormEditText>(R.id.edt_address_complete_user)
-                val isValid = FormValidator(nameField, addressField).isValid
-
-                if (isValid) {
-                    // Upload User Data
-                    val name = edt_name_complete_user.text.toString()
-                    val address = edt_address_complete_user.text.toString()
-                    val userPhone = tv_phone_number.text.toString()
-
-                    presenter.sendUserData(name, address, userSellerStatus, userPhone)
-                } else {
-                    // if not valid
-                    nameField.error = getString(R.string.name_field_error)
-                    addressField.error = getString(R.string.address_field_error)
+                alert(
+                    getString(R.string.message_check_your_data),
+                    getString(R.string.title_check_your_data)
+                ) {
+                    yesButton {
+                        saveUserProfileData()
+                    }
+                    noButton { }
+                }.apply {
+                    isCancelable = false
+                    show()
                 }
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun saveUserProfileData() {
+        val nameField = findViewById<FormEditText>(R.id.edt_name_complete_user)
+        val addressField = findViewById<FormEditText>(R.id.edt_address_complete_user)
+        val isValid = FormValidator(nameField, addressField).isValid
+
+        if (isValid) {
+            // Upload User Data
+            val name = edt_name_complete_user.text.toString()
+            val address = edt_address_complete_user.text.toString()
+            val userPhone = tv_phone_number.text.toString()
+
+            presenter.sendUserData(name, address, userSellerStatus, userPhone)
+        } else {
+            // if not valid
+            nameField.error = getString(R.string.name_field_error)
+            addressField.error = getString(R.string.address_field_error)
         }
     }
 }

@@ -67,4 +67,6 @@
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="take_from_camera">Take from Camera</string>
     <string name="upload_data_title">Upload data…</string>
+    <string name="message_check_your_data">make sure the data you entered is correct</string>
+    <string name="title_check_your_data">Check your data</string>
 </resources>
