@@ -73,14 +73,7 @@
         </activity>
         <activity
             android:name=".ui.user.userprofile.UserProfileActivity"
-            android:parentActivityName=".ui.user.main.MainActivity"
-            android:theme="@style/ProfileTheme.NoActionBar">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
-        </activity>
+            android:theme="@style/ProfileTheme.NoActionBar" />
         <activity android:name=".ui.user.userproductdetails.UserProductDetailsActivity" />
         <activity
             android:name=".ui.user.userstore.UserStoreActivity"

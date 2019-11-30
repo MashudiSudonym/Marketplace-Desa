@@ -9,6 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
+import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.user.main.MainActivity
 import c.m.marketplacedesa.util.Constants
 import com.firebase.ui.auth.AuthUI
@@ -53,16 +54,16 @@ class SignInActivity : AppCompatActivity() {
                 finish()
             } else {
                 if (response == null) {
-                    toast("Sign in cancel")
+                    toast(getString(R.string.sign_in_cancel_alert))
                 }
 
                 if (response?.error?.errorCode == ErrorCodes.NO_NETWORK) {
-                    toast("Check your internet connection")
+                    toast(getString(R.string.check_internet_connection_alert))
                 }
 
                 Log.e(
                     "Sign In Error",
-                    "Sign-in error: ${response?.error?.message} || ${response?.error}"
+                    "Sign In error: ${response?.error?.message} || ${response?.error}"
                 )
             }
         }
@@ -76,7 +77,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_setting -> true
+            R.id.menu_setting -> {
+                startActivity<SettingsActivity>()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

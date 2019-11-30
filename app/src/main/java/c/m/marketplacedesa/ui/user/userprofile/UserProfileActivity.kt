@@ -22,6 +22,7 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
     private lateinit var presenter: UserProfilePresenter
     private var contentProfile: MutableList<UsersResponse> = mutableListOf()
+    private var uid: String? = ""
     private var imageProfile: String? = ""
     private var name: String? = ""
     private var seller: Boolean = false
@@ -72,6 +73,7 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
     @SuppressLint("SetTextI18n")
     override fun getProfile(profileData: List<UsersResponse>) {
         profileData.forEach { response ->
+            uid = response.uid
             imageProfile = response.image_profile
             name = response.name
             seller = response.seller
@@ -112,6 +114,11 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_user_profile, menu)
@@ -122,7 +129,13 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
         return when (item.itemId) {
             R.id.menu_edit_profile -> {
                 Log.d(Constants.DEBUG_TAG, name.toString())
-                startActivity<UserEditProfileActivity>()
+                startActivity<UserEditProfileActivity>(
+                    Constants.UID to uid,
+                    Constants.NAME to name,
+                    Constants.IMG_PROFILE to imageProfile,
+                    Constants.ADDRESS to address,
+                    Constants.PHONE to phone
+                )
                 true
             }
             R.id.menu_sign_out -> {

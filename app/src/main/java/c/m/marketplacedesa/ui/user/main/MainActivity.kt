@@ -40,9 +40,6 @@ class MainActivity : AppCompatActivity(), MainView {
         setSupportActionBar(toolbar_main)
         supportActionBar?.apply { title = getString(R.string.app_name) }
 
-        // for new user check user profile data
-        presenter.checkUserData()
-
         // get store content data
         presenter.getStore()
 
@@ -59,6 +56,13 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onDetachView() {
         presenter.onDetach()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // for new user check user profile data
+        presenter.checkUserData()
     }
 
     override fun onDestroy() {

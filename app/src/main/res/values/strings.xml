@@ -70,4 +70,6 @@
     <string name="message_check_your_data">make sure the data you entered is correct</string>
     <string name="title_check_your_data">Check your data</string>
     <string name="your_store_page">Your Store Page</string>
+    <string name="sign_in_cancel_alert">Sign in cancel</string>
+    <string name="check_internet_connection_alert">Check your internet connection</string>
 </resources>

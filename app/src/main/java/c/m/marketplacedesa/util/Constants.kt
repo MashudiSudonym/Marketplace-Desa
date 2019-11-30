@@ -5,6 +5,7 @@ class Constants {
         const val UID = "uid"
         const val NAME = "name"
         const val IMG_PRODUCT = "imgProduct"
+        const val IMG_PROFILE = "imgProfile"
         const val PRICE = "price"
         const val STOCK = "stock"
         const val STORE_UID = "storeUID"
