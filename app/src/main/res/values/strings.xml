@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">Marketplace Desa</string>
+    <string name="app_name" translatable="false">Marketplace Desa</string>
     <string name="profile">Profile</string>
     <string name="cart">Cart</string>
     <string name="setting">Setting</string>
     <string name="no_data">No Data</string>
-    <string name="image_store_description">Image Store</string>
-    <string name="image_product_description">Image Product</string>
-    <string name="background_gradient_description">Background Gradient</string>
-    <string name="background_solid_description">Background Solid</string>
+    <string name="image_store_description" translatable="false">Image Store</string>
+    <string name="image_product_description" translatable="false">Image Product</string>
+    <string name="background_gradient_description" translatable="false">Background Gradient</string>
+    <string name="background_solid_description" translatable="false">Background Solid</string>
     <string name="search">Search</string>
     <string name="product_title">Product Title</string>
     <string name="stock_title">Stock : </string>
-    <string name="number_of_stock">-</string>
+    <string name="number_of_stock" translatable="false">-</string>
     <string name="price_title">Price : Rp.</string>
-    <string name="number_of_price">-</string>
+    <string name="number_of_price" translatable="false">-</string>
     <string name="search_product_query_hint">Search product here…</string>
     <string name="search_store_query_hint">Search store here…</string>
     <string name="title_activity_settings">Settings</string>
@@ -23,16 +23,16 @@
     <string name="seller_status_title">Seller Status : </string>
     <string name="dummy_address">User Address, St. 8888. Ngabul. Tahunan. Jepara. Jawa Tengah. Indonesia</string>
     <string name="become_a_seller">Become a seller</string>
-    <string name="phone_number">+6289647990167</string>
+    <string name="phone_number" translatable="false">+6289647990167</string>
     <string name="edit_profile">edit profile</string>
     <string name="sign_out">sign out</string>
     <string name="language_setting">Language Setting</string>
     <string name="choose_language_menu">Choose Language</string>
     <string name="edit_info_store">Edit Store Information</string>
     <string name="details_store">Details Store</string>
-    <string name="plus_sign">+</string>
-    <string name="minus_sign">-</string>
-    <string name="order_count">0</string>
+    <string name="plus_sign" translatable="false">+</string>
+    <string name="minus_sign" translatable="false">-</string>
+    <string name="order_count" translatable="false">0</string>
     <string name="add_to_shopping_basket">add to shopping basket</string>
     <string name="save">Save</string>
     <string name="choose_image">Choose Image</string>
@@ -40,29 +40,29 @@
     <string name="address">Address</string>
     <string name="caution_phone_number_cannot_edit">telephone number cannot be changed</string>
     <string name="complete_your_profile">Complete your profile</string>
-    <string name="key_maps">AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U</string>
+    <string name="key_maps" translatable="false">AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U</string>
     <string name="my_order">My Order</string>
     <string name="order_list">Order List</string>
     <string name="total_price_title">Total Price : Rp.</string>
     <string name="order_quantity_title">Order Quantity</string>
     <string name="order_number">Order Number</string>
-    <string name="dummy_user_order_number">md00001</string>
+    <string name="dummy_user_order_number" translatable="false">md00001</string>
     <string name="user_order">Order by</string>
-    <string name="dummy_name_user_order">User 001</string>
+    <string name="dummy_name_user_order" translatable="false">User 001</string>
     <string name="choose_a_shipping_method">Choose a Shipping Method</string>
     <string name="take_it_by_yourself">Take it by yourself</string>
     <string name="delivered_to_home">Delivered to home</string>
     <string name="payment_details">Payment Details</string>
     <string name="estimated_total_price">Estimated total price</string>
     <string name="total">Total</string>
-    <string name="checkout">Checkout</string>
+    <string name="checkout" translatable="false">Checkout</string>
     <string name="checkout_order">Checkout Order</string>
     <string name="order_confirmation">Order Confirmation</string>
     <string name="no_changes_to_orders">no changes to orders?</string>
-    <string name="id_default_country">id</string>
+    <string name="id_default_country" translatable="false">id</string>
     <string name="name_field_error">Name cannot be empty</string>
     <string name="address_field_error">Address cannot be empty</string>
-    <string name="permission_checked">Permission Checked</string>
+    <string name="permission_checked" translatable="false">Permission Checked</string>
     <string name="take_or_choose">Take Photo or Choose from Gallery</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="take_from_camera">Take from Camera</string>
