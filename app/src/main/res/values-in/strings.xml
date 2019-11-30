@@ -53,4 +53,6 @@
     <string name="title_check_your_data">Periksa data anda</string>
     <string name="your_store_page">Halaman Toko Anda</string>
     <string name="price_title">Harga : Rp.</string>
+    <string name="check_internet_connection_alert">periksa koneksi internet anda</string>
+    <string name="sign_in_cancel_alert">batal masuk</string>
 </resources>
