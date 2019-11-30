@@ -49,14 +49,16 @@ class MainPresenter : Presenter<MainView> {
 
     fun checkUserData() {
         if (userAuthentication()) {
+            val userUID = authentication?.currentUser?.uid.toString()
+
             db?.collection("users")
-                ?.whereEqualTo("uid", authentication?.currentUser?.uid.toString())
+                ?.whereEqualTo("uid", userUID)
                 ?.addSnapshotListener { snapshot, exception ->
                     if (exception != null) Log.e("Error!!", "$exception")
 
                     val userList = snapshot?.toObjects(UsersResponse::class.java)
 
-                    if (userList.isNullOrEmpty()) mView?.returnToCompleteUserProfile()
+                    if (userList?.isNotEmpty() == false) mView?.returnToCompleteUserProfile()
                 }
         } else {
             mView?.returnToSignInActivity()

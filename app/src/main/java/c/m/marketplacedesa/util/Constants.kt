@@ -17,5 +17,7 @@ class Constants {
         const val REQUEST_SIGN_IN_CODE = 123
         const val PICK_PHOTO_CODE = 666
         const val CAMERA_REQUEST_CODE = 888
+        const val ERROR_TAG = "ERROR !!!"
+        const val DEBUG_TAG = "DEBUG !!!"
     }
 }

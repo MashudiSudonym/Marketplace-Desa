@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
                     .setAvailableProviders(
                         listOf(
                             AuthUI.IdpConfig.PhoneBuilder()
-                                .setDefaultCountryIso(getString(R.string.id_defaut_country))
+                                .setDefaultCountryIso(getString(R.string.id_default_country))
                                 .build()
                         )
                     ).build(),
@@ -50,7 +50,7 @@ class SignInActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
                 startActivity<MainActivity>()
-                this.finish()
+                finish()
             } else {
                 if (response == null) {
                     toast("Sign in cancel")

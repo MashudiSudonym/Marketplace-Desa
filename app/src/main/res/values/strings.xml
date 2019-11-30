@@ -20,7 +20,7 @@
     <string name="seller">Seller</string>
     <string name="not_a_seller">Not a seller</string>
     <string name="user_name">Your Name</string>
-    <string name="seller_status_title">Seller Status</string>
+    <string name="seller_status_title">Seller Status : </string>
     <string name="dummy_address">User Address, St. 8888. Ngabul. Tahunan. Jepara. Jawa Tengah. Indonesia</string>
     <string name="become_a_seller">Become a seller</string>
     <string name="phone_number">+6289647990167</string>
@@ -59,7 +59,7 @@
     <string name="checkout_order">Checkout Order</string>
     <string name="order_confirmation">Order Confirmation</string>
     <string name="no_changes_to_orders">no changes to orders?</string>
-    <string name="id_defaut_country">id</string>
+    <string name="id_default_country">id</string>
     <string name="name_field_error">Name cannot be empty</string>
     <string name="address_field_error">Address cannot be empty</string>
     <string name="permission_checked">Permission Checked</string>
@@ -69,4 +69,5 @@
     <string name="upload_data_title">Upload data…</string>
     <string name="message_check_your_data">make sure the data you entered is correct</string>
     <string name="title_check_your_data">Check your data</string>
+    <string name="your_store_page">Your Store Page</string>
 </resources>
