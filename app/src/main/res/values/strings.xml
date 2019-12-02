@@ -72,4 +72,6 @@
     <string name="your_store_page">Your Store Page</string>
     <string name="sign_in_cancel_alert">Sign in cancel</string>
     <string name="check_internet_connection_alert">Check your internet connection</string>
+    <string name="photo_profile_alert">Photo Profile Can Not Empty!!</string>
+    <string name="attention">Attention!!</string>
 </resources>

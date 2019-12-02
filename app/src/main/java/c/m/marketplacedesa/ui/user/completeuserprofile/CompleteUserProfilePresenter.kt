@@ -71,6 +71,8 @@ class CompleteUserProfilePresenter : Presenter<CompleteUserProfileView> {
         val imageThumbnailsReference = storageReference?.child("users/$userUID/$userUID")
 
         if (userAuthentication()) {
+            mView?.showProgressDialog()
+
             imageThumbnailsReference?.downloadUrl?.addOnSuccessListener {
                 val docData = hashMapOf(
                     "address" to address,
@@ -83,8 +85,13 @@ class CompleteUserProfilePresenter : Presenter<CompleteUserProfileView> {
 
                 db?.collection("users")?.document(userUID)
                     ?.set(docData)
-                    ?.addOnSuccessListener { mView?.returnMainActivity() }
+                    ?.addOnSuccessListener {
+                        mView?.progressDialogMessage("Update...")
+                        mView?.returnMainActivity()
+                        mView?.closeProgressDialog()
+                    }
                     ?.addOnFailureListener { e ->
+                        mView?.closeProgressDialog()
                         Log.e("ERROR!!", "$e")
                     }
             }

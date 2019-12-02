@@ -54,15 +54,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="c.m.marketplacedesa.ui.user.main.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.user.usereditprofile.UserEditProfileActivity"
-            android:parentActivityName=".ui.user.userprofile.UserProfileActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity" />
-        </activity>
+        <activity android:name=".ui.user.usereditprofile.UserEditProfileActivity" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings"

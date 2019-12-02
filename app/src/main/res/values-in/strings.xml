@@ -55,4 +55,6 @@
     <string name="price_title">Harga : Rp.</string>
     <string name="check_internet_connection_alert">periksa koneksi internet anda</string>
     <string name="sign_in_cancel_alert">batal masuk</string>
+    <string name="attention">Perhatian!!</string>
+    <string name="photo_profile_alert">Foto Profil tidak boleh kosong!!</string>
 </resources>

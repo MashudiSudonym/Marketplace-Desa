@@ -2,7 +2,6 @@ package c.m.marketplacedesa.ui.user.userprofile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -128,13 +127,13 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_edit_profile -> {
-                Log.d(Constants.DEBUG_TAG, name.toString())
                 startActivity<UserEditProfileActivity>(
                     Constants.UID to uid,
                     Constants.NAME to name,
                     Constants.IMG_PROFILE to imageProfile,
                     Constants.ADDRESS to address,
-                    Constants.PHONE to phone
+                    Constants.PHONE to phone,
+                    Constants.SELLER_STATUS to seller
                 )
                 true
             }

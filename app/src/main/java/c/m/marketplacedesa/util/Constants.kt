@@ -11,6 +11,7 @@ class Constants {
         const val STORE_UID = "storeUID"
         const val ADDRESS = "address"
         const val OWNER_UID = "ownerUID"
+        const val SELLER_STATUS = "seller_status"
         const val STORE_LATITUDE = "storeLatitude"
         const val STORE_LONGITUDE = "storeLongitude"
         const val REQUEST_PERMISSION_CODE = 101

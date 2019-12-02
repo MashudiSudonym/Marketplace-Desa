@@ -65,6 +65,7 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
 
         supportActionBar?.apply { title = getString(R.string.complete_your_profile) }
 
+        // request permission
         validatePermission()
 
         btn_choose_image_complete_user.setOnClickListener {
@@ -238,6 +239,25 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
         }
     }
 
+    private fun saveUserProfileData() {
+        val nameField = findViewById<FormEditText>(R.id.edt_name_complete_user)
+        val addressField = findViewById<FormEditText>(R.id.edt_address_complete_user)
+        val isValid = FormValidator(nameField, addressField).isValid
+
+        if (isValid) {
+            val name = edt_name_complete_user.text.toString()
+            val address = edt_address_complete_user.text.toString()
+            val userPhone = tv_phone_number.text.toString()
+
+            // Upload User Data
+            presenter.sendUserData(name, address, userSellerStatus, userPhone)
+        } else {
+            // if not valid
+            nameField.error = getString(R.string.name_field_error)
+            addressField.error = getString(R.string.address_field_error)
+        }
+    }
+
     // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -248,40 +268,34 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_save -> {
-                alert(
-                    getString(R.string.message_check_your_data),
-                    getString(R.string.title_check_your_data)
-                ) {
-                    yesButton {
-                        saveUserProfileData()
+                if (filePath != null) {
+                    alert(
+                        getString(R.string.message_check_your_data),
+                        getString(R.string.title_check_your_data)
+                    ) {
+                        yesButton {
+                            saveUserProfileData()
+                        }
+                        noButton { }
+                    }.apply {
+                        isCancelable = false
+                        show()
                     }
-                    noButton { }
-                }.apply {
-                    isCancelable = false
-                    show()
+                } else {
+                    alert(
+                        getString(R.string.photo_profile_alert),
+                        getString(R.string.attention)
+                    ) {
+                        yesButton {}
+                        noButton { }
+                    }.apply {
+                        isCancelable = false
+                        show()
+                    }
                 }
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun saveUserProfileData() {
-        val nameField = findViewById<FormEditText>(R.id.edt_name_complete_user)
-        val addressField = findViewById<FormEditText>(R.id.edt_address_complete_user)
-        val isValid = FormValidator(nameField, addressField).isValid
-
-        if (isValid) {
-            // Upload User Data
-            val name = edt_name_complete_user.text.toString()
-            val address = edt_address_complete_user.text.toString()
-            val userPhone = tv_phone_number.text.toString()
-
-            presenter.sendUserData(name, address, userSellerStatus, userPhone)
-        } else {
-            // if not valid
-            nameField.error = getString(R.string.name_field_error)
-            addressField.error = getString(R.string.address_field_error)
         }
     }
 }
