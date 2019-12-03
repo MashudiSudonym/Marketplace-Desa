@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.UsersResponse
+import c.m.marketplacedesa.ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.usereditprofile.UserEditProfileActivity
 import c.m.marketplacedesa.util.Constants
@@ -20,7 +21,6 @@ import org.jetbrains.anko.startActivity
 class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
     private lateinit var presenter: UserProfilePresenter
-    private var contentProfile: MutableList<UsersResponse> = mutableListOf()
     private var uid: String? = ""
     private var imageProfile: String? = ""
     private var name: String? = ""
@@ -110,6 +110,14 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
             // Seller Status Button
             btn_store.text = getString(R.string.become_a_seller)
+
+            // Complete Store Information
+            btn_store.setOnClickListener {
+                startActivity<CompleteSellerStoreInformationActivity>(
+                    Constants.UID to uid,
+                    Constants.PHONE to phone
+                )
+            }
         }
     }
 

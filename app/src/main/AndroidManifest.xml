@@ -35,7 +35,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-        <activity android:name=".ui.user.userordercart.UserOrderCartActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -44,6 +43,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_maps" />
 
+        <activity android:name=".ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity" />
+        <activity android:name=".ui.user.userordercart.UserOrderCartActivity" />
         <activity android:name=".ui.user.userstoredetails.UserStoreDetailsActivity" />
         <activity
             android:name=".ui.user.completeuserprofile.CompleteUserProfileActivity"
