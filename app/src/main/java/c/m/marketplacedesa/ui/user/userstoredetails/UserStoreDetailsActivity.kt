@@ -80,8 +80,10 @@ class UserStoreDetailsActivity : AppCompatActivity() {
 
         // maps UI launch
         mv_user_store_details.getMapAsync { googleMap ->
+            // setup maps type
             googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
+            // Permission access for device gps location
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager
                     .PERMISSION_GRANTED
@@ -94,10 +96,15 @@ class UserStoreDetailsActivity : AppCompatActivity() {
                 )
             }
 
+            // Control settings
             googleMap.isMyLocationEnabled = true
             googleMap.uiSettings.isZoomControlsEnabled = true
             googleMap.uiSettings.isCompassEnabled = true
 
+            // disable set center map to my location
+            googleMap.setOnMyLocationButtonClickListener { true }
+
+            // setup camera and marker store location
             googleMap.run {
                 animateCamera(
                     CameraUpdateFactory.newCameraPosition(
