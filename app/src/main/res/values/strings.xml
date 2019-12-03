@@ -74,4 +74,8 @@
     <string name="check_internet_connection_alert">Check your internet connection</string>
     <string name="photo_profile_alert">Photo Profile Can Not Empty!!</string>
     <string name="attention">Attention!!</string>
+    <string name="seller_phone_number">Store phone numbers may be different from the user\'s phone number.</string>
+    <string name="choose_store_image">Choose Store Image</string>
+    <string name="select_store_location">Select Store Location</string>
+    <string name="complete_store_information">Complete Store Information</string>
 </resources>
