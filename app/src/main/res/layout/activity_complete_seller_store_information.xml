@@ -117,18 +117,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:hint="@string/fui_verify_phone_number_title"
-                android:textColor="@android:color/black"
-                android:ems="10"
                 android:inputType="phone"
-                app:validationType="phone"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_address_complete_seller_store_information" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_address_complete_seller_store_information"
+                app:validationType="phone" />
 
             <TextView
                 android:id="@+id/tv_caution"

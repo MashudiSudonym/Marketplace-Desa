@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -43,6 +44,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_maps" />
 
+        <activity android:name=".ui.seller.sellerstoreinformation.SellerStoreInformationActivity" />
         <activity android:name=".ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity" />
         <activity android:name=".ui.user.userordercart.UserOrderCartActivity" />
         <activity android:name=".ui.user.userstoredetails.UserStoreDetailsActivity" />

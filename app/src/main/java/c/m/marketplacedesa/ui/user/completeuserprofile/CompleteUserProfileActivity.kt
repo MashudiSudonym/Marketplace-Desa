@@ -287,7 +287,6 @@ class CompleteUserProfileActivity : AppCompatActivity(), CompleteUserProfileView
                         getString(R.string.attention)
                     ) {
                         yesButton {}
-                        noButton { }
                     }.apply {
                         isCancelable = false
                         show()

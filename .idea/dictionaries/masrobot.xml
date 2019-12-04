@@ -3,13 +3,22 @@
     <words>
       <w>autofill</w>
       <w>autofocus</w>
+      <w>completesellerstoreinformation</w>
+      <w>completeuserprofile</w>
       <w>desa</w>
       <w>fileprovider</w>
       <w>firebase</w>
+      <w>geopoint</w>
       <w>iconics</w>
+      <w>marketplacedesa</w>
+      <w>sellerstoreinformation</w>
+      <w>signin</w>
       <w>usereditprofile</w>
       <w>userordercart</w>
       <w>userproductdetails</w>
+      <w>userprofile</w>
+      <w>userstore</w>
+      <w>userstoredetails</w>
     </words>
   </dictionary>
 </component>

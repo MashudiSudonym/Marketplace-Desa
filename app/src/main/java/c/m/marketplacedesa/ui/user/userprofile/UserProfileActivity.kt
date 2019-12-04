@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.UsersResponse
 import c.m.marketplacedesa.ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity
+import c.m.marketplacedesa.ui.seller.sellerstoreinformation.SellerStoreInformationActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.usereditprofile.UserEditProfileActivity
 import c.m.marketplacedesa.util.Constants
@@ -103,6 +104,11 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
             // Seller Status Button
             btn_store.text = getString(R.string.your_store_page)
+
+            // Store Information Activity
+            btn_store.setOnClickListener {
+                startActivity<SellerStoreInformationActivity>()
+            }
         } else {
             // Seller Status Label
             tv_seller_status.text =
@@ -114,7 +120,6 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
             // Complete Store Information
             btn_store.setOnClickListener {
                 startActivity<CompleteSellerStoreInformationActivity>(
-                    Constants.UID to uid,
                     Constants.PHONE to phone
                 )
             }

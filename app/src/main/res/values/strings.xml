@@ -78,4 +78,7 @@
     <string name="choose_store_image">Choose Store Image</string>
     <string name="select_store_location">Select Store Location</string>
     <string name="complete_store_information">Complete Store Information</string>
+    <string name="phone_field_error">Phone number cannot be empty</string>
+    <string name="select_store_location_alert">Select your store location on map</string>
+    <string name="title_select_store_location_alert">Location store not selected</string>
 </resources>
