@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -50,7 +51,6 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
     private lateinit var presenter: CompleteSellerStoreInformationPresenter
     private lateinit var progressDialog: ProgressDialog
     private lateinit var geoPointStore: GeoPoint
-    private var userPhone: String? = ""
     private var filePath: Uri? = null
     private var imageFilePath: String? = ""
     private var markerArrayList: ArrayList<Marker> = arrayListOf()
@@ -83,12 +83,6 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-
-        val intent = intent
-        userPhone = intent.getStringExtra(Constants.PHONE)
-
-        // default phone number
-        edt_phone_complete_seller_store_information.setText(userPhone)
 
         // Maps for select store location
         mv_store_location.getMapAsync { googleMap ->
@@ -329,9 +323,11 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
             findViewById<FormEditText>(R.id.edt_address_complete_seller_store_information)
         val phoneStoreField =
             findViewById<FormEditText>(R.id.edt_phone_complete_seller_store_information)
-        val isValid = FormValidator(nameStoreField, addressStoreField, phoneStoreField).isValid
+        val isValid = FormValidator(phoneStoreField, nameStoreField, addressStoreField).isValid
 
-        if (isValid && (markerArrayList.size != 0)) {
+        Log.d(Constants.DEBUG_TAG, "$isValid")
+
+        if (isValid && (markerArrayList.size > 0)) {
             val nameStore = edt_name_complete_seller_store_information.text.toString()
             val addressStore = edt_address_complete_seller_store_information.text.toString()
             val phoneStore = edt_phone_complete_seller_store_information.text.toString()
@@ -350,14 +346,16 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
             phoneStoreField.error = getString(R.string.phone_field_error)
 
             // show alert to select store location
-            alert(
-                getString(R.string.select_store_location_alert),
-                getString(R.string.title_select_store_location_alert)
-            ) {
-                yesButton { }
-            }.apply {
-                isCancelable = false
-                show()
+            if (markerArrayList.size == 0) {
+                alert(
+                    getString(R.string.select_store_location_alert),
+                    getString(R.string.title_select_store_location_alert)
+                ) {
+                    yesButton { }
+                }.apply {
+                    isCancelable = false
+                    show()
+                }
             }
         }
     }

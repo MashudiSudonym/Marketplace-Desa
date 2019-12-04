@@ -65,6 +65,11 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
         presenter.onDetach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.getProfile()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         onDetachView()
@@ -119,9 +124,7 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
             // Complete Store Information
             btn_store.setOnClickListener {
-                startActivity<CompleteSellerStoreInformationActivity>(
-                    Constants.PHONE to phone
-                )
+                startActivity<CompleteSellerStoreInformationActivity>()
             }
         }
     }
