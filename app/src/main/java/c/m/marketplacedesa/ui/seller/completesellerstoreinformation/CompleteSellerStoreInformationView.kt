@@ -6,5 +6,5 @@ interface CompleteSellerStoreInformationView : View {
     fun showProgressDialog()
     fun closeProgressDialog()
     fun progressDialogMessage(message: String)
-    fun finishThisActivityToNextActivity()
+    fun finishThisActivityToNextActivity(storeUID: String)
 }

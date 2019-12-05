@@ -192,9 +192,11 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
         progressDialog.setMessage(message)
     }
 
-    override fun finishThisActivityToNextActivity() {
+    override fun finishThisActivityToNextActivity(storeUID: String) {
         finish() // finish this activity
-        startActivity<SellerStoreInformationActivity>()
+        startActivity<SellerStoreInformationActivity>(
+            Constants.STORE_UID to storeUID
+        )
     }
 
     private fun validatePermission() {

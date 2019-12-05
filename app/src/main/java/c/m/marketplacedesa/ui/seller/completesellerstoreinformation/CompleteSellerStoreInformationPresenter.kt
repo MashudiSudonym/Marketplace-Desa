@@ -91,7 +91,7 @@ class CompleteSellerStoreInformationPresenter : Presenter<CompleteSellerStoreInf
                         db?.collection("users")?.document(userUID)
                             ?.update("seller", true)
 
-                        mView?.finishThisActivityToNextActivity()
+                        mView?.finishThisActivityToNextActivity(storeUID)
                         mView?.closeProgressDialog()
                     }
                     ?.addOnFailureListener { e ->

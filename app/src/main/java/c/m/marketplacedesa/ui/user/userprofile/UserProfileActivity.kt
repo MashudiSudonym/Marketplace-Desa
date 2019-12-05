@@ -22,7 +22,7 @@ import org.jetbrains.anko.startActivity
 class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
     private lateinit var presenter: UserProfilePresenter
-    private var uid: String? = ""
+    private var userUID: String? = ""
     private var imageProfile: String? = ""
     private var name: String? = ""
     private var seller: Boolean = false
@@ -78,7 +78,7 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
     @SuppressLint("SetTextI18n")
     override fun getProfile(profileData: List<UsersResponse>) {
         profileData.forEach { response ->
-            uid = response.uid
+            userUID = response.uid
             imageProfile = response.image_profile
             name = response.name
             seller = response.seller
@@ -112,7 +112,9 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
             // Store Information Activity
             btn_store.setOnClickListener {
-                startActivity<SellerStoreInformationActivity>()
+                startActivity<SellerStoreInformationActivity>(
+                    Constants.OWNER_UID to userUID
+                )
             }
         } else {
             // Seller Status Label
@@ -144,7 +146,7 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
         return when (item.itemId) {
             R.id.menu_edit_profile -> {
                 startActivity<UserEditProfileActivity>(
-                    Constants.UID to uid,
+                    Constants.UID to userUID,
                     Constants.NAME to name,
                     Constants.IMG_PROFILE to imageProfile,
                     Constants.ADDRESS to address,

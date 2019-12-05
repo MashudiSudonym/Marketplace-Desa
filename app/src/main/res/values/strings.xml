@@ -46,9 +46,9 @@
     <string name="total_price_title">Total Price : Rp.</string>
     <string name="order_quantity_title">Order Quantity</string>
     <string name="order_number">Order Number</string>
-    <string name="dummy_user_order_number" translatable="false">md00001</string>
+    <string name="dummy_user_order_number" translatable="false">-</string>
     <string name="user_order">Order by</string>
-    <string name="dummy_name_user_order" translatable="false">User 001</string>
+    <string name="dummy_name_user_order" translatable="false">-</string>
     <string name="choose_a_shipping_method">Choose a Shipping Method</string>
     <string name="take_it_by_yourself">Take it by yourself</string>
     <string name="delivered_to_home">Delivered to home</string>
