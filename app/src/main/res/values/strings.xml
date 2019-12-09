@@ -81,4 +81,5 @@
     <string name="phone_field_error">Phone number cannot be empty</string>
     <string name="select_store_location_alert">Select your store location on map</string>
     <string name="title_select_store_location_alert">Location store not selected</string>
+    <string name="store_location">Store Location</string>
 </resources>

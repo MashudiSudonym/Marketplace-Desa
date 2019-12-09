@@ -68,15 +68,27 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_no_data_seller_store_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_data"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_address_seller_store_information"
+                    tools:text="@string/no_data" />
+
+                <TextView
                     android:id="@+id/tv_title_seller_store_information"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -151,6 +163,6 @@
         android:layout_height="wrap_content"
         app:layout_anchor="@id/app_bar_seller_store_information"
         app:layout_anchorGravity="end|bottom"
-        app:srcCompat="@drawable/ic_location_on"
+        app:srcCompat="@drawable/ic_add_circle_outline"
         app:useCompatPadding="true" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

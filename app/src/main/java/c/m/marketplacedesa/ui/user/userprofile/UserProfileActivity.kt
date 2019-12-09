@@ -86,7 +86,6 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
             phone = response.phone
         }
 
-        // Do logic here
         Glide.with(this)
             .load(imageProfile)
             .apply(
@@ -96,8 +95,8 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
                     .error(R.drawable.ic_broken_image)
             )
             .into(img_profile)
-        tv_name.text = name
 
+        tv_name.text = name
         tv_address.text = address
         tv_phone_number.text = phone
 

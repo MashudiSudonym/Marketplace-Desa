@@ -64,4 +64,5 @@
     <string name="phone_field_error">Nomor telepon tidak boleh kosong</string>
     <string name="select_store_location_alert">Pilih lokasi tokomu di peta</string>
     <string name="title_select_store_location_alert">Lokasi peta tidak ditentukan</string>
+    <string name="store_location">Lokasi Toko</string>
 </resources>
