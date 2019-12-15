@@ -1,5 +1,7 @@
 package c.m.marketplacedesa.ui.user.userstore
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -9,16 +11,26 @@ import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.ProductsResponse
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
-import c.m.marketplacedesa.ui.user.userproductdetails.UserProductDetailsActivity
 import c.m.marketplacedesa.ui.user.userstoredetails.UserStoreDetailsActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
+import com.mikepenz.actionitembadge.library.ActionItemBadge
 import kotlinx.android.synthetic.main.activity_user_store.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.startActivity
 
-class UserStoreActivity : AppCompatActivity(), UserStoreView {
+class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemoveInterface {
 
+    private lateinit var presenter: UserStorePresenter
+    private lateinit var userStoreAdapter: UserStoreAdapter
+    private lateinit var userStoreOrderSharedPreferences: SharedPreferences
+    private lateinit var badgeSharedPreferences: SharedPreferences
+    private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
+    private var userStoreOrder: String? = ""
+    private var badgeCount: Int = 0
+    private var badgeSharedPreferencesValue: Int = 0
     private var uid: String? = ""
     private var name: String? = ""
     private var address: String? = ""
@@ -26,9 +38,6 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView {
     private var phone: String? = ""
     private var storeLatitude: Double? = 0.0
     private var storeLongitude: Double? = 0.0
-    private lateinit var presenter: UserStorePresenter
-    private lateinit var userStoreAdapter: UserStoreAdapter
-    private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +80,41 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView {
             swipe_refresh_product.isRefreshing = false
             // refresh product content data
             presenter.getProduct(uid.toString())
+        }
+
+        // badge shopping cart
+        badgeSharedPreferences = this.getSharedPreferences(
+            getString(R.string.order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        badgeSharedPreferencesValue = badgeSharedPreferences.getInt(
+            getString(R.string.badge_shared_preferences_value_key),
+            Constants.DEFAULT_INT_VALUE
+        )
+
+        // check value of badgeSharedPreferencesValue and badgeCount
+        if (badgeSharedPreferencesValue != 0) {
+            badgeCount = badgeSharedPreferencesValue
+            invalidateOptionsMenu()
+        }
+
+        // check user order status
+        userStoreOrderSharedPreferences = this.getSharedPreferences(
+            getString(R.string.user_store_order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        userStoreOrder = userStoreOrderSharedPreferences.getString(
+            getString(R.string.user_store_order_value_key),
+            Constants.DEFAULT_STRING_VALUE
+        )
+
+        if (userStoreOrder != uid) {
+            alert(getString(R.string.alert_message_order), getString(R.string.attention)) {
+                okButton { onBackPressed() }
+            }.apply {
+                isCancelable = false
+                show()
+            }
         }
     }
 
@@ -127,16 +171,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView {
     }
 
     private fun setupProductRecyclerView() {
-        userStoreAdapter = UserStoreAdapter(contentProduct) { response ->
-            startActivity<UserProductDetailsActivity>(
-                Constants.UID to response.uid,
-                Constants.NAME to response.name,
-                Constants.IMG_PRODUCT to response.image_product,
-                Constants.PRICE to response.price,
-                Constants.STOCK to response.stock,
-                Constants.STORE_UID to response.store
-            )
-        }
+        userStoreAdapter = UserStoreAdapter(contentProduct)
 
         rv_product.setHasFixedSize(true)
         rv_product.adapter = userStoreAdapter
@@ -154,10 +189,42 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView {
         shimmer_frame_product.stopShimmer()
     }
 
+    // add remove badge count
+    override fun addProduct() {
+        badgeCount++
+
+        with(badgeSharedPreferences.edit()) {
+            putInt(getString(R.string.badge_shared_preferences_value_key), badgeCount)
+            commit()
+        }
+
+        invalidateOptionsMenu()
+    }
+
+    override fun removeProduct() {
+        badgeCount--
+
+        with(badgeSharedPreferences.edit()) {
+            putInt(getString(R.string.badge_shared_preferences_value_key), badgeCount)
+            commit()
+        }
+
+        invalidateOptionsMenu()
+    }
+
     // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_user_store, menu)
+        if (badgeCount > 0) {
+            ActionItemBadge.update(
+                this,
+                menu?.findItem(R.id.menu_cart),
+                getDrawable(R.drawable.ic_shopping_cart),
+                ActionItemBadge.BadgeStyles.GREEN,
+                badgeCount
+            )
+        }
         return true
     }
 

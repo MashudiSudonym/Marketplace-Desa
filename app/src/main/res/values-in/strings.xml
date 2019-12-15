@@ -21,7 +21,7 @@
     <string name="choose_language_menu">Pilih bahasa</string>
     <string name="edit_info_store">Edit Informasi Toko</string>
     <string name="details_store">Detail Toko</string>
-    <string name="add_to_shopping_basket">tambahkan ke keranjang belanja</string>
+    <string name="add">tambah</string>
     <string name="save">Simpan</string>
     <string name="choose_image">Pilih gambar</string>
     <string name="name">Nama</string>
@@ -65,4 +65,5 @@
     <string name="select_store_location_alert">Pilih lokasi tokomu di peta</string>
     <string name="title_select_store_location_alert">Lokasi peta tidak ditentukan</string>
     <string name="store_location">Lokasi Toko</string>
+    <string name="alert_message_order">Anda memiliki pesanan yang belum diselesaikan di toko lain. Harap selesaikan pesanan atau batalkan.</string>
 </resources>

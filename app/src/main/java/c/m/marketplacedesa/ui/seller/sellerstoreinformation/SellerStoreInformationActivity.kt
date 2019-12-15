@@ -21,7 +21,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
 
     private lateinit var presenter: SellerStoreInformationPresenter
     private lateinit var sellerStoreInformationAdapter: SellerStoreInformationAdapter
-    private var productsList: MutableList<ProductsResponse> = mutableListOf()
+    private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
     private var ownerUID: String? = ""
     private var storeUID: String? = ""
     private var storeLatitude: Double? = 0.0
@@ -89,7 +89,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
     }
 
     private fun setupProductRecyclerView() {
-        sellerStoreInformationAdapter = SellerStoreInformationAdapter(productsList) {}
+        sellerStoreInformationAdapter = SellerStoreInformationAdapter(contentProduct) {}
 
         rv_product_seller_store_information.setHasFixedSize(true)
         rv_product_seller_store_information.adapter = sellerStoreInformationAdapter
@@ -149,8 +149,8 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
     }
 
     override fun getProduct(productData: List<ProductsResponse>) {
-        productsList.clear()
-        productsList.addAll(productData)
+        contentProduct.clear()
+        contentProduct.addAll(productData)
         sellerStoreInformationAdapter.notifyDataSetChanged()
     }
 

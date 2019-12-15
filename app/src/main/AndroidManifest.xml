@@ -69,7 +69,6 @@
         <activity
             android:name=".ui.user.userprofile.UserProfileActivity"
             android:theme="@style/ProfileTheme.NoActionBar" />
-        <activity android:name=".ui.user.userproductdetails.UserProductDetailsActivity" />
         <activity
             android:name=".ui.user.userstore.UserStoreActivity"
             android:parentActivityName=".ui.user.main.MainActivity">

@@ -33,7 +33,7 @@
     <string name="plus_sign" translatable="false">+</string>
     <string name="minus_sign" translatable="false">-</string>
     <string name="order_count" translatable="false">0</string>
-    <string name="add_to_shopping_basket">add to shopping basket</string>
+    <string name="add">add</string>
     <string name="save">Save</string>
     <string name="choose_image">Choose Image</string>
     <string name="name">Name</string>
@@ -82,4 +82,10 @@
     <string name="select_store_location_alert">Select your store location on map</string>
     <string name="title_select_store_location_alert">Location store not selected</string>
     <string name="store_location">Store Location</string>
+    <string name="order_number_key" translatable="false">orderNumber</string>
+    <string name="badge_shared_preferences_value_key" translatable="false">badgeSharedPreferencesValue</string>
+    <string name="order_shared_preferences_name" translatable="false">order_shared_preferences</string>
+    <string name="user_store_order_shared_preferences_name" translatable="false">user_store_order_shared_preferences</string>
+    <string name="user_store_order_value_key" translatable="false">user_store_order_value_key</string>
+    <string name="alert_message_order">You have an order that hasn\'t been completed in another store. Please complete the order or cancel.</string>
 </resources>

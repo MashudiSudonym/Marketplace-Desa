@@ -21,5 +21,7 @@ class Constants {
         const val CAMERA_REQUEST_CODE = 888
         const val ERROR_TAG = "ERROR !!!"
         const val DEBUG_TAG = "DEBUG !!!"
+        const val DEFAULT_INT_VALUE = 0
+        const val DEFAULT_STRING_VALUE = ""
     }
 }
