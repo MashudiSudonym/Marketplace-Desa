@@ -1,5 +1,7 @@
 package c.m.marketplacedesa.ui.user.main
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,6 +18,7 @@ import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
+import com.mikepenz.actionitembadge.library.ActionItemBadge
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
@@ -23,7 +26,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var presenter: MainPresenter
     private lateinit var mainAdapter: MainAdapter
+    private lateinit var badgeSharedPreferences: SharedPreferences
     private val contentStore: MutableList<StoreResponse> = mutableListOf()
+    private var badgeCount: Int = 0
+    private var badgeSharedPreferencesValue: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +57,22 @@ class MainActivity : AppCompatActivity(), MainView {
             swipe_refresh_main.isRefreshing = false
             // refresh store content data
             presenter.getStore()
+        }
+
+        // badge shopping cart
+        badgeSharedPreferences = this.getSharedPreferences(
+            getString(R.string.order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        badgeSharedPreferencesValue = badgeSharedPreferences.getInt(
+            getString(R.string.badge_shared_preferences_value_key),
+            Constants.DEFAULT_INT_VALUE
+        )
+
+        // check value of badgeSharedPreferencesValue and badgeCount
+        if (badgeSharedPreferencesValue != 0) {
+            badgeCount = badgeSharedPreferencesValue
+            invalidateOptionsMenu()
         }
     }
 
@@ -151,6 +173,15 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_user_main, menu)
+        if (badgeCount > 0) {
+            ActionItemBadge.update(
+                this,
+                menu?.findItem(R.id.menu_cart),
+                getDrawable(R.drawable.ic_shopping_cart),
+                ActionItemBadge.BadgeStyles.GREEN,
+                badgeCount
+            )
+        }
         return true
     }
 

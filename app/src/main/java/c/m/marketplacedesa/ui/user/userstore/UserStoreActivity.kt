@@ -108,7 +108,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
             Constants.DEFAULT_STRING_VALUE
         )
 
-        if (userStoreOrder != uid) {
+        if (userStoreOrder != uid && badgeSharedPreferencesValue != 0) {
             alert(getString(R.string.alert_message_order), getString(R.string.attention)) {
                 okButton { onBackPressed() }
             }.apply {
