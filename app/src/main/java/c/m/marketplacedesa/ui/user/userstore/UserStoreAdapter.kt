@@ -16,6 +16,7 @@ import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_product_order.*
 import org.jetbrains.anko.design.snackbar
@@ -158,19 +159,9 @@ class UserStoreAdapter(
 
                 db.collection("order_by_order_number")
                     .document(getOrderNumberValue.toString())
-                    .update(orderByOrderNumber)
+                    .set(orderByOrderNumber, SetOptions.merge())
                     .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
                     .addOnFailureListener { e ->
-                        db.collection("order_by_order_number")
-                            .document(getOrderNumberValue.toString())
-                            .set(orderByOrderNumber)
-                            .addOnSuccessListener {
-                                Log.d(
-                                    Constants.DEBUG_TAG,
-                                    "Success update data"
-                                )
-                            }
-                            .addOnFailureListener { exception -> Log.e("ERROR!!", "$exception") }
                         Log.e("ERROR!!", "$e")
                     }
             }

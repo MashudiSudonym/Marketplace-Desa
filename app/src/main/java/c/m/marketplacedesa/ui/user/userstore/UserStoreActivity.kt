@@ -112,6 +112,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
             invalidateOptionsMenu()
         }
 
+        // check order number
         if (badgeCount == 0 && getOrderNumberValue != "") {
             with(badgeSharedPreferences.edit()) {
                 putString(

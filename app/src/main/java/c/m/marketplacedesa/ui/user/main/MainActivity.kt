@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private val contentStore: MutableList<StoreResponse> = mutableListOf()
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
-    private var orderNumber: String? = ""
+    private var getOrderNumberValue: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +69,27 @@ class MainActivity : AppCompatActivity(), MainView {
             getString(R.string.badge_shared_preferences_value_key),
             Constants.DEFAULT_INT_VALUE
         )
+        // get order number
+        getOrderNumberValue = badgeSharedPreferences.getString(
+            getString(R.string.order_number_value_key),
+            Constants.DEFAULT_STRING_VALUE
+        )
 
         // check value of badgeSharedPreferencesValue and badgeCount
         if (badgeSharedPreferencesValue != 0) {
             badgeCount = badgeSharedPreferencesValue
             invalidateOptionsMenu()
+        }
+
+        // check order number
+        if (badgeCount == 0 && getOrderNumberValue != "") {
+            with(badgeSharedPreferences.edit()) {
+                putString(
+                    getString(R.string.order_number_value_key),
+                    Constants.DEFAULT_STRING_VALUE
+                )
+                commit()
+            }
         }
     }
 
