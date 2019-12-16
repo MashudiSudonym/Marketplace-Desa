@@ -1,6 +1,9 @@
 package c.m.marketplacedesa.ui.user.userstore
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +15,10 @@ import c.m.marketplacedesa.util.invisible
 import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_product_order.*
-import kotlin.random.Random
+import org.jetbrains.anko.design.snackbar
 
 class UserStoreAdapter(
     private val contentProduct: List<ProductsResponse>
@@ -34,10 +38,13 @@ class UserStoreAdapter(
 
     class UserStoreViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
+        @SuppressLint("RestrictedApi")
         fun bind(contentProduct: ProductsResponse) {
             var productOrderCount = 0
-            // create order number
-            val orderNumber = "md-${Random.nextInt(0, 1000).plus(69).times(5)}"
+            // firebase initialize
+            val db = FirebaseFirestore.getInstance()
+            val temporaryOrderItemProductKey =
+                db.collection("temporary_order_item_product").document().id
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
@@ -45,6 +52,10 @@ class UserStoreAdapter(
             ) ?: return
             val userStoreOrder = userStoreOrderSharedPreferences.getString(
                 itemView.context.getString(R.string.user_store_order_value_key),
+                Constants.DEFAULT_STRING_VALUE
+            )
+            val userName = userStoreOrderSharedPreferences.getString(
+                itemView.context.getString(R.string.user_name_value_key),
                 Constants.DEFAULT_STRING_VALUE
             )
             // badge shopping cart
@@ -108,16 +119,60 @@ class UserStoreAdapter(
                     commit()
                 }
 
-                // save order number to shared preferences
-                if (getOrderNumberValue == Constants.DEFAULT_STRING_VALUE) {
-                    with(badgeSharedPreferences.edit()) {
-                        putString(
-                            itemView.context.getString(R.string.order_number_value_key),
-                            orderNumber
-                        )
-                        commit()
+                // show notification added product
+                itemView.snackbar("Add ${contentProduct.name} to shopping cart")
+
+                // firebase data map
+                val temporaryOrderItemProduct = mapOf(
+                    "uid" to temporaryOrderItemProductKey,
+                    "image_product" to contentProduct.image_product,
+                    "name" to contentProduct.name,
+                    "number_of_product_orders" to productOrderCount,
+                    "total_price" to contentProduct.price?.times(productOrderCount),
+                    "order_number" to getOrderNumberValue,
+                    "order_status" to false,
+                    "payment_status" to false,
+                    "is_canceled" to false,
+                    "order_by" to userName,
+                    "delivery_option" to 1
+                )
+                val orderByOrderNumber = mapOf(
+                    temporaryOrderItemProductKey to true
+                )
+                val updateProductStock = mapOf(
+                    "stock" to contentProduct.stock?.minus(1)
+                )
+
+                // send data to firebase
+                db.collection("products")
+                    .document(contentProduct.uid.toString())
+                    .update(updateProductStock)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                db.collection("temporary_order_item_product")
+                    .document(temporaryOrderItemProductKey)
+                    .set(temporaryOrderItemProduct)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                db.collection("order_by_order_number")
+                    .document(getOrderNumberValue.toString())
+                    .update(orderByOrderNumber)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                    .addOnFailureListener { e ->
+                        db.collection("order_by_order_number")
+                            .document(getOrderNumberValue.toString())
+                            .set(orderByOrderNumber)
+                            .addOnSuccessListener {
+                                Log.d(
+                                    Constants.DEBUG_TAG,
+                                    "Success update data"
+                                )
+                            }
+                            .addOnFailureListener { exception -> Log.e("ERROR!!", "$exception") }
+                        Log.e("ERROR!!", "$e")
                     }
-                }
             }
 
             btn_plus_sign_order.setOnClickListener {
@@ -135,6 +190,28 @@ class UserStoreAdapter(
 
                 // show product order count
                 tv_order_count_order.text = productOrderCount.toString()
+
+                // firebase data map
+                val temporaryOrderItemProduct = mapOf(
+                    "number_of_product_orders" to productOrderCount,
+                    "total_price" to contentProduct.price?.times(productOrderCount)
+                )
+                val updateProductStock = mapOf(
+                    "stock" to contentProduct.stock?.minus(1)
+                )
+
+                // send data to firebase
+                db.collection("products")
+                    .document(contentProduct.uid.toString())
+                    .update(updateProductStock)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                db.collection("temporary_order_item_product")
+                    .document(temporaryOrderItemProductKey)
+                    .update(temporaryOrderItemProduct)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
             }
 
             btn_minus_sign_order.setOnClickListener {
@@ -150,16 +227,61 @@ class UserStoreAdapter(
                     commit()
                 }
 
+                // firebase data map
+                val temporaryOrderItemProduct = mapOf(
+                    "number_of_product_orders" to productOrderCount,
+                    "total_price" to contentProduct.price?.times(productOrderCount)
+                )
+                val updateProductStock = mapOf(
+                    "stock" to contentProduct.stock?.plus(1)
+                )
+
+                // send data to firebase
+                db.collection("products")
+                    .document(contentProduct.uid.toString())
+                    .update(updateProductStock)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                db.collection("temporary_order_item_product")
+                    .document(temporaryOrderItemProductKey)
+                    .update(temporaryOrderItemProduct)
+                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
                 // visible and invisible button button
                 if (productOrderCount == 0) {
                     btn_add_to_shopping_basket_order.visible()
                     btn_plus_sign_order.invisible()
                     btn_minus_sign_order.invisible()
                     tv_order_count_order.invisible()
+                    itemView.snackbar("Remove ${contentProduct.name} to shopping cart")
+
+                    // send data to firebase
+                    db.collection("temporary_order_item_product")
+                        .document(temporaryOrderItemProductKey)
+                        .delete()
+
+                    db.collection("order_by_order_number")
+                        .document(getOrderNumberValue.toString())
+                        .delete()
                 }
 
                 // show product order count
                 tv_order_count_order.text = productOrderCount.toString()
+            }
+
+            // if item stock is empty or limit, disable button add to shopping cart
+            if (contentProduct.stock == 0) {
+                btn_add_to_shopping_basket_order.isEnabled = false
+                btn_add_to_shopping_basket_order.setBackgroundColor(Color.LTGRAY)
+                btn_plus_sign_order.isEnabled = false
+                btn_plus_sign_order.setBackgroundColor(Color.LTGRAY)
+            } else {
+                btn_add_to_shopping_basket_order.isEnabled = true
+                btn_add_to_shopping_basket_order.setBackgroundColor(Color.parseColor("#43A047"))
+                btn_plus_sign_order.isEnabled = true
+                btn_plus_sign_order.setBackgroundColor(Color.parseColor("#43A047"))
             }
 
             // Layout show data

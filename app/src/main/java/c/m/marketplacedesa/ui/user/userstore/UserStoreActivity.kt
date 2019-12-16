@@ -3,12 +3,14 @@ package c.m.marketplacedesa.ui.user.userstore
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.ProductsResponse
+import c.m.marketplacedesa.model.UsersResponse
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userstoredetails.UserStoreDetailsActivity
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_user_store.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.startActivity
+import kotlin.random.Random
 
 class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemoveInterface {
 
@@ -29,8 +32,11 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
     private lateinit var badgeSharedPreferences: SharedPreferences
     private var contentProduct: MutableList<ProductsResponse> = mutableListOf()
     private var userStoreOrder: String? = ""
+    private var orderNumber: String? = ""
+    private var getOrderNumberValue: String? = ""
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
+    private var userName: String? = ""
     private var uid: String? = ""
     private var name: String? = ""
     private var address: String? = ""
@@ -50,6 +56,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
     override fun onAttachView() {
         presenter.onAttach(this)
         presenter.initFirebase()
+        presenter.getUser()
 
         setSupportActionBar(toolbar_product)
         supportActionBar?.apply {
@@ -92,11 +99,38 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
             getString(R.string.badge_shared_preferences_value_key),
             Constants.DEFAULT_INT_VALUE
         )
+        // get order number
+        getOrderNumberValue = badgeSharedPreferences.getString(
+            getString(R.string.order_number_value_key),
+            Constants.DEFAULT_STRING_VALUE
+        )
+        // create order number
+        orderNumber = "md-${Random.nextInt(0, 1000).plus(69).times(5)}"
+        Log.d(Constants.DEBUG_TAG, orderNumber.toString())
 
         // check value of badgeSharedPreferencesValue and badgeCount
         if (badgeSharedPreferencesValue != 0) {
             badgeCount = badgeSharedPreferencesValue
             invalidateOptionsMenu()
+        }
+
+        if (badgeCount == 0 && getOrderNumberValue != "") {
+            with(badgeSharedPreferences.edit()) {
+                putString(
+                    getString(R.string.order_number_value_key),
+                    Constants.DEFAULT_STRING_VALUE
+                )
+                commit()
+            }
+        } else if (getOrderNumberValue == "") {
+            // save order number to shared preferences
+            with(badgeSharedPreferences.edit()) {
+                putString(
+                    getString(R.string.order_number_value_key),
+                    orderNumber
+                )
+                commit()
+            }
         }
 
         // check user order status
@@ -162,6 +196,17 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         userStoreAdapter.notifyDataSetChanged()
     }
 
+    override fun getUser(userData: List<UsersResponse>) {
+        userData.forEach {
+            userName = it.name
+        }
+
+        with(userStoreOrderSharedPreferences.edit()) {
+            putString(getString(R.string.user_name_value_key), userName)
+            commit()
+        }
+    }
+
     override fun returnToSignInActivity() {
         finish() // close this activity
         startActivity<SignInActivity>() // open sign in activity
@@ -190,7 +235,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         shimmer_frame_product.stopShimmer()
     }
 
-    // add remove badge count
+    // add badge count
     override fun addProduct() {
         badgeCount++
 
@@ -202,6 +247,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         invalidateOptionsMenu()
     }
 
+    // remove badge count
     override fun removeProduct() {
         badgeCount--
 
@@ -213,8 +259,31 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         invalidateOptionsMenu()
     }
 
+    // device back button
+    override fun onBackPressed() {
+        if (badgeCount == 0) {
+            with(badgeSharedPreferences.edit()) {
+                putString(
+                    getString(R.string.order_number_value_key),
+                    Constants.DEFAULT_STRING_VALUE
+                )
+                commit()
+            }
+        }
+        super.onBackPressed()
+    }
+
+    // action bar navigation up
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        if (badgeCount == 0) {
+            with(badgeSharedPreferences.edit()) {
+                putString(
+                    getString(R.string.order_number_value_key),
+                    Constants.DEFAULT_STRING_VALUE
+                )
+                commit()
+            }
+        }
         return super.onSupportNavigateUp()
     }
 
