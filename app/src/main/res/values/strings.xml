@@ -88,4 +88,5 @@
     <string name="user_store_order_shared_preferences_name" translatable="false">user_store_order_shared_preferences</string>
     <string name="user_store_order_value_key" translatable="false">user_store_order_value_key</string>
     <string name="alert_message_order">You have an order that hasn\'t been completed in another store. Please complete the order or cancel.</string>
+    <string name="order_number_value_key" translatable="false">order_number_value_key</string>
 </resources>

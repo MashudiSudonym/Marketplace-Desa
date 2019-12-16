@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private val contentStore: MutableList<StoreResponse> = mutableListOf()
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
+    private var orderNumber: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

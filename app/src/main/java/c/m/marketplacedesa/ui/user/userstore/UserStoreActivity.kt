@@ -42,7 +42,6 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_store)
-        setSupportActionBar(toolbar_product)
 
         initPresenter()
         onAttachView()
@@ -52,9 +51,11 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         presenter.onAttach(this)
         presenter.initFirebase()
 
+        setSupportActionBar(toolbar_product)
         supportActionBar?.apply {
+            title = ""
             setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
         }
 
         val intent = intent
@@ -210,6 +211,11 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         }
 
         invalidateOptionsMenu()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     // app bar menu

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_product_order.*
+import kotlin.random.Random
 
 class UserStoreAdapter(
     private val contentProduct: List<ProductsResponse>
@@ -35,6 +36,8 @@ class UserStoreAdapter(
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(contentProduct: ProductsResponse) {
             var productOrderCount = 0
+            // create order number
+            val orderNumber = "md-${Random.nextInt(0, 1000).plus(69).times(5)}"
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
@@ -49,14 +52,19 @@ class UserStoreAdapter(
                 itemView.context.getString(R.string.order_shared_preferences_name),
                 Context.MODE_PRIVATE
             ) ?: return
-            val getBadgeCountValue = badgeSharedPreferences.getInt(
-                itemView.context.getString(R.string.badge_shared_preferences_value_key),
+            val getProductOrderCountValue = badgeSharedPreferences.getInt(
+                "${contentProduct.uid}",
                 Constants.DEFAULT_INT_VALUE
+            )
+            // get order number
+            val getOrderNumberValue = badgeSharedPreferences.getString(
+                itemView.context.getString(R.string.order_number_value_key),
+                Constants.DEFAULT_STRING_VALUE
             )
 
             // set default value productOrderCount and check store product position
-            if (getBadgeCountValue != 0 && userStoreOrder == contentProduct.store) {
-                productOrderCount = getBadgeCountValue
+            if (getProductOrderCountValue != 0 && userStoreOrder == contentProduct.store) {
+                productOrderCount = getProductOrderCountValue
 
                 // visible and invisible button
                 btn_add_to_shopping_basket_order.invisible()
@@ -76,6 +84,12 @@ class UserStoreAdapter(
                     (itemView.context as UserStoreAddOrRemoveInterface).addProduct()
                 }
 
+                // add order value by product name
+                with(badgeSharedPreferences.edit()) {
+                    putInt("${contentProduct.uid}", productOrderCount)
+                    commit()
+                }
+
                 // visible and invisible button button
                 btn_add_to_shopping_basket_order.invisible()
                 btn_plus_sign_order.visible()
@@ -93,6 +107,17 @@ class UserStoreAdapter(
                     )
                     commit()
                 }
+
+                // save order number to shared preferences
+                if (getOrderNumberValue == Constants.DEFAULT_STRING_VALUE) {
+                    with(badgeSharedPreferences.edit()) {
+                        putString(
+                            itemView.context.getString(R.string.order_number_value_key),
+                            orderNumber
+                        )
+                        commit()
+                    }
+                }
             }
 
             btn_plus_sign_order.setOnClickListener {
@@ -100,6 +125,12 @@ class UserStoreAdapter(
 
                 if (itemView.context is UserStoreActivity) {
                     (itemView.context as UserStoreAddOrRemoveInterface).addProduct()
+                }
+
+                // add order value by product name
+                with(badgeSharedPreferences.edit()) {
+                    putInt("${contentProduct.uid}", productOrderCount)
+                    commit()
                 }
 
                 // show product order count
@@ -111,6 +142,12 @@ class UserStoreAdapter(
 
                 if (itemView.context is UserStoreActivity) {
                     (itemView.context as UserStoreAddOrRemoveInterface).removeProduct()
+                }
+
+                // add order value by product name
+                with(badgeSharedPreferences.edit()) {
+                    putInt("${contentProduct.uid}", productOrderCount)
+                    commit()
                 }
 
                 // visible and invisible button button
