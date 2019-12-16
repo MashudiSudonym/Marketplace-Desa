@@ -3,7 +3,6 @@ package c.m.marketplacedesa.ui.user.userstore
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -106,7 +105,6 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         )
         // create order number
         orderNumber = "md-${Random.nextInt(0, 1000).plus(69).times(5)}"
-        Log.d(Constants.DEBUG_TAG, orderNumber.toString())
 
         // check value of badgeSharedPreferencesValue and badgeCount
         if (badgeSharedPreferencesValue != 0) {
