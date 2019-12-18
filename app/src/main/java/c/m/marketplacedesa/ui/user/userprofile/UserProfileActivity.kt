@@ -1,6 +1,8 @@
 package c.m.marketplacedesa.ui.user.userprofile
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,11 +19,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_user_profile.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.startActivity
 
 class UserProfileActivity : AppCompatActivity(), UserProfileView {
 
     private lateinit var presenter: UserProfilePresenter
+    private lateinit var userStoreOrderSharedPreferences: SharedPreferences
+    private lateinit var badgeSharedPreferences: SharedPreferences
+    private var userStoreOrder: String? = ""
+    private var badgeSharedPreferencesValue: Int = 0
     private var userUID: String? = ""
     private var imageProfile: String? = ""
     private var name: String? = ""
@@ -59,6 +67,26 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
             // refresh profile content data
             presenter.getProfile()
         }
+
+        // badge shopping cart
+        badgeSharedPreferences = this.getSharedPreferences(
+            getString(R.string.order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        badgeSharedPreferencesValue = badgeSharedPreferences.getInt(
+            getString(R.string.badge_shared_preferences_value_key),
+            Constants.DEFAULT_INT_VALUE
+        )
+
+        // check user order status
+        userStoreOrderSharedPreferences = this.getSharedPreferences(
+            getString(R.string.user_store_order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        userStoreOrder = userStoreOrderSharedPreferences.getString(
+            getString(R.string.user_store_order_value_key),
+            Constants.DEFAULT_STRING_VALUE
+        )
     }
 
     override fun onDetachView() {
@@ -155,18 +183,28 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
                 true
             }
             R.id.menu_sign_out -> {
-                // user Sign Out
-                AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            // Finish this activity
-                            finish()
-
-                            // return to sign in activity
-                            startActivity<SignInActivity>()
-                        }
+                // check user order not finish
+                if (userStoreOrder != userUID && badgeSharedPreferencesValue != 0) {
+                    alert(getString(R.string.alert_message_order), getString(R.string.attention)) {
+                        okButton { onBackPressed() }
+                    }.apply {
+                        isCancelable = false
+                        show()
                     }
+                } else {
+                    // user Sign Out
+                    AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // Finish this activity
+                                finish()
+
+                                // return to sign in activity
+                                startActivity<SignInActivity>()
+                            }
+                        }
+                }
 
                 true
             }
