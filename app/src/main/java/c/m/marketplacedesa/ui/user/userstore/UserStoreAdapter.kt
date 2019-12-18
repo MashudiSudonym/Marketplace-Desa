@@ -140,17 +140,8 @@ class UserStoreAdapter(
                 val orderByOrderNumber = mapOf(
                     temporaryOrderItemProductKey to true
                 )
-                val updateProductStock = mapOf(
-                    "stock" to contentProduct.stock?.minus(1)
-                )
 
                 // send data to firebase
-                db.collection("products")
-                    .document(contentProduct.uid.toString())
-                    .update(updateProductStock)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
-
                 db.collection("temporary_order_item_product")
                     .document(temporaryOrderItemProductKey)
                     .set(temporaryOrderItemProduct)
@@ -164,6 +155,8 @@ class UserStoreAdapter(
                     .addOnFailureListener { e ->
                         Log.e("ERROR!!", "$e")
                     }
+
+                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
             }
 
             btn_plus_sign_order.setOnClickListener {
@@ -187,22 +180,15 @@ class UserStoreAdapter(
                     "number_of_product_orders" to productOrderCount,
                     "total_price" to contentProduct.price?.times(productOrderCount)
                 )
-                val updateProductStock = mapOf(
-                    "stock" to contentProduct.stock?.minus(1)
-                )
 
                 // send data to firebase
-                db.collection("products")
-                    .document(contentProduct.uid.toString())
-                    .update(updateProductStock)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
-
                 db.collection("temporary_order_item_product")
                     .document(temporaryOrderItemProductKey)
                     .update(temporaryOrderItemProduct)
                     .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
                     .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
             }
 
             btn_minus_sign_order.setOnClickListener {
@@ -223,22 +209,15 @@ class UserStoreAdapter(
                     "number_of_product_orders" to productOrderCount,
                     "total_price" to contentProduct.price?.times(productOrderCount)
                 )
-                val updateProductStock = mapOf(
-                    "stock" to contentProduct.stock?.plus(1)
-                )
 
                 // send data to firebase
-                db.collection("products")
-                    .document(contentProduct.uid.toString())
-                    .update(updateProductStock)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
-
                 db.collection("temporary_order_item_product")
                     .document(temporaryOrderItemProductKey)
                     .update(temporaryOrderItemProduct)
                     .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
                     .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
 
                 // visible and invisible button button
                 if (productOrderCount == 0) {
@@ -263,16 +242,20 @@ class UserStoreAdapter(
             }
 
             // if item stock is empty or limit, disable button add to shopping cart
-            if (contentProduct.stock == 0) {
+            if (contentProduct.stock == false) {
                 btn_add_to_shopping_basket_order.isEnabled = false
                 btn_add_to_shopping_basket_order.setBackgroundColor(Color.LTGRAY)
                 btn_plus_sign_order.isEnabled = false
                 btn_plus_sign_order.setBackgroundColor(Color.LTGRAY)
+                tv_number_of_stock_order.text =
+                    itemView.context.getString(R.string.not_available_stock_status)
             } else {
                 btn_add_to_shopping_basket_order.isEnabled = true
                 btn_add_to_shopping_basket_order.setBackgroundColor(Color.parseColor("#43A047"))
                 btn_plus_sign_order.isEnabled = true
                 btn_plus_sign_order.setBackgroundColor(Color.parseColor("#43A047"))
+                tv_number_of_stock_order.text =
+                    itemView.context.getString(R.string.avaliable_stock_status)
             }
 
             // Layout show data
@@ -287,7 +270,6 @@ class UserStoreAdapter(
                 .into(img_product_order)
 
             tv_product_title_order.text = contentProduct.name
-            tv_number_of_stock_order.text = contentProduct.stock.toString()
             tv_number_of_price_order.text = contentProduct.price.toString()
         }
     }

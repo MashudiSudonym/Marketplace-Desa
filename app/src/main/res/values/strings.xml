@@ -90,4 +90,6 @@
     <string name="alert_message_order">You have an order that hasn\'t been completed in another store. Please complete the order or cancel.</string>
     <string name="order_number_value_key" translatable="false">order_number_value_key</string>
     <string name="user_name_value_key" translatable="false">user_name_value_key</string>
+    <string name="avaliable_stock_status">available</string>
+    <string name="not_available_stock_status">not available</string>
 </resources>

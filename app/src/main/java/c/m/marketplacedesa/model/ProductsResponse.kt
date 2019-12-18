@@ -7,7 +7,7 @@ class ProductsResponse {
     var image_product: String? = ""
     var name: String? = ""
     var price: Int? = 0
-    var stock: Int? = 0
+    var stock: Boolean? = false
     var store: String? = ""
     var uid: String? = ""
 }
