@@ -92,4 +92,6 @@
     <string name="user_name_value_key" translatable="false">user_name_value_key</string>
     <string name="avaliable_stock_status">available</string>
     <string name="not_available_stock_status">not available</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="you_want_to_cancel_the_order">You want to cancel the order</string>
 </resources>

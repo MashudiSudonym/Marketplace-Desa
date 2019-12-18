@@ -21,11 +21,22 @@ class UserOrderCartActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        // Checkout Alert
         btn_order.setOnClickListener {
+            // Checkout Alert
             alert(
                 getString(R.string.no_changes_to_orders),
                 getString(R.string.order_confirmation)
+            ) {
+                yesButton { toast("Yes") }
+                noButton { toast("No") }
+            }.show()
+        }
+
+        btn_cancel_order.setOnClickListener {
+            // cancel order alert
+            alert(
+                getString(R.string.you_want_to_cancel_the_order),
+                getString(R.string.attention)
             ) {
                 yesButton { toast("Yes") }
                 noButton { toast("No") }
