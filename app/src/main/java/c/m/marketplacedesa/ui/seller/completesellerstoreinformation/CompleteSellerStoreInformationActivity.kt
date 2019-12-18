@@ -13,10 +13,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import c.m.marketplacedesa.R
@@ -32,8 +32,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.GeoPoint
-import com.sha.formvalidator.FormValidator
-import com.sha.formvalidator.widget.FormEditText
+import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
 import kotlinx.android.synthetic.main.activity_complete_seller_store_information.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -320,19 +319,18 @@ class CompleteSellerStoreInformationActivity : AppCompatActivity(),
 
     private fun saveStoreInformationData() {
         val nameStoreField =
-            findViewById<FormEditText>(R.id.edt_name_complete_seller_store_information)
+            findViewById<EditText>(R.id.edt_name_complete_seller_store_information)
         val addressStoreField =
-            findViewById<FormEditText>(R.id.edt_address_complete_seller_store_information)
+            findViewById<EditText>(R.id.edt_address_complete_seller_store_information)
         val phoneStoreField =
-            findViewById<FormEditText>(R.id.edt_phone_complete_seller_store_information)
-        val isValid = FormValidator(phoneStoreField, nameStoreField, addressStoreField).isValid
-
-        Log.d(Constants.DEBUG_TAG, "$isValid")
+            findViewById<EditText>(R.id.edt_phone_complete_seller_store_information)
+        val isValid =
+            nameStoreField.nonEmpty() && addressStoreField.nonEmpty() && phoneStoreField.nonEmpty()
+        val nameStore = edt_name_complete_seller_store_information.text.toString()
+        val addressStore = edt_address_complete_seller_store_information.text.toString()
+        val phoneStore = edt_phone_complete_seller_store_information.text.toString()
 
         if (isValid && (markerArrayList.size > 0)) {
-            val nameStore = edt_name_complete_seller_store_information.text.toString()
-            val addressStore = edt_address_complete_seller_store_information.text.toString()
-            val phoneStore = edt_phone_complete_seller_store_information.text.toString()
 
             // upload store information data
             presenter.saveStoreInformationData(

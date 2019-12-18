@@ -13,9 +13,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import c.m.marketplacedesa.R
@@ -23,8 +25,7 @@ import c.m.marketplacedesa.util.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.babedev.dexter.dsl.runtimePermission
-import com.sha.formvalidator.FormValidator
-import com.sha.formvalidator.widget.FormEditText
+import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
 import kotlinx.android.synthetic.main.activity_user_edit_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -261,21 +262,24 @@ class UserEditProfileActivity : AppCompatActivity(), UserEditProfileView {
     }
 
     private fun saveUpdateUserProfileData() {
-        val nameField = findViewById<FormEditText>(R.id.edt_name_edit_profile)
-        val addressField = findViewById<FormEditText>(R.id.edt_address_edit_profile)
-        val isValid = FormValidator(nameField, addressField).isValid
+        val nameField = findViewById<EditText>(R.id.edt_name_edit_profile)
+        val addressField = findViewById<EditText>(R.id.edt_address_edit_profile)
+        val isValid = nameField.nonEmpty() && addressField.nonEmpty()
+        val name = edt_name_edit_profile.text.toString()
+        val address = edt_address_edit_profile.text.toString()
+        val userPhone = tv_phone_number_edit_profile.text.toString()
 
         if (isValid) {
-            val name = edt_name_edit_profile.text.toString()
-            val address = edt_address_edit_profile.text.toString()
-            val userPhone = tv_phone_number_edit_profile.text.toString()
-
             // Upload User Data
             presenter.sendUserUpdateData(name, address, userSellerStatus, userPhone, filePath)
+
+            Log.d(Constants.DEBUG_TAG, "$name, $address, $userPhone")
         } else {
             // if not valid
             nameField.error = getString(R.string.name_field_error)
             addressField.error = getString(R.string.address_field_error)
+
+            Log.d(Constants.DEBUG_TAG, "$name, $address, $userPhone")
         }
     }
 

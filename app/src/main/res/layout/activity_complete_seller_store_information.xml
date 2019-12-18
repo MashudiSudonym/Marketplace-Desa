@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cart_complete_seller_store_information"
                 tools:text="@string/choose_store_image" />
 
-            <com.sha.formvalidator.widget.FormEditText
+            <EditText
                 android:id="@+id/edt_name_complete_seller_store_information"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,13 +87,12 @@
                 android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
-                app:validationType="alphaNumeric"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_choose_image_complete_seller_store_information"
                 tools:ignore="Autofill" />
 
-            <com.sha.formvalidator.widget.FormEditText
+            <EditText
                 android:id="@+id/edt_address_complete_seller_store_information"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -106,13 +105,12 @@
                 android:hint="@string/address"
                 android:inputType="textLongMessage|textPersonName"
                 android:textColor="@android:color/black"
-                app:validationType="alphaNumeric"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edt_name_complete_seller_store_information"
                 tools:ignore="Autofill" />
 
-            <com.sha.formvalidator.widget.FormEditText
+            <EditText
                 android:id="@+id/edt_phone_complete_seller_store_information"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -121,11 +119,11 @@
                 android:layout_marginEnd="16dp"
                 android:hint="@string/fui_verify_phone_number_title"
                 android:inputType="phone"
-                app:validationType="phone"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_address_complete_seller_store_information" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_address_complete_seller_store_information"
+                tools:ignore="Autofill" />
 
             <TextView
                 android:id="@+id/tv_caution"
