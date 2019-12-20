@@ -46,15 +46,24 @@ class UserStoreAdapter(
             val db = FirebaseFirestore.getInstance()
             val temporaryOrderItemProductKey =
                 db.collection("temporary_order_item_product").document().id
+            // save temporaryOrderItemProductKey to SharedPreferences
+            val firebaseSharedPreferences = itemView.context.getSharedPreferences(
+                itemView.context.getString(R.string.firebase_shared_preferences),
+                Context.MODE_PRIVATE
+            )
+            // get firebase temporary order key
+            var firebaseTemporaryOrderItemProductKey: String?
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
                 Context.MODE_PRIVATE
             ) ?: return
+            // get user store order
             val userStoreOrder = userStoreOrderSharedPreferences.getString(
                 itemView.context.getString(R.string.user_store_order_value_key),
                 Constants.DEFAULT_STRING_VALUE
             )
+            // get user name
             val userName = userStoreOrderSharedPreferences.getString(
                 itemView.context.getString(R.string.user_name_value_key),
                 Constants.DEFAULT_STRING_VALUE
@@ -64,6 +73,7 @@ class UserStoreAdapter(
                 itemView.context.getString(R.string.order_shared_preferences_name),
                 Context.MODE_PRIVATE
             ) ?: return
+            // get product order value
             val getProductOrderCountValue = badgeSharedPreferences.getInt(
                 "${contentProduct.uid}",
                 Constants.DEFAULT_INT_VALUE
@@ -116,6 +126,15 @@ class UserStoreAdapter(
                     putString(
                         itemView.context.getString(R.string.user_store_order_value_key),
                         contentProduct.store
+                    )
+                    commit()
+                }
+
+                // save temporary order key
+                with(firebaseSharedPreferences.edit()) {
+                    putString(
+                        "${contentProduct.uid}",
+                        temporaryOrderItemProductKey
                     )
                     commit()
                 }
@@ -175,6 +194,12 @@ class UserStoreAdapter(
                 // show product order count
                 tv_order_count_order.text = productOrderCount.toString()
 
+                // get firebase temporary order key
+                firebaseTemporaryOrderItemProductKey = firebaseSharedPreferences.getString(
+                    "${contentProduct.uid}",
+                    Constants.DEFAULT_STRING_VALUE
+                )
+
                 // firebase data map
                 val temporaryOrderItemProduct = mapOf(
                     "number_of_product_orders" to productOrderCount,
@@ -183,12 +208,12 @@ class UserStoreAdapter(
 
                 // send data to firebase
                 db.collection("temporary_order_item_product")
-                    .document(temporaryOrderItemProductKey)
+                    .document(firebaseTemporaryOrderItemProductKey.toString())
                     .update(temporaryOrderItemProduct)
                     .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
                     .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
 
-                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
+                Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
             }
 
             btn_minus_sign_order.setOnClickListener {
@@ -204,6 +229,12 @@ class UserStoreAdapter(
                     commit()
                 }
 
+                // get firebase temporary order key
+                firebaseTemporaryOrderItemProductKey = firebaseSharedPreferences.getString(
+                    "${contentProduct.uid}",
+                    Constants.DEFAULT_STRING_VALUE
+                )
+
                 // firebase data map
                 val temporaryOrderItemProduct = mapOf(
                     "number_of_product_orders" to productOrderCount,
@@ -212,12 +243,12 @@ class UserStoreAdapter(
 
                 // send data to firebase
                 db.collection("temporary_order_item_product")
-                    .document(temporaryOrderItemProductKey)
+                    .document(firebaseTemporaryOrderItemProductKey.toString())
                     .update(temporaryOrderItemProduct)
                     .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
                     .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
 
-                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
+                Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
 
                 // visible and invisible button button
                 if (productOrderCount == 0) {

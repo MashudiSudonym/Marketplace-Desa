@@ -112,7 +112,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
             invalidateOptionsMenu()
         }
 
-        // check order number
+        // check order number status if have order number in shared preferences do not create order number
         if (badgeCount == 0 && getOrderNumberValue != "") {
             with(badgeSharedPreferences.edit()) {
                 putString(
@@ -122,7 +122,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
                 commit()
             }
         } else if (getOrderNumberValue == "") {
-            // save order number to shared preferences
+            // create and save order number to shared preferences
             with(badgeSharedPreferences.edit()) {
                 putString(
                     getString(R.string.order_number_value_key),
@@ -142,6 +142,7 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
             Constants.DEFAULT_STRING_VALUE
         )
 
+        // check order user status on other store
         if (userStoreOrder != uid && badgeSharedPreferencesValue != 0) {
             alert(getString(R.string.alert_message_order), getString(R.string.attention)) {
                 okButton { onBackPressed() }
