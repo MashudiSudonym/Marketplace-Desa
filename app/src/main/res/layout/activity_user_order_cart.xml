@@ -251,7 +251,6 @@
                                 android:id="@+id/radio_button_take_it_by_yourself"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusable="true"
                                 android:text="@string/take_it_by_yourself"
                                 android:textColor="@android:color/black"
                                 tools:text="@string/take_it_by_yourself" />
@@ -260,7 +259,6 @@
                                 android:id="@+id/radio_button_delivered_to_home"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusable="false"
                                 android:text="@string/delivered_to_home"
                                 android:textColor="@android:color/black"
                                 tools:text="@string/delivered_to_home" />
@@ -379,6 +377,8 @@
                             android:layout_marginEnd="16dp"
                             android:text="@string/number_of_price"
                             android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_total_price_title"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tv_total_price_title"

@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/image_product_description"
@@ -27,9 +27,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        
         android:text="@string/product_title"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        
         android:text="@string/order_quantity_title"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/img_product"
@@ -55,9 +55,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        
         android:text="@string/number_of_stock"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/tv_order_quantity_title"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/total_price_title"
@@ -86,9 +86,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        
         android:text="@string/number_of_price"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/tv_total_price_title"

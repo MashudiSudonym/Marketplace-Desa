@@ -260,7 +260,7 @@ class UserStoreAdapter(
 
                     // send data to firebase
                     db.collection("temporary_order_item_product")
-                        .document(temporaryOrderItemProductKey)
+                        .document(firebaseTemporaryOrderItemProductKey.toString())
                         .delete()
 
                     db.collection("order_by_order_number")

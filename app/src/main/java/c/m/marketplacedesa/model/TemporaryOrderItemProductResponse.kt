@@ -10,7 +10,7 @@ class TemporaryOrderItemProductResponse {
     var order_status: Boolean = false
     var order_number: String? = ""
     var order_by: String? = ""
-    var number_of_product_order: Int? = 0
+    var number_of_product_orders: Int? = 0
     var name: String? = ""
     var is_canceled: Boolean = false
     var image_product: String? = ""
