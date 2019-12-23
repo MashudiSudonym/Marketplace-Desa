@@ -5,9 +5,7 @@ import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 class UserOrderCartPresenter : Presenter<UserOrderCartView> {
     private var mView: UserOrderCartView? = null
@@ -60,7 +58,41 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
                         db?.collection("temporary_order_item_product")
                             ?.document(response.uid.toString())
                             ?.update(updateData)
-                            ?.addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                            ?.addOnSuccessListener {
+                                Log.d(Constants.DEBUG_TAG, "Success update data")
+                                mView?.returnToMainActivity()
+                            }
+                            ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                    }
+                }
+        }
+    }
+
+    fun deleteOrder(orderNumber: String) {
+        if (userAuthentication()) {
+            db?.collection("temporary_order_item_product")
+                ?.whereEqualTo("order_number", orderNumber)
+                ?.addSnapshotListener { snapshot, exception ->
+                    if (exception != null) Log.e(Constants.ERROR_TAG, "$exception")
+
+                    val temporaryOrderList =
+                        snapshot?.toObjects(TemporaryOrderItemProductResponse::class.java)
+
+                    temporaryOrderList?.forEach { response ->
+                        db?.collection("temporary_order_item_product")
+                            ?.document(response.uid.toString())
+                            ?.delete()
+                            ?.addOnSuccessListener {
+                                Log.d(Constants.DEBUG_TAG, "Success delete data")
+                                db?.collection("order_by_order_number")
+                                    ?.document(orderNumber)
+                                    ?.delete()
+                                    ?.addOnSuccessListener {
+                                        Log.d(Constants.DEBUG_TAG, "Success delete data")
+                                        mView?.returnToMainActivity()
+                                    }
+                                    ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                            }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }
                 }

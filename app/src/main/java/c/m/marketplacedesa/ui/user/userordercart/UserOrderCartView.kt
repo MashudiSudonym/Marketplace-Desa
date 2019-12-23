@@ -5,4 +5,5 @@ import c.m.marketplacedesa.util.base.View
 
 interface UserOrderCartView : View {
     fun getTemporaryOrder(temporaryOrderData: List<TemporaryOrderItemProductResponse>)
+    fun returnToMainActivity()
 }

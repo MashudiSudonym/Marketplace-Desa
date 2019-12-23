@@ -7,12 +7,10 @@ import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.ui.user.main.MainActivity
 import c.m.marketplacedesa.util.Constants
 import kotlinx.android.synthetic.main.activity_user_order_cart.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.yesButton
+import org.jetbrains.anko.*
 
 class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
 
@@ -91,6 +89,11 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         onDetachView()
     }
 
+    override fun returnToMainActivity() {
+        finish() // finish this activity
+        startActivity<MainActivity>()
+    }
+
     override fun getTemporaryOrder(temporaryOrderData: List<TemporaryOrderItemProductResponse>) {
         // initiate data to recycler view adapter
         contentList.clear()
@@ -133,18 +136,16 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                         when (radioButtonDeliveryOption.text) {
                             getString(R.string.take_it_by_yourself) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 1)
-                                toast("1")
                             }
                             getString(R.string.delivered_to_home) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 2)
-                                toast("2")
                             }
                         }
                     } else {
                         toast("yes")
                     }
                 }
-                noButton { toast("No") }
+                noButton { }
             }.show()
         }
 
@@ -154,8 +155,8 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                 getString(R.string.you_want_to_cancel_the_order),
                 getString(R.string.attention)
             ) {
-                yesButton { toast("$getOrderNumberValue") }
-                noButton { toast("No") }
+                yesButton { presenter.deleteOrder(getOrderNumberValue.toString()) }
+                noButton { }
             }.show()
         }
     }
