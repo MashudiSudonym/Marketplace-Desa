@@ -50,7 +50,7 @@ class UserStoreAdapter(
             val firebaseSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.firebase_shared_preferences),
                 Context.MODE_PRIVATE
-            )
+            ) ?: return
             // get firebase temporary order key
             var firebaseTemporaryOrderItemProductKey: String?
             // check user order status

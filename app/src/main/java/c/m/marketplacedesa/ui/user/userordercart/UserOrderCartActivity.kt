@@ -10,13 +10,18 @@ import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.ui.user.main.MainActivity
 import c.m.marketplacedesa.util.Constants
 import kotlinx.android.synthetic.main.activity_user_order_cart.*
-import org.jetbrains.anko.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.yesButton
 
 class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
 
     private lateinit var presenter: UserOrderCartPresenter
     private lateinit var adapter: UserOrderCartAdapter
     private lateinit var badgeSharedPreferences: SharedPreferences
+    private lateinit var firebaseSharedPreferences: SharedPreferences
+    private lateinit var userStoreOrderSharedPreferences: SharedPreferences
     private lateinit var radioButtonDeliveryOption: RadioButton
     private var selectedDeliveryOption: Int? = 0
     private var contentList: MutableList<TemporaryOrderItemProductResponse> = mutableListOf()
@@ -50,6 +55,14 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         }
 
         // SharedPreferences initiate
+        userStoreOrderSharedPreferences = this.getSharedPreferences(
+            getString(R.string.user_store_order_shared_preferences_name),
+            Context.MODE_PRIVATE
+        ) ?: return
+        firebaseSharedPreferences = this.getSharedPreferences(
+            getString(R.string.firebase_shared_preferences),
+            Context.MODE_PRIVATE
+        ) ?: return
         badgeSharedPreferences = this.getSharedPreferences(
             getString(R.string.order_shared_preferences_name),
             Context.MODE_PRIVATE
@@ -136,13 +149,13 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                         when (radioButtonDeliveryOption.text) {
                             getString(R.string.take_it_by_yourself) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 1)
+                                clearSharedPreferences()
                             }
                             getString(R.string.delivered_to_home) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 2)
+                                clearSharedPreferences()
                             }
                         }
-                    } else {
-                        toast("yes")
                     }
                 }
                 noButton { }
@@ -155,9 +168,27 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                 getString(R.string.you_want_to_cancel_the_order),
                 getString(R.string.attention)
             ) {
-                yesButton { presenter.deleteOrder(getOrderNumberValue.toString()) }
+                yesButton {
+                    presenter.deleteOrder(getOrderNumberValue.toString())
+                    clearSharedPreferences()
+                }
                 noButton { }
             }.show()
+        }
+    }
+
+    private fun clearSharedPreferences() {
+        with(userStoreOrderSharedPreferences.edit()) {
+            clear()
+            commit()
+        }
+        with(firebaseSharedPreferences.edit()) {
+            clear()
+            commit()
+        }
+        with(badgeSharedPreferences.edit()) {
+            clear()
+            commit()
         }
     }
 
