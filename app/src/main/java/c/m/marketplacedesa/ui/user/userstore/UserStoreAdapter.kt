@@ -15,6 +15,7 @@ import c.m.marketplacedesa.util.invisible
 import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.extensions.LayoutContainer
@@ -53,6 +54,8 @@ class UserStoreAdapter(
             ) ?: return
             // get firebase temporary order key
             var firebaseTemporaryOrderItemProductKey: String?
+            // get current user uid
+            val userUID = FirebaseAuth.getInstance().uid.toString()
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
@@ -154,6 +157,7 @@ class UserStoreAdapter(
                     "payment_status" to false,
                     "is_canceled" to false,
                     "order_by" to userName,
+                    "user_order_uid" to userUID,
                     "delivery_option" to 1
                 )
                 val orderByOrderNumber = mapOf(

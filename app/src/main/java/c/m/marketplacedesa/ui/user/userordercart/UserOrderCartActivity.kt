@@ -10,10 +10,7 @@ import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.ui.user.main.MainActivity
 import c.m.marketplacedesa.util.Constants
 import kotlinx.android.synthetic.main.activity_user_order_cart.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.yesButton
+import org.jetbrains.anko.*
 
 class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
 
@@ -30,6 +27,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
     private var orderBy: String? = ""
     private var totalPrice: Int? = 0
     private var deliveryOption: Int? = 1
+    private var userOrderUID: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,6 +117,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
             orderBy = response.order_by
             totalPrice = response.total_price?.let { totalPrice?.plus(it) }
             deliveryOption = response.delivery_option
+            userOrderUID = response.user_order_uid
         }
 
         tv_name_of_user_order.text = orderBy
@@ -150,10 +149,12 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                         when (radioButtonDeliveryOption.text) {
                             getString(R.string.take_it_by_yourself) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 1)
+                                toast(userOrderUID.toString())
                                 clearSharedPreferences()
                             }
                             getString(R.string.delivered_to_home) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 2)
+                                toast(userOrderUID.toString())
                                 clearSharedPreferences()
                             }
                         }
