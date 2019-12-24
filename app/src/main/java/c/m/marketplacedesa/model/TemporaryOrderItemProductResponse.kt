@@ -15,5 +15,5 @@ class TemporaryOrderItemProductResponse {
     var is_canceled: Boolean = false
     var image_product: String? = ""
     var delivery_option: Int? = 1
-    var user_order_uid: String? = ""
+    var store_owner_uid: String? = ""
 }

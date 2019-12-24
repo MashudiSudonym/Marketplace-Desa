@@ -2,7 +2,6 @@
 
 package c.m.marketplacedesa.util
 
-import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -22,8 +21,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -37,15 +34,7 @@ fun View.gone() {
     visibility = View.GONE
 }
 
-@SuppressLint("SimpleDateFormat")
-fun simpleDateFormat(originalDate: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd")
-    val outputFormat = SimpleDateFormat("EEEE, dd MMM yyy")
-    val date = inputFormat.parse(originalDate)
-    return outputFormat.format(date as Date)
-}
-
-fun notificationSetup(
+fun highNotificationSetup(
     context: Context?,
     title: String?,
     content: String?,
@@ -75,16 +64,16 @@ fun notificationSetup(
         )
         .setAutoCancel(true)
         .setContentIntent(pendingIntent)
-        .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+        .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setCategory(NotificationCompat.CATEGORY_ALARM)
 
     // Since android Oreo notification channel is needed.
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channel = NotificationChannel(
             notificationChannel,
             notificationChannel,
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         ).apply {
             setShowBadge(true)
             canShowBadge()

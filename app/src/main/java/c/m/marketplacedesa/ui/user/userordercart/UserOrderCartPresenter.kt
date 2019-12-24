@@ -1,16 +1,25 @@
 package c.m.marketplacedesa.ui.user.userordercart
 
 import android.util.Log
+import c.m.marketplacedesa.model.MessageNotification
+import c.m.marketplacedesa.model.Notification
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
+import c.m.marketplacedesa.util.webservice.ApiInterface
+import c.m.marketplacedesa.util.webservice.RetrofitService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class UserOrderCartPresenter : Presenter<UserOrderCartView> {
     private var mView: UserOrderCartView? = null
     private var db: FirebaseFirestore? = null
     private var authentication: FirebaseAuth? = null
+    private val apiService =
+        RetrofitService.getInstance("https://fcm.googleapis.com/").create(ApiInterface::class.java)
 
     override fun onAttach(view: UserOrderCartView) {
         mView = view
@@ -39,6 +48,21 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
 
                     mView?.getTemporaryOrder(temporaryOrderList as List<TemporaryOrderItemProductResponse>)
                 }
+        }
+    }
+
+    fun sendOrderNotification(
+        storeOwnerUID: String,
+        orderBodyMessage: String,
+        orderTitleMessage: String
+    ) {
+        val messageNotification = MessageNotification(
+            "/topics/$storeOwnerUID",
+            Notification(orderBodyMessage, orderTitleMessage)
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            apiService.postMessage(messageNotification)
         }
     }
 

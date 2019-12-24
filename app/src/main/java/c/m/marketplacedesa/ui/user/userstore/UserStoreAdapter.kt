@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.ProductsResponse
+import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.invisible
 import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.extensions.LayoutContainer
@@ -54,8 +54,19 @@ class UserStoreAdapter(
             ) ?: return
             // get firebase temporary order key
             var firebaseTemporaryOrderItemProductKey: String?
-            // get current user uid
-            val userUID = FirebaseAuth.getInstance().uid.toString()
+            // get owner uid
+            var storeOwnerUID = ""
+            FirebaseFirestore.getInstance().collection("store")
+                .whereEqualTo("uid", contentProduct.store)
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception != null) Log.e(Constants.ERROR_TAG, "$exception")
+
+                    val storeData = snapshot?.toObjects(StoreResponse::class.java)
+
+                    storeData?.forEach { response ->
+                        storeOwnerUID = response.owner.toString()
+                    }
+                }
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
@@ -157,7 +168,7 @@ class UserStoreAdapter(
                     "payment_status" to false,
                     "is_canceled" to false,
                     "order_by" to userName,
-                    "user_order_uid" to userUID,
+                    "store_owner_uid" to storeOwnerUID,
                     "delivery_option" to 1
                 )
                 val orderByOrderNumber = mapOf(

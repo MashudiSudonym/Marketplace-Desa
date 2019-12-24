@@ -98,4 +98,7 @@
     <string name="short_lived_task_is_done" translatable="false">Short lived task is done.</string>
     <string name="default_notification_channel_id" translatable="false">6969</string>
     <string name="notification_channel" translatable="false">Marketplace Desa Notification</string>
+    <string name="yout_have_a_new_order">You Have a New Order</string>
+    <string name="you_have_a_new_order_with_order_number">You have a new order with order number</string>
+    <string name="from">from</string>
 </resources>

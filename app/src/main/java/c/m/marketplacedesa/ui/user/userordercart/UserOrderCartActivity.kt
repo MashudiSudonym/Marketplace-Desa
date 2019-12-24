@@ -10,7 +10,10 @@ import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.ui.user.main.MainActivity
 import c.m.marketplacedesa.util.Constants
 import kotlinx.android.synthetic.main.activity_user_order_cart.*
-import org.jetbrains.anko.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.yesButton
 
 class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
 
@@ -27,7 +30,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
     private var orderBy: String? = ""
     private var totalPrice: Int? = 0
     private var deliveryOption: Int? = 1
-    private var userOrderUID: String? = ""
+    private var storeOwnerUID: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +120,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
             orderBy = response.order_by
             totalPrice = response.total_price?.let { totalPrice?.plus(it) }
             deliveryOption = response.delivery_option
-            userOrderUID = response.user_order_uid
+            storeOwnerUID = response.store_owner_uid
         }
 
         tv_name_of_user_order.text = orderBy
@@ -149,12 +152,28 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                         when (radioButtonDeliveryOption.text) {
                             getString(R.string.take_it_by_yourself) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 1)
-                                toast(userOrderUID.toString())
+                                presenter.sendOrderNotification(
+                                    storeOwnerUID.toString(),
+                                    "${getString(
+                                        R.string.you_have_a_new_order_with_order_number
+                                    )} $getOrderNumberValue ${getString(
+                                        R.string.from
+                                    )} $orderBy",
+                                    getString(R.string.yout_have_a_new_order)
+                                )
                                 clearSharedPreferences()
                             }
                             getString(R.string.delivered_to_home) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 2)
-                                toast(userOrderUID.toString())
+                                presenter.sendOrderNotification(
+                                    storeOwnerUID.toString(),
+                                    "${getString(
+                                        R.string.you_have_a_new_order_with_order_number
+                                    )} $getOrderNumberValue ${getString(
+                                        R.string.from
+                                    )} $orderBy",
+                                    getString(R.string.yout_have_a_new_order)
+                                )
                                 clearSharedPreferences()
                             }
                         }
