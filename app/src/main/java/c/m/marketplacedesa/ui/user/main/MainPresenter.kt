@@ -37,6 +37,16 @@ class MainPresenter : Presenter<MainView> {
         // get user UID
         userUID = authentication?.currentUser?.uid
 
+        // subscribe this application for firebase cloud messaging topic
+        FirebaseMessaging.getInstance().subscribeToTopic("$userUID")
+            .addOnCompleteListener { task ->
+                var msg = "subscribe"
+                if (!task.isSuccessful) {
+                    msg = "failed"
+                }
+                Log.d(Constants.DEBUG_TAG, "$msg $userUID")
+            }
+
         // get fcm token
         firebaseInstanceId?.instanceId?.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) return@OnCompleteListener
@@ -46,9 +56,6 @@ class MainPresenter : Presenter<MainView> {
             val userFcmData = mapOf(
                 "fcm_token" to fcmToken
             )
-
-            // subscribe this application for firebase cloud messaging topic
-            FirebaseMessaging.getInstance().subscribeToTopic("$userUID")
 
             if (userAuthentication()) {
                 db?.collection("users")
