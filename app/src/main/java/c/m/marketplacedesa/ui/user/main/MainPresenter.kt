@@ -1,16 +1,25 @@
 package c.m.marketplacedesa.ui.user.main
 
+import android.annotation.SuppressLint
 import android.util.Log
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.model.UsersResponse
+import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
+import com.onesignal.OneSignal
 
 class MainPresenter : Presenter<MainView> {
     private var mView: MainView? = null
     private var db: FirebaseFirestore? = null
     private var authentication: FirebaseAuth? = null
+    private var firebaseInstanceId: FirebaseInstanceId? = null
+    private var fcmToken: String? = ""
+    private var userUID: String? = ""
 
     override fun onAttach(view: MainView) {
         mView = view
@@ -20,9 +29,36 @@ class MainPresenter : Presenter<MainView> {
         mView = null
     }
 
+    @SuppressLint("DefaultLocale")
     fun initFirebase() {
         db = FirebaseFirestore.getInstance()
         authentication = FirebaseAuth.getInstance()
+        firebaseInstanceId = FirebaseInstanceId.getInstance()
+
+        // get user UID
+        userUID = authentication?.currentUser?.uid
+
+        // get fcm token
+        firebaseInstanceId?.instanceId?.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) return@OnCompleteListener
+
+            fcmToken = task.result?.token
+
+            val userFcmData = mapOf(
+                "fcm_token" to fcmToken
+            )
+
+            // subscribe this application for firebase cloud messaging topic
+            FirebaseMessaging.getInstance().subscribeToTopic("$userUID")
+
+            if (userAuthentication()) {
+                db?.collection("users")
+                    ?.document(userUID.toString())
+                    ?.update(userFcmData)
+                    ?.addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "add success") }
+                    ?.addOnFailureListener { Log.e(Constants.ERROR_TAG, "$it") }
+            }
+        })
     }
 
     private fun userAuthentication() = authentication?.currentUser != null

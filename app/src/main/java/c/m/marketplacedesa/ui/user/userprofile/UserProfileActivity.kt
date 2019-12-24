@@ -186,12 +186,17 @@ class UserProfileActivity : AppCompatActivity(), UserProfileView {
                 // check user order not finish
                 if (userStoreOrder != userUID && badgeSharedPreferencesValue != 0) {
                     alert(getString(R.string.alert_message_order), getString(R.string.attention)) {
-                        okButton { onBackPressed() }
+                        okButton {
+                            onBackPressed()
+                        }
                     }.apply {
                         isCancelable = false
                         show()
                     }
                 } else {
+                    // remove fcm token from users database
+                    presenter.removeFCMToken()
+
                     // user Sign Out
                     AuthUI.getInstance()
                         .signOut(this)

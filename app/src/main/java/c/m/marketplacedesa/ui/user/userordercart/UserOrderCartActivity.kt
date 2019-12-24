@@ -125,6 +125,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         tv_number_of_order_number.text = orderNumber
         tv_number_estimated_total_price.text = totalPrice.toString()
         tv_number_of_total_price.text = totalPrice.toString()
+
         // check delivery option
         when (deliveryOption) {
             1 -> radio_group_shipping_method.check(R.id.radio_button_take_it_by_yourself)

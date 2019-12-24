@@ -50,6 +50,7 @@ class SignInActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
+                // open main activity and finish this activity
                 startActivity<MainActivity>()
                 finish()
             } else {

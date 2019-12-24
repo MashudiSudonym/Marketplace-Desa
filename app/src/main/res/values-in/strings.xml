@@ -66,7 +66,7 @@
     <string name="title_select_store_location_alert">Lokasi peta tidak ditentukan</string>
     <string name="store_location">Lokasi Toko</string>
     <string name="alert_message_order">Anda memiliki pesanan yang belum diselesaikan di toko lain. Harap selesaikan pesanan atau batalkan.</string>
-    <string name="avaliable_stock_status">tersedia</string>
+    <string name="available_stock_status">tersedia</string>
     <string name="not_available_stock_status">tidak tersedia</string>
     <string name="cancel_order">Batalkan Pesanan</string>
     <string name="you_want_to_cancel_the_order">anda ingin membatalkan pesanan dan menghapus pesanan ?</string>

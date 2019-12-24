@@ -23,5 +23,7 @@ class Constants {
         const val DEBUG_TAG = "DEBUG !!!"
         const val DEFAULT_INT_VALUE = 0
         const val DEFAULT_STRING_VALUE = ""
+        const val APP_FIREBASE_MESSAGING_SERVICE = "AppFirebaseMsgService"
+        const val MY_WORKER = "my worker"
     }
 }

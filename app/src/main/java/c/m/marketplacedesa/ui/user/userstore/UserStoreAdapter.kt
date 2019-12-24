@@ -286,7 +286,7 @@ class UserStoreAdapter(
                 btn_plus_sign_order.isEnabled = true
                 btn_plus_sign_order.setBackgroundColor(Color.parseColor("#43A047"))
                 tv_number_of_stock_order.text =
-                    itemView.context.getString(R.string.avaliable_stock_status)
+                    itemView.context.getString(R.string.available_stock_status)
             }
 
             // Layout show data
