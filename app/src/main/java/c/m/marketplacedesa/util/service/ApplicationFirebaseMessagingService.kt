@@ -21,11 +21,7 @@ class ApplicationFirebaseMessagingService : FirebaseMessagingService() {
                 "Message data payload: " + remoteMessage.data
             )
 
-            if (true) {
-                scheduleJob()
-            } else {
-                handleNow()
-            }
+            scheduleJob()
         }
 
         remoteMessage.notification?.let {
@@ -44,12 +40,5 @@ class ApplicationFirebaseMessagingService : FirebaseMessagingService() {
     private fun scheduleJob() {
         val work = OneTimeWorkRequest.Builder(MyWorker::class.java).build()
         WorkManager.getInstance(this).beginWith(work).enqueue()
-    }
-
-    private fun handleNow() {
-        Log.d(
-            Constants.APP_FIREBASE_MESSAGING_SERVICE,
-            getString(R.string.short_lived_task_is_done)
-        )
     }
 }
