@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.ProductsResponse
 import c.m.marketplacedesa.model.StoreResponse
+import c.m.marketplacedesa.ui.seller.selleraddproduct.SellerAddProductActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_seller_store_information.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformationView {
@@ -86,7 +88,9 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
         setupProductRecyclerView()
 
         // button add product
-        btn_floating_add_product_seller_store_information.setOnClickListener { toast("add product") }
+        btn_floating_add_product_seller_store_information.setOnClickListener {
+            startActivity<SellerAddProductActivity>()
+        }
     }
 
     private fun setupProductRecyclerView() {

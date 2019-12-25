@@ -75,4 +75,5 @@
     <string name="from">dari</string>
     <string name="order_history">Riwayat Pesanan</string>
     <string name="order_received">Pesanan Diterima</string>
+    <string name="add_new_product">Tambah Produk Baru</string>
 </resources>
