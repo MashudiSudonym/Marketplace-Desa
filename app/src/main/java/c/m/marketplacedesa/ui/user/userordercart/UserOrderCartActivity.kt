@@ -2,6 +2,7 @@ package c.m.marketplacedesa.ui.user.userordercart
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
     private var getOrderNumberValue: String? = ""
     private var orderNumber: String? = ""
     private var orderBy: String? = ""
+    private var estimateTotalPrice: Int? = 0
     private var totalPrice: Int? = 0
     private var deliveryOption: Int? = 1
     private var storeOwnerUID: String? = ""
@@ -118,15 +120,27 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         temporaryOrderData.forEach { response ->
             orderNumber = response.order_number
             orderBy = response.order_by
-            totalPrice = response.total_price?.let { totalPrice?.plus(it) }
+            //totalPrice = response.total_price?.let { totalPrice?.plus(it) }
+            estimateTotalPrice = response.total_price
             deliveryOption = response.delivery_option
             storeOwnerUID = response.store_owner_uid
         }
 
+        // count total price
+        totalPrice = totalPrice?.plus(estimateTotalPrice as Int)
+
+        // show data in text view
         tv_name_of_user_order.text = orderBy
         tv_number_of_order_number.text = orderNumber
         tv_number_estimated_total_price.text = totalPrice.toString()
         tv_number_of_total_price.text = totalPrice.toString()
+
+        // activate button checkout and cancel order
+        if (temporaryOrderData.isNullOrEmpty()) {
+            deactiveOrderAndCancelButton()
+        } else {
+            activeOrderAndCancelButton()
+        }
 
         // check delivery option
         when (deliveryOption) {
@@ -161,6 +175,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $orderBy",
                                     getString(R.string.yout_have_a_new_order)
                                 )
+                                deactiveOrderAndCancelButton()
                                 clearSharedPreferences()
                             }
                             getString(R.string.delivered_to_home) -> {
@@ -174,6 +189,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $orderBy",
                                     getString(R.string.yout_have_a_new_order)
                                 )
+                                deactiveOrderAndCancelButton()
                                 clearSharedPreferences()
                             }
                         }
@@ -195,6 +211,28 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                 }
                 noButton { }
             }.show()
+        }
+    }
+
+    private fun activeOrderAndCancelButton() {
+        btn_order.apply {
+            isEnabled = true
+            setBackgroundColor(Color.parseColor("#43A047"))
+        }
+        btn_cancel_order.apply {
+            isEnabled = true
+            setTextColor(Color.RED)
+        }
+    }
+
+    private fun deactiveOrderAndCancelButton() {
+        btn_order.apply {
+            isEnabled = false
+            setBackgroundColor(Color.LTGRAY)
+        }
+        btn_cancel_order.apply {
+            isEnabled = false
+            setTextColor(Color.LTGRAY)
         }
     }
 
