@@ -101,4 +101,6 @@
     <string name="yout_have_a_new_order">You Have a New Order</string>
     <string name="you_have_a_new_order_with_order_number">You have a new order with order number</string>
     <string name="from">from</string>
+    <string name="order_history">Order History</string>
+    <string name="order_received">Order Received</string>
 </resources>

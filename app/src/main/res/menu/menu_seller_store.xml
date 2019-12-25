@@ -11,4 +11,14 @@
         android:id="@+id/menu_edit_info_store"
         android:icon="@drawable/ic_edit"
         android:title="@string/edit_info_store" />
+    <item
+        android:id="@+id/menu_order_received"
+        android:icon="@drawable/ic_view_list"
+        android:title="@string/order_received"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_order_history_store"
+        android:icon="@drawable/ic_history"
+        android:title="@string/order_history"
+        app:showAsAction="ifRoom" />
 </menu>

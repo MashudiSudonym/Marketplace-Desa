@@ -73,4 +73,6 @@
     <string name="yout_have_a_new_order">Anda Memiliki Pesanan Baru</string>
     <string name="you_have_a_new_order_with_order_number">Anda memiliki pesanan baru dengan nomor pesanan</string>
     <string name="from">dari</string>
+    <string name="order_history">Riwayat Pesanan</string>
+    <string name="order_received">Pesanan Diterima</string>
 </resources>
