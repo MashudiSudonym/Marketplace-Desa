@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ui.seller.selleraddproduct.SellerAddProductActivity"></activity>
 
         <service
             android:name=".util.service.ApplicationFirebaseMessagingService"
