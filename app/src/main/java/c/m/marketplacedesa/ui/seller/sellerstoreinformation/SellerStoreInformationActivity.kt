@@ -29,6 +29,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
     private var storeName: String? = ""
     private var storeAddress: String? = ""
     private var storeImage: String? = ""
+    private var storePhone: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,6 +131,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
             storeAddress = response.address
             storeUID = response.uid
             storeImage = response.image_profile_store
+            storePhone = response.phone
         }
 
         Glide.with(this)
@@ -144,6 +146,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
 
         tv_title_seller_store_information.text = storeName
         tv_address_seller_store_information.text = storeAddress
+        tv_phone_number_store_information.text = storePhone
 
         presenter.getProduct(storeUID.toString())
     }

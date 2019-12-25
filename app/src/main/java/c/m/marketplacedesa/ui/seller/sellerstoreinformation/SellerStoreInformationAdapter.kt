@@ -47,8 +47,15 @@ class SellerStoreInformationAdapter(
                 .into(img_product)
 
             tv_product_title.text = content.name
-            tv_number_of_stock.text = content.stock.toString()
             tv_number_of_price.text = content.price.toString()
+
+            if (content.stock == false) {
+                tv_number_of_stock.text =
+                    itemView.context.getString(R.string.not_available_stock_status)
+            } else {
+                tv_number_of_stock.text =
+                    itemView.context.getString(R.string.available_stock_status)
+            }
         }
     }
 }
