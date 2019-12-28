@@ -76,4 +76,6 @@
     <string name="order_history">Riwayat Pesanan</string>
     <string name="order_received">Pesanan Diterima</string>
     <string name="add_new_product">Tambah Produk Baru</string>
+    <string name="edit_product_information">Edit Informasi Produk</string>
+    <string name="photo_product_allert">Foto Produk tidak boleh kosong!!</string>
 </resources>

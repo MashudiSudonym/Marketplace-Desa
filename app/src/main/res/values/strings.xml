@@ -104,4 +104,6 @@
     <string name="order_history">Order History</string>
     <string name="order_received">Order Received</string>
     <string name="add_new_product">Add New Product</string>
+    <string name="edit_product_information">Edit Product Information</string>
+    <string name="photo_product_allert">Photo Product Can Not Empty!!</string>
 </resources>

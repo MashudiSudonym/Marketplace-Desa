@@ -10,6 +10,7 @@ import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.ProductsResponse
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.seller.selleraddproduct.SellerAddProductActivity
+import c.m.marketplacedesa.ui.seller.sellereditproduct.SellerEditProductActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
@@ -84,17 +85,19 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
             presenter.getProduct(storeUID.toString())
         }
 
-        // recyclerview product list
+        // recycler view product list
         setupProductRecyclerView()
 
         // button add product
         btn_floating_add_product_seller_store_information.setOnClickListener {
-            startActivity<SellerAddProductActivity>()
+            startActivity<SellerAddProductActivity>(Constants.STORE_UID to storeUID)
         }
     }
 
     private fun setupProductRecyclerView() {
-        sellerStoreInformationAdapter = SellerStoreInformationAdapter(contentProduct) {}
+        sellerStoreInformationAdapter = SellerStoreInformationAdapter(contentProduct) {
+            startActivity<SellerEditProductActivity>(Constants.UID to it.uid)
+        }
 
         rv_product_seller_store_information.setHasFixedSize(true)
         rv_product_seller_store_information.adapter = sellerStoreInformationAdapter
