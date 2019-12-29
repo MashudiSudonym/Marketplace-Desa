@@ -88,24 +88,21 @@ class SellerEditProductPresenter : Presenter<SellerEditProductView> {
             } else {
                 mView?.showProgressDialog()
 
-                imageThumbnailsReference?.downloadUrl?.addOnSuccessListener {
-                    val docData = hashMapOf(
-                        "image_product" to (it?.toString() ?: "-"),
-                        "name" to productName,
-                        "uid" to productUID,
-                        "price" to productPrice,
-                        "stock" to productStock,
-                        "store" to productStore
-                    )
+                val docData = hashMapOf(
+                    "name" to productName,
+                    "uid" to productUID,
+                    "price" to productPrice,
+                    "stock" to productStock,
+                    "store" to productStore
+                )
 
-                    db?.collection("products")?.document(productUID)
-                        ?.update(docData)
-                        ?.addOnSuccessListener { mView?.finishThisActivityToNextActivity(storeUID) }
-                        ?.addOnFailureListener { e ->
-                            mView?.closeProgressDialog()
-                            Log.e("ERROR!!", "$e")
-                        }
-                }
+                db?.collection("products")?.document(productUID)
+                    ?.update(docData)
+                    ?.addOnSuccessListener { mView?.finishThisActivityToNextActivity(storeUID) }
+                    ?.addOnFailureListener { e ->
+                        mView?.closeProgressDialog()
+                        Log.e("ERROR!!", "$e")
+                    }
             }
         }
     }
