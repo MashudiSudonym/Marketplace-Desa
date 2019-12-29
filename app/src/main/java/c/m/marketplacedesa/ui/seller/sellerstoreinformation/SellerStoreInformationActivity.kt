@@ -96,7 +96,14 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
 
     private fun setupProductRecyclerView() {
         sellerStoreInformationAdapter = SellerStoreInformationAdapter(contentProduct) {
-            startActivity<SellerEditProductActivity>(Constants.UID to it.uid)
+            startActivity<SellerEditProductActivity>(
+                Constants.UID to it.uid,
+                Constants.STORE_UID to it.store,
+                Constants.IMG_PRODUCT to it.image_product,
+                Constants.NAME to it.name,
+                Constants.PRICE to it.price,
+                Constants.STOCK to it.stock
+            )
         }
 
         rv_product_seller_store_information.setHasFixedSize(true)
