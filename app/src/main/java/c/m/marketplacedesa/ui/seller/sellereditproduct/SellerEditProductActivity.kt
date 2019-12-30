@@ -46,7 +46,7 @@ class SellerEditProductActivity : AppCompatActivity(), SellerEditProductView {
     private lateinit var radioButtonStockStatus: RadioButton
     private var selectedStockOption: Int? = 0
     private var productUID: String? = ""
-    private var storeUID: String? = ""
+    private var productStore: String? = ""
     private var productName: String? = ""
     private var productPrice: Int? = 0
     private var productStock: Boolean = false
@@ -86,7 +86,7 @@ class SellerEditProductActivity : AppCompatActivity(), SellerEditProductView {
 
         val intent = intent
         productUID = intent.getStringExtra(Constants.UID)
-        storeUID = intent.getStringExtra(Constants.STORE_UID)
+        productStore = intent.getStringExtra(Constants.STORE_UID)
         productName = intent.getStringExtra(Constants.NAME)
         productPrice = intent.getIntExtra(Constants.PRICE, 0)
         productStock = intent.getBooleanExtra(Constants.STOCK, false)
@@ -305,10 +305,9 @@ class SellerEditProductActivity : AppCompatActivity(), SellerEditProductView {
                 productName,
                 productPrice.toInt(),
                 productStock,
-                storeUID.toString(),
+                productStore.toString(),
                 filePath,
-                randomNumber.toString(),
-                storeUID.toString()
+                randomNumber.toString()
             )
         } else {
             // if not valid
@@ -325,7 +324,7 @@ class SellerEditProductActivity : AppCompatActivity(), SellerEditProductView {
     // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_seller_add_edit_product, menu)
+        inflater.inflate(R.menu.menu_seller_edit_product, menu)
         return true
     }
 
@@ -338,6 +337,21 @@ class SellerEditProductActivity : AppCompatActivity(), SellerEditProductView {
                 ) {
                     yesButton {
                         saveUpdateProductData()
+                    }
+                    noButton { }
+                }.apply {
+                    isCancelable = false
+                    show()
+                }
+                true
+            }
+            R.id.menu_delete -> {
+                alert(
+                    getString(R.string.message_delete_product),
+                    getString(R.string.title_delete_product)
+                ) {
+                    yesButton {
+                        presenter.deleteProduct(productUID.toString(), productStore.toString())
                     }
                     noButton { }
                 }.apply {

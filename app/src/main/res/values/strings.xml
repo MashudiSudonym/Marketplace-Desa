@@ -106,4 +106,7 @@
     <string name="add_new_product">Add New Product</string>
     <string name="edit_product_information">Edit Product Information</string>
     <string name="photo_product_allert">Photo Product Can Not Empty!!</string>
+    <string name="delete">Delete</string>
+    <string name="message_delete_product">Are you sure want to delete this product ?</string>
+    <string name="title_delete_product">Delete this product ?</string>
 </resources>

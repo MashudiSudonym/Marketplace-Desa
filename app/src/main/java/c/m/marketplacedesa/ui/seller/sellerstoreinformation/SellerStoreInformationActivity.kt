@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_seller_store_information.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformationView {
 
@@ -196,10 +195,6 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_location_store -> {
-                toast("$storeLatitude, $storeLongitude")
-                true
-            }
             R.id.menu_edit_info_store -> true
             else -> super.onOptionsItemSelected(item)
         }

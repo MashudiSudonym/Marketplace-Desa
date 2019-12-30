@@ -303,7 +303,7 @@ class SellerAddProductActivity : AppCompatActivity(), SellerAddProductView {
     // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_seller_add_edit_product, menu)
+        inflater.inflate(R.menu.menu_seller_add_product, menu)
         return true
     }
 

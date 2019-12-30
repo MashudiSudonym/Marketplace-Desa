@@ -39,8 +39,7 @@ class SellerEditProductPresenter : Presenter<SellerEditProductView> {
         productStock: Boolean,
         productStore: String,
         filePath: Uri?,
-        randomNumber: String,
-        storeUID: String
+        randomNumber: String
     ) {
         val userUID = authentication?.currentUser?.uid.toString()
         val imageThumbnailsReference =
@@ -67,7 +66,7 @@ class SellerEditProductPresenter : Presenter<SellerEditProductView> {
                                 ?.update(docData)
                                 ?.addOnSuccessListener {
                                     mView?.finishThisActivityToNextActivity(
-                                        storeUID
+                                        productStore
                                     )
                                 }
                                 ?.addOnFailureListener { e ->
@@ -98,12 +97,27 @@ class SellerEditProductPresenter : Presenter<SellerEditProductView> {
 
                 db?.collection("products")?.document(productUID)
                     ?.update(docData)
-                    ?.addOnSuccessListener { mView?.finishThisActivityToNextActivity(storeUID) }
+                    ?.addOnSuccessListener { mView?.finishThisActivityToNextActivity(productStore) }
                     ?.addOnFailureListener { e ->
                         mView?.closeProgressDialog()
                         Log.e("ERROR!!", "$e")
                     }
             }
+        }
+    }
+
+    fun deleteProduct(
+        productUID: String,
+        productStore: String
+    ) {
+        if (userAuthentication()) {
+            db?.collection("products")
+                ?.document(productUID)
+                ?.delete()
+                ?.addOnSuccessListener { mView?.finishThisActivityToNextActivity(productStore) }
+                ?.addOnFailureListener { e ->
+                    Log.e("ERROR!!", "$e")
+                }
         }
     }
 }
