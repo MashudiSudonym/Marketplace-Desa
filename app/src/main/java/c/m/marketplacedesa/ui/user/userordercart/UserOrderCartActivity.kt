@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
@@ -120,24 +121,25 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         temporaryOrderData.forEach { response ->
             orderNumber = response.order_number
             orderBy = response.order_by
-            //totalPrice = response.total_price?.let { totalPrice?.plus(it) }
-            estimateTotalPrice = response.total_price
+            estimateTotalPrice = response.total_price?.let { estimateTotalPrice?.plus(it) }
             deliveryOption = response.delivery_option
             storeOwnerUID = response.store_owner_uid
         }
 
         // count total price
-        totalPrice = totalPrice?.plus(estimateTotalPrice as Int)
+        totalPrice = estimateTotalPrice
+
+        Log.d(Constants.DEBUG_TAG, "$totalPrice, $estimateTotalPrice")
 
         // show data in text view
         tv_name_of_user_order.text = orderBy
         tv_number_of_order_number.text = orderNumber
-        tv_number_estimated_total_price.text = totalPrice.toString()
+        tv_number_estimated_total_price.text = estimateTotalPrice.toString()
         tv_number_of_total_price.text = totalPrice.toString()
 
         // activate button checkout and cancel order
         if (temporaryOrderData.isNullOrEmpty()) {
-            deactiveOrderAndCancelButton()
+            deactivateOrderAndCancelButton()
         } else {
             activeOrderAndCancelButton()
         }
@@ -175,7 +177,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $orderBy",
                                     getString(R.string.yout_have_a_new_order)
                                 )
-                                deactiveOrderAndCancelButton()
+                                deactivateOrderAndCancelButton()
                                 clearSharedPreferences()
                             }
                             getString(R.string.delivered_to_home) -> {
@@ -189,7 +191,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $orderBy",
                                     getString(R.string.yout_have_a_new_order)
                                 )
-                                deactiveOrderAndCancelButton()
+                                deactivateOrderAndCancelButton()
                                 clearSharedPreferences()
                             }
                         }
@@ -225,7 +227,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
         }
     }
 
-    private fun deactiveOrderAndCancelButton() {
+    private fun deactivateOrderAndCancelButton() {
         btn_order.apply {
             isEnabled = false
             setBackgroundColor(Color.LTGRAY)
