@@ -109,4 +109,5 @@
     <string name="delete">Delete</string>
     <string name="message_delete_product">Are you sure want to delete this product ?</string>
     <string name="title_delete_product">Delete this product ?</string>
+    <string name="edit_store_information">Edit Store Information</string>
 </resources>

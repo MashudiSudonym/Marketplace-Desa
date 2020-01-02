@@ -81,4 +81,5 @@
     <string name="delete">Hapus</string>
     <string name="message_delete_product">Anda yakin akan menghapus produk ini ?</string>
     <string name="title_delete_product">Hapus produk ini ?</string>
+    <string name="edit_store_information">Ubah Informasi Toko</string>
 </resources>

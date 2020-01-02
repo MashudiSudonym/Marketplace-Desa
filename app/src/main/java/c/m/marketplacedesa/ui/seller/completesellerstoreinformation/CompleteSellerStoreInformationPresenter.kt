@@ -73,7 +73,7 @@ class CompleteSellerStoreInformationPresenter : Presenter<CompleteSellerStoreInf
             mView?.showProgressDialog()
 
             imageThumbnailsReference?.downloadUrl?.addOnSuccessListener {
-                val docData = hashMapOf(
+                val docData = mapOf(
                     "address" to storeAddress,
                     "image_profile_store" to (it?.toString() ?: "-"),
                     "name" to storeName,

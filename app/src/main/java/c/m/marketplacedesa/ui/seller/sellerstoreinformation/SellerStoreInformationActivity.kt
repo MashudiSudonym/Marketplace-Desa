@@ -11,6 +11,7 @@ import c.m.marketplacedesa.model.ProductsResponse
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.seller.selleraddproduct.SellerAddProductActivity
 import c.m.marketplacedesa.ui.seller.sellereditproduct.SellerEditProductActivity
+import c.m.marketplacedesa.ui.seller.sellereditstoreinformation.SellerEditStoreInformationActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
@@ -195,7 +196,18 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_edit_info_store -> true
+            R.id.menu_edit_info_store -> {
+                startActivity<SellerEditStoreInformationActivity>(
+                    Constants.STORE_UID to storeUID,
+                    Constants.STORE_LATITUDE to storeLatitude,
+                    Constants.STORE_LONGITUDE to storeLongitude,
+                    Constants.NAME to storeName,
+                    Constants.PHONE to storePhone,
+                    Constants.ADDRESS to storeAddress,
+                    Constants.IMG_PROFILE to storeImage
+                )
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
