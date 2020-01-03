@@ -19,17 +19,7 @@
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@android:color/black">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/sv_product"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:iconifiedByDefault="false"
-                android:padding="0dp"
-                app:queryHint="@string/search_product_query_hint" />
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@android:color/black" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

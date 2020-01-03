@@ -57,13 +57,6 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         presenter.initFirebase()
         presenter.getUser()
 
-        setSupportActionBar(toolbar_product)
-        supportActionBar?.apply {
-            title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
-        }
-
         val intent = intent
         uid = intent.getStringExtra(Constants.UID)
         name = intent.getStringExtra(Constants.NAME)
@@ -75,6 +68,13 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
 
         tv_store_name.text = name
         tv_store_address.text = address
+
+        setSupportActionBar(toolbar_product)
+        supportActionBar?.apply {
+            title = name
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         // get product content data
         presenter.getProduct(uid.toString())

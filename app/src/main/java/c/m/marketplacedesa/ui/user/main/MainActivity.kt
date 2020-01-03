@@ -8,6 +8,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
+import c.m.marketplacedesa.database.MarketplaceDesaDatabase
+import c.m.marketplacedesa.database.StoreEntity
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
@@ -20,14 +22,19 @@ import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import com.mikepenz.actionitembadge.library.ActionItemBadge
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), MainView {
 
+    private lateinit var marketplaceDesaDatabase: MarketplaceDesaDatabase
     private lateinit var presenter: MainPresenter
     private lateinit var mainAdapter: MainAdapter
     private lateinit var badgeSharedPreferences: SharedPreferences
     private val contentStore: MutableList<StoreResponse> = mutableListOf()
+    private val localContentStore: MutableList<StoreEntity> = mutableListOf()
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
     private var getOrderNumberValue: String? = ""
@@ -43,6 +50,10 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onAttachView() {
         presenter.onAttach(this)
         presenter.initFirebase()
+
+        // local database declaration
+        marketplaceDesaDatabase = MarketplaceDesaDatabase.getDatabase(this)
+        marketplaceDesaDatabase.storeDao()
 
         setSupportActionBar(toolbar_main)
         supportActionBar?.apply { title = getString(R.string.app_name) }
@@ -141,6 +152,26 @@ class MainActivity : AppCompatActivity(), MainView {
         contentStore.clear()
         contentStore.addAll(storeData)
         mainAdapter.notifyDataSetChanged()
+
+        // save to local database
+        storeData.forEach {
+            val storeEntity = StoreEntity(
+                0L,
+                it.uid,
+                it.name,
+                it.address,
+                it.phone,
+                it.owner,
+                it.store_geopoint.latitude,
+                it.store_geopoint.longitude
+            )
+
+            localContentStore.addAll(listOf(storeEntity))
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            marketplaceDesaDatabase.storeDao().updateContent(localContentStore)
+        }
     }
 
     override fun returnToCompleteUserProfile() {
