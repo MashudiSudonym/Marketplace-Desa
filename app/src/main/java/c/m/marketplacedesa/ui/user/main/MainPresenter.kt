@@ -2,6 +2,7 @@ package c.m.marketplacedesa.ui.user.main
 
 import android.annotation.SuppressLint
 import android.util.Log
+import c.m.marketplacedesa.model.NotificationCollectionResponse
 import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.model.UsersResponse
 import c.m.marketplacedesa.util.Constants
@@ -79,7 +80,7 @@ class MainPresenter : Presenter<MainView> {
 
                 if (!storeList.isNullOrEmpty()) {
                     mView?.hideLoading()
-                    mView?.getStore(storeList as List<StoreResponse>)
+                    mView?.getStore(storeList)
                 } else {
                     mView?.showNoDataResult()
                 }
@@ -104,6 +105,26 @@ class MainPresenter : Presenter<MainView> {
                 }
         } else {
             mView?.returnToSignInActivity()
+        }
+    }
+
+    fun checkNewNotification() {
+        val userUID = authentication?.currentUser?.uid.toString()
+
+        if (userAuthentication()) {
+            db?.collection("notification_collections")
+                ?.whereEqualTo("user_uid", userUID)
+                ?.whereEqualTo("read_notification", false)
+                ?.addSnapshotListener { snapshot, exception ->
+                    if (exception != null) Log.e("Error!!", "$exception")
+
+                    val notificationData =
+                        snapshot?.toObjects(NotificationCollectionResponse::class.java)
+
+                    if (!notificationData.isNullOrEmpty()) {
+                        mView?.getNotificationCount(notificationData)
+                    }
+                }
         }
     }
 }

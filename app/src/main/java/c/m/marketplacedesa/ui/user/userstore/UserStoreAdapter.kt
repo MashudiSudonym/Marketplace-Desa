@@ -169,7 +169,8 @@ class UserStoreAdapter(
                     "is_canceled" to false,
                     "order_by" to userName,
                     "store_owner_uid" to storeOwnerUID,
-                    "delivery_option" to 1
+                    "delivery_option" to 1,
+                    "store_uid" to contentProduct.store
                 )
                 val orderByOrderNumber = mapOf(
                     temporaryOrderItemProductKey to true

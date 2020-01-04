@@ -8,6 +8,11 @@
         android:title="@string/cart"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_notification"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/notification"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_user"
         android:icon="@drawable/ic_user"
         android:title="@string/profile"

@@ -34,6 +34,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
     private var totalPrice: Int? = 0
     private var deliveryOption: Int? = 1
     private var storeOwnerUID: String? = ""
+    private var storeUID: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,6 +125,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
             estimateTotalPrice = response.total_price?.let { estimateTotalPrice?.plus(it) }
             deliveryOption = response.delivery_option
             storeOwnerUID = response.store_owner_uid
+            storeUID = response.store_uid
         }
 
         // count total price
@@ -169,6 +171,8 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                             getString(R.string.take_it_by_yourself) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 1)
                                 presenter.sendOrderNotification(
+                                    storeUID.toString(),
+                                    getOrderNumberValue.toString(),
                                     storeOwnerUID.toString(),
                                     "${getString(
                                         R.string.you_have_a_new_order_with_order_number
@@ -183,6 +187,8 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                             getString(R.string.delivered_to_home) -> {
                                 presenter.updateDeliveryOption(orderNumber.toString(), 2)
                                 presenter.sendOrderNotification(
+                                    storeUID.toString(),
+                                    getOrderNumberValue.toString(),
                                     storeOwnerUID.toString(),
                                     "${getString(
                                         R.string.you_have_a_new_order_with_order_number

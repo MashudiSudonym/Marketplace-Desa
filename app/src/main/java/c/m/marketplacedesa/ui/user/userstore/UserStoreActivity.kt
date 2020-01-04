@@ -165,7 +165,6 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
     override fun showLoading() {
         shimmerStart()
         tv_no_data_product.gone()
-        rv_search_product.gone()
         rv_product.gone()
     }
 
@@ -173,20 +172,17 @@ class UserStoreActivity : AppCompatActivity(), UserStoreView, UserStoreAddOrRemo
         shimmerStop()
         tv_no_data_product.gone()
         rv_product.visible()
-        rv_search_product.gone()
     }
 
     override fun hideSearchLoading() {
         shimmerStop()
         tv_no_data_product.gone()
         rv_product.gone()
-        rv_search_product.visible()
     }
 
     override fun showNoDataResult() {
         shimmerStop()
         tv_no_data_product.visible()
-        rv_search_product.gone()
         rv_product.gone()
     }
 

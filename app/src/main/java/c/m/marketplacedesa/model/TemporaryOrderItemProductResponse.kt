@@ -16,4 +16,5 @@ class TemporaryOrderItemProductResponse {
     var image_product: String? = ""
     var delivery_option: Int? = 1
     var store_owner_uid: String? = ""
+    var store_uid: String? = ""
 }

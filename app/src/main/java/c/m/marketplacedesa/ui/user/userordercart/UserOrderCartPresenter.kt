@@ -3,6 +3,7 @@ package c.m.marketplacedesa.ui.user.userordercart
 import android.util.Log
 import c.m.marketplacedesa.model.MessageNotification
 import c.m.marketplacedesa.model.Notification
+import c.m.marketplacedesa.model.NotificationCollectionResponse
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
@@ -52,6 +53,8 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
     }
 
     fun sendOrderNotification(
+        storeUID: String,
+        orderNumber: String,
         storeOwnerUID: String,
         orderBodyMessage: String,
         orderTitleMessage: String
@@ -63,6 +66,26 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
 
         CoroutineScope(Dispatchers.IO).launch {
             apiService.postMessage(messageNotification)
+        }
+
+        if (userAuthentication()) {
+            val notificationKey =
+                db?.collection("notification_collections")?.document()?.id.toString()
+            val data = mapOf(
+                "order_title_message" to orderTitleMessage,
+                "order_body_message" to orderBodyMessage,
+                "order_number" to orderNumber,
+                "user_uid" to storeOwnerUID,
+                "store_uid" to storeUID,
+                "read_notification" to false,
+                "uid" to notificationKey
+            )
+
+            db?.collection("notification_collections")
+                ?.document(notificationKey)
+                ?.set(data)
+                ?.addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
         }
     }
 
@@ -116,6 +139,25 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
                                         mView?.returnToMainActivity()
                                     }
                                     ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                            }
+                            ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                    }
+                }
+
+            db?.collection("notification_collections")
+                ?.whereEqualTo("order_number", orderNumber)
+                ?.addSnapshotListener { snapshot, exception ->
+                    if (exception != null) Log.e(Constants.ERROR_TAG, "$exception")
+
+                    val notificationCollectionList =
+                        snapshot?.toObjects(NotificationCollectionResponse::class.java)
+
+                    notificationCollectionList?.forEach { response ->
+                        db?.collection("notification_collections")
+                            ?.document(response.uid.toString())
+                            ?.delete()
+                            ?.addOnSuccessListener {
+                                Log.d(Constants.DEBUG_TAG, "Success delete data")
                             }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }

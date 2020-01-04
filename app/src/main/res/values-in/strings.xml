@@ -82,4 +82,7 @@
     <string name="message_delete_product">Anda yakin akan menghapus produk ini ?</string>
     <string name="title_delete_product">Hapus produk ini ?</string>
     <string name="edit_store_information">Ubah Informasi Toko</string>
+    <string name="notification">Notifikasi</string>
+    <string name="no_notification">Tidak ada notifikasi</string>
+    <string name="notification_alert">Anda memiliki notifikasi baru</string>
 </resources>

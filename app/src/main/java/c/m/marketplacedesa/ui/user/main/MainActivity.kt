@@ -3,6 +3,7 @@ package c.m.marketplacedesa.ui.user.main
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.database.MarketplaceDesaDatabase
 import c.m.marketplacedesa.database.StoreEntity
+import c.m.marketplacedesa.model.NotificationCollectionResponse
 import c.m.marketplacedesa.model.StoreResponse
+import c.m.marketplacedesa.ui.notification.NotificationActivity
 import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.completeuserprofile.CompleteUserProfileActivity
@@ -20,6 +23,7 @@ import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
+import com.google.android.material.snackbar.Snackbar
 import com.mikepenz.actionitembadge.library.ActionItemBadge
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
     private var getOrderNumberValue: String? = ""
+    private var notificationValue: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,9 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onAttachView() {
         presenter.onAttach(this)
         presenter.initFirebase()
+
+        // Check new notification
+        presenter.checkNewNotification()
 
         // local database declaration
         marketplaceDesaDatabase = MarketplaceDesaDatabase.getDatabase(this)
@@ -113,6 +121,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
         // for new user check user profile data
         presenter.checkUserData()
+
+        // check notification
+        presenter.checkNewNotification()
     }
 
     override fun onDestroy() {
@@ -123,7 +134,6 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun showLoading() {
         shimmerStart()
         tv_no_data_main.gone()
-        rv_search_store.gone()
         rv_store.gone()
     }
 
@@ -131,20 +141,17 @@ class MainActivity : AppCompatActivity(), MainView {
         shimmerStop()
         tv_no_data_main.gone()
         rv_store.visible()
-        rv_search_store.gone()
     }
 
     override fun hideSearchLoading() {
         shimmerStop()
         tv_no_data_main.gone()
         rv_store.gone()
-        rv_search_store.visible()
     }
 
     override fun showNoDataResult() {
         shimmerStop()
         tv_no_data_main.visible()
-        rv_search_store.gone()
         rv_store.gone()
     }
 
@@ -184,6 +191,20 @@ class MainActivity : AppCompatActivity(), MainView {
         startActivity<SignInActivity>() // open sign in activity
     }
 
+    override fun getNotificationCount(notificationData: List<NotificationCollectionResponse>) {
+        Log.d(Constants.DEBUG_TAG, "${notificationData.size}")
+
+        if (notificationData.isNotEmpty()) {
+            Snackbar.make(
+                layout_main,
+                getString(R.string.notification_alert),
+                Snackbar.LENGTH_INDEFINITE
+            ).setAction("SHOW") {
+                startActivity<NotificationActivity>()
+            }.show()
+        }
+    }
+
     private fun initPresenter() {
         presenter = MainPresenter()
     }
@@ -217,7 +238,6 @@ class MainActivity : AppCompatActivity(), MainView {
         shimmer_frame_main.stopShimmer()
     }
 
-    // app bar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_user_main, menu)
@@ -237,6 +257,10 @@ class MainActivity : AppCompatActivity(), MainView {
         return when (item.itemId) {
             R.id.menu_cart -> {
                 startActivity<UserOrderCartActivity>()
+                true
+            }
+            R.id.menu_notification -> {
+                startActivity<NotificationActivity>()
                 true
             }
             R.id.menu_user -> {

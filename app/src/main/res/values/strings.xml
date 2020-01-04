@@ -110,4 +110,7 @@
     <string name="message_delete_product">Are you sure want to delete this product ?</string>
     <string name="title_delete_product">Delete this product ?</string>
     <string name="edit_store_information">Edit Store Information</string>
+    <string name="notification">Notification</string>
+    <string name="no_notification">No Notification</string>
+    <string name="notification_alert">You have new notification</string>
 </resources>
