@@ -86,4 +86,5 @@
     <string name="no_notification">Tidak ada notifikasi</string>
     <string name="notification_alert">Anda memiliki notifikasi baru</string>
     <string name="order_list_title">Pesanan anda dengan nomor order :</string>
+    <string name="my_order_history">Riwayat Pesanan Saya</string>
 </resources>

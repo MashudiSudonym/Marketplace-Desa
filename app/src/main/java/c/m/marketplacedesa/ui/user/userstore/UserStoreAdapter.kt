@@ -164,7 +164,7 @@ class UserStoreAdapter(
                     "number_of_product_orders" to productOrderCount,
                     "total_price" to contentProduct.price?.times(productOrderCount),
                     "order_number" to getOrderNumberValue,
-                    "order_status" to false,
+                    "order_status" to 0,
                     "payment_status" to false,
                     "is_canceled" to false,
                     "order_by" to userName,

@@ -7,9 +7,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.ui.user.userorderhistory.UserOrderHistoryActivity
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_user_order.*
+import org.jetbrains.anko.startActivity
 
 class UserOrderActivity : AppCompatActivity(), UserOrderView {
 
@@ -44,6 +46,11 @@ class UserOrderActivity : AppCompatActivity(), UserOrderView {
         adapter = UserOrderAdapter(content) {}
         rv_user_order.setHasFixedSize(true)
         rv_user_order.adapter = adapter
+
+        swipe_refresh_user_order.setOnRefreshListener {
+            swipe_refresh_user_order.isRefreshing = false
+            presenter.getUserOrder()
+        }
     }
 
     override fun onDetachView() {
@@ -105,6 +112,7 @@ class UserOrderActivity : AppCompatActivity(), UserOrderView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_order_history -> {
+                startActivity<UserOrderHistoryActivity>()
                 true
             }
             else -> super.onOptionsItemSelected(item)

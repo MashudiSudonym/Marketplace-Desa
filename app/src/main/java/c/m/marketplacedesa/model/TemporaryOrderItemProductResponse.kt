@@ -7,7 +7,7 @@ class TemporaryOrderItemProductResponse {
     var uid: String? = ""
     var total_price: Int? = 0
     var payment_status: Boolean = false
-    var order_status: Boolean = false
+    var order_status: Int = 0
     var order_number: String? = ""
     var order_by: String? = ""
     var number_of_product_orders: Int? = 0

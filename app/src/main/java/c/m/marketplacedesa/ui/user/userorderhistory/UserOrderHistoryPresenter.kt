@@ -1,4 +1,4 @@
-package c.m.marketplacedesa.ui.user.userorder
+package c.m.marketplacedesa.ui.user.userorderhistory
 
 import android.util.Log
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
@@ -8,12 +8,12 @@ import c.m.marketplacedesa.util.base.Presenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class UserOrderPresenter : Presenter<UserOrderView> {
-    private var mView: UserOrderView? = null
+class UserOrderHistoryPresenter : Presenter<UserOrderHistoryView> {
+    private var mView: UserOrderHistoryView? = null
     private var db: FirebaseFirestore? = null
     private var authentication: FirebaseAuth? = null
 
-    override fun onAttach(view: UserOrderView) {
+    override fun onAttach(view: UserOrderHistoryView) {
         mView = view
     }
 
@@ -47,11 +47,9 @@ class UserOrderPresenter : Presenter<UserOrderView> {
 
                     userData?.forEach { userResponse ->
                         // get order number
-                        val queryOne = db?.collection("temporary_order_item_product")
+                        db?.collection("temporary_order_item_product")
                             ?.whereEqualTo("order_by", userResponse.name)
-                            ?.whereLessThanOrEqualTo("order_status", 2)
-                        queryOne?.whereEqualTo("is_canceled", false)
-                            ?.whereEqualTo("payment_status", false)
+                            ?.whereEqualTo("order_status", 3)
                             ?.addSnapshotListener { snapshot, firestoreException ->
                                 if (firestoreException != null) Log.e(
                                     Constants.ERROR_TAG,
