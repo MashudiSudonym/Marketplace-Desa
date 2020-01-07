@@ -47,8 +47,11 @@ class UserOrderPresenter : Presenter<UserOrderView> {
 
                     userData?.forEach { userResponse ->
                         // get order number
-                        db?.collection("temporary_order_item_product")
+                        val queryOne = db?.collection("temporary_order_item_product")
                             ?.whereEqualTo("order_by", userResponse.name)
+                            ?.whereEqualTo("order_status", false)
+                        queryOne?.whereEqualTo("is_canceled", false)
+                            ?.whereEqualTo("payment_status", false)
                             ?.addSnapshotListener { snapshot, firestoreException ->
                                 if (firestoreException != null) Log.e(
                                     Constants.ERROR_TAG,
