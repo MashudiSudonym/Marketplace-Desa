@@ -17,6 +17,7 @@ import c.m.marketplacedesa.ui.notification.NotificationActivity
 import c.m.marketplacedesa.ui.settings.SettingsActivity
 import c.m.marketplacedesa.ui.signin.SignInActivity
 import c.m.marketplacedesa.ui.user.completeuserprofile.CompleteUserProfileActivity
+import c.m.marketplacedesa.ui.user.userorder.UserOrderActivity
 import c.m.marketplacedesa.ui.user.userordercart.UserOrderCartActivity
 import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
 import c.m.marketplacedesa.ui.user.userstore.UserStoreActivity
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity(), MainView {
     private var badgeCount: Int = 0
     private var badgeSharedPreferencesValue: Int = 0
     private var getOrderNumberValue: String? = ""
-    private var notificationValue: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -268,6 +268,7 @@ class MainActivity : AppCompatActivity(), MainView {
                 true
             }
             R.id.menu_my_order -> {
+                startActivity<UserOrderActivity>()
                 true
             }
             R.id.menu_setting -> {

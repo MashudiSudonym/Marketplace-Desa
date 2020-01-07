@@ -1,6 +1,5 @@
 package c.m.marketplacedesa.ui.notification
 
-import android.annotation.SuppressLint
 import android.util.Log
 import c.m.marketplacedesa.model.NotificationCollectionResponse
 import c.m.marketplacedesa.util.Constants
@@ -21,7 +20,6 @@ class NotificationPresenter : Presenter<NotificationView> {
         mView = null
     }
 
-    @SuppressLint("DefaultLocale")
     fun initFirebase() {
         db = FirebaseFirestore.getInstance()
         authentication = FirebaseAuth.getInstance()
