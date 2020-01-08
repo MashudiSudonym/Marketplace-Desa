@@ -92,8 +92,6 @@
                 android:isScrollContainer="true"
                 android:overScrollMode="ifContentScrolls"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="true"
-                app:stackFromEnd="true"
                 tools:listitem="@layout/item_notification"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

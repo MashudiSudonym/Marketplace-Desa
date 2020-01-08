@@ -4,9 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.ui.user.userorderdetails.UserOrderDetailsActivity
+import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_user_order_history.*
+import org.jetbrains.anko.startActivity
 
 class UserOrderHistoryActivity : AppCompatActivity(), UserOrderHistoryView {
 
@@ -38,7 +41,11 @@ class UserOrderHistoryActivity : AppCompatActivity(), UserOrderHistoryView {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        adapter = UserOrderHistoryAdapter(content) {}
+        adapter = UserOrderHistoryAdapter(content) {
+            startActivity<UserOrderDetailsActivity>(
+                Constants.ORDER_NUMBER to it.order_number
+            )
+        }
         rv_user_order_history.setHasFixedSize(true)
         rv_user_order_history.adapter = adapter
 

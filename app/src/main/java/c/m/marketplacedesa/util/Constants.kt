@@ -25,6 +25,6 @@ class Constants {
         const val DEFAULT_STRING_VALUE = ""
         const val APP_FIREBASE_MESSAGING_SERVICE = "AppFirebaseMsgService"
         const val MY_WORKER = "my worker"
-        const val RANDOM_NUMBER = "random number"
+        const val ORDER_NUMBER = "order number"
     }
 }
