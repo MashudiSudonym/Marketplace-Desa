@@ -5,4 +5,5 @@ import c.m.marketplacedesa.util.base.View
 
 interface UserOrderDetailsView : View {
     fun getTemporaryOrder(temporaryOrderData: List<TemporaryOrderItemProductResponse>)
+    fun getStoreName(storeName: String)
 }

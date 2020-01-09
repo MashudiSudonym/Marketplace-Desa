@@ -125,4 +125,5 @@
     <string name="payment_status">Payment Status</string>
     <string name="paid_off_status">Paid off</string>
     <string name="not_yet_paid_off_status">Not yet paid off</string>
+    <string name="store">Store</string>
 </resources>

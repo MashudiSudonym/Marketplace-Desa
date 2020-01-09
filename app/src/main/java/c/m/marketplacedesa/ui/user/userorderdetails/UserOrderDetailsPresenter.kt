@@ -1,6 +1,7 @@
 package c.m.marketplacedesa.ui.user.userorderdetails
 
 import android.util.Log
+import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
@@ -38,6 +39,21 @@ class UserOrderDetailsPresenter : Presenter<UserOrderDetailsView> {
                         snapshot?.toObjects(TemporaryOrderItemProductResponse::class.java)
 
                     mView?.getTemporaryOrder(temporaryOrderList as List<TemporaryOrderItemProductResponse>)
+
+                    // get store name
+                    temporaryOrderList?.forEach { response ->
+                        db?.collection("store")
+                            ?.whereEqualTo("uid", response.store_uid)
+                            ?.addSnapshotListener { snapshot, firestoreException ->
+                                if (exception != null) Log.e(Constants.ERROR_TAG, "$exception")
+
+                                val storeList = snapshot?.toObjects(StoreResponse::class.java)
+
+                                storeList?.forEach { storeResponse ->
+                                    mView?.getStoreName(storeResponse.name.toString())
+                                }
+                            }
+                    }
                 }
         }
     }

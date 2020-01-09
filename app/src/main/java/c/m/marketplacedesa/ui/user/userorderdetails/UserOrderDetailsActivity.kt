@@ -14,12 +14,12 @@ class UserOrderDetailsActivity : AppCompatActivity(), UserOrderDetailsView {
     private var content: MutableList<TemporaryOrderItemProductResponse> = mutableListOf()
     private var orderNumber: String? = ""
     private var orderBy: String? = ""
-    private var estimateTotalPrice: Int? = 0
+    private var estimateTotalPrice: Int = 0
     private var deliveryOption: Int? = 0
     private var orderStatus: Int? = 0
     private var orderPaymentStatus: Boolean = false
     private var orderCanceled: Boolean = false
-    private var totalPrice: Int? = 0
+    private var totalPrice: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,6 @@ class UserOrderDetailsActivity : AppCompatActivity(), UserOrderDetailsView {
 
         swipe_refresh_order_details.setOnRefreshListener {
             swipe_refresh_order_details.isRefreshing = false
-            presenter.getTemporaryOrder(orderNumber.toString())
         }
     }
 
@@ -76,7 +75,7 @@ class UserOrderDetailsActivity : AppCompatActivity(), UserOrderDetailsView {
         // get data response
         temporaryOrderData.forEach { response ->
             orderBy = response.order_by
-            estimateTotalPrice = response.total_price?.let { estimateTotalPrice?.plus(it) }
+            estimateTotalPrice += response.total_price as Int
             deliveryOption = response.delivery_option
             orderCanceled = response.is_canceled
             orderPaymentStatus = response.payment_status
@@ -116,6 +115,10 @@ class UserOrderDetailsActivity : AppCompatActivity(), UserOrderDetailsView {
             true -> tv_payment_status.text = getString(R.string.paid_off_status)
             false -> tv_payment_status.text = getString(R.string.not_yet_paid_off_status)
         }
+    }
+
+    override fun getStoreName(storeName: String) {
+        tv_name_of_store.text = storeName
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -97,4 +97,5 @@
     <string name="payment_status">Status Pembayaran</string>
     <string name="paid_off_status">Lunas</string>
     <string name="not_yet_paid_off_status">Belum Lunas</string>
+    <string name="store">Toko</string>
 </resources>
