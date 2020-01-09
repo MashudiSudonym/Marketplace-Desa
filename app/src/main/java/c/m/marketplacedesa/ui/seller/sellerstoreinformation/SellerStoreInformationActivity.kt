@@ -216,7 +216,7 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
                 )
                 true
             }
-            R.id.menu_order_history -> {
+            R.id.menu_order_history_store -> {
                 startActivity<SellerStoreOrderHistoryActivity>(
                     Constants.STORE_UID to storeUID
                 )
