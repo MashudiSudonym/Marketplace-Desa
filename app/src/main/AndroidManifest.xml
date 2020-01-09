@@ -27,7 +27,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.user.userorderdetails.UserOrderDetailsActivity"></activity>
+        <activity android:name=".ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity"></activity>
+        <activity android:name=".ui.seller.sellerstoreorderhistory.SellerStoreOrderHistoryActivity" />
+        <activity android:name=".ui.seller.sellerstoreorderreceived.SellerStoreOrderReceivedActivity" />
+        <activity android:name=".ui.user.userorderdetails.UserOrderDetailsActivity" />
         <activity android:name=".ui.user.userorderhistory.UserOrderHistoryActivity" />
         <activity android:name=".ui.user.userorder.UserOrderActivity" />
         <activity android:name=".ui.notification.NotificationActivity" />

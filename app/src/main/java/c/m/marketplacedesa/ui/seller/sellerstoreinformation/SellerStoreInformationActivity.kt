@@ -12,6 +12,8 @@ import c.m.marketplacedesa.model.StoreResponse
 import c.m.marketplacedesa.ui.seller.selleraddproduct.SellerAddProductActivity
 import c.m.marketplacedesa.ui.seller.sellereditproduct.SellerEditProductActivity
 import c.m.marketplacedesa.ui.seller.sellereditstoreinformation.SellerEditStoreInformationActivity
+import c.m.marketplacedesa.ui.seller.sellerstoreorderhistory.SellerStoreOrderHistoryActivity
+import c.m.marketplacedesa.ui.seller.sellerstoreorderreceived.SellerStoreOrderReceivedActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
@@ -205,6 +207,18 @@ class SellerStoreInformationActivity : AppCompatActivity(), SellerStoreInformati
                     Constants.PHONE to storePhone,
                     Constants.ADDRESS to storeAddress,
                     Constants.IMG_PROFILE to storeImage
+                )
+                true
+            }
+            R.id.menu_order_received -> {
+                startActivity<SellerStoreOrderReceivedActivity>(
+                    Constants.STORE_UID to storeUID
+                )
+                true
+            }
+            R.id.menu_order_history -> {
+                startActivity<SellerStoreOrderHistoryActivity>(
+                    Constants.STORE_UID to storeUID
                 )
                 true
             }
