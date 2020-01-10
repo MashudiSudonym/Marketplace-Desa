@@ -70,14 +70,14 @@
     <string name="not_available_stock_status">tidak tersedia</string>
     <string name="cancel_order">Batalkan Pesanan</string>
     <string name="you_want_to_cancel_the_order">anda ingin membatalkan pesanan dan menghapus pesanan ?</string>
-    <string name="yout_have_a_new_order">Anda Memiliki Pesanan Baru</string>
+    <string name="you_have_a_new_order">Anda Memiliki Pesanan Baru</string>
     <string name="you_have_a_new_order_with_order_number">Anda memiliki pesanan baru dengan nomor pesanan</string>
     <string name="from">dari</string>
     <string name="order_history">Riwayat Pesanan</string>
     <string name="order_received">Pesanan Diterima</string>
     <string name="add_new_product">Tambah Produk Baru</string>
     <string name="edit_product_information">Edit Informasi Produk</string>
-    <string name="photo_product_allert">Foto Produk tidak boleh kosong!!</string>
+    <string name="photo_product_alert">Foto Produk tidak boleh kosong!!</string>
     <string name="delete">Hapus</string>
     <string name="message_delete_product">Anda yakin akan menghapus produk ini ?</string>
     <string name="title_delete_product">Hapus produk ini ?</string>
@@ -98,4 +98,10 @@
     <string name="paid_off_status">Lunas</string>
     <string name="not_yet_paid_off_status">Belum Lunas</string>
     <string name="store">Toko</string>
+    <string name="finish_order">Pesanan Selesai / Terbayar Lunas</string>
+    <string name="order_progress_status">Status Proses Pesanan</string>
+    <string name="update_order_status_success">Sukses perbarui status pesanan</string>
+    <string name="update_status">Perbarui Status</string>
+    <string name="your_order_status_title">"Status pesanan anda : "</string>
+    <string name="update_order_status">Perbarui status pesanan</string>
 </resources>

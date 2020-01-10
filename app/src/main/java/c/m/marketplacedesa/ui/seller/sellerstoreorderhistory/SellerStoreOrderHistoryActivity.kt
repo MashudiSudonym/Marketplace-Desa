@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_seller_store_order_history.*
+import org.jetbrains.anko.startActivity
 
 class SellerStoreOrderHistoryActivity : AppCompatActivity(), SellerStoreOrderHistoryView {
 
@@ -50,7 +52,11 @@ class SellerStoreOrderHistoryActivity : AppCompatActivity(), SellerStoreOrderHis
             presenter.getUserOrder(storeUID.toString())
         }
 
-        adapter = SellerStoreOrderHistoryAdapter(content) {}
+        adapter = SellerStoreOrderHistoryAdapter(content) {
+            startActivity<SellerStoreOrderDetailsActivity>(
+                Constants.ORDER_NUMBER to it.order_number
+            )
+        }
         rv_seller_store_order_history.setHasFixedSize(true)
         rv_seller_store_order_history.adapter = adapter
     }

@@ -325,7 +325,7 @@ class SellerAddProductActivity : AppCompatActivity(), SellerAddProductView {
                     }
                 } else {
                     alert(
-                        getString(R.string.photo_product_allert),
+                        getString(R.string.photo_product_alert),
                         getString(R.string.attention)
                     ) {
                         yesButton {}

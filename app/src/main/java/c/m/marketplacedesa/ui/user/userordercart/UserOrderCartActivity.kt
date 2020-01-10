@@ -179,7 +179,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $getOrderNumberValue ${getString(
                                         R.string.from
                                     )} $orderBy",
-                                    getString(R.string.yout_have_a_new_order)
+                                    getString(R.string.you_have_a_new_order)
                                 )
                                 deactivateOrderAndCancelButton()
                                 clearSharedPreferences()
@@ -195,7 +195,7 @@ class UserOrderCartActivity : AppCompatActivity(), UserOrderCartView {
                                     )} $getOrderNumberValue ${getString(
                                         R.string.from
                                     )} $orderBy",
-                                    getString(R.string.yout_have_a_new_order)
+                                    getString(R.string.you_have_a_new_order)
                                 )
                                 deactivateOrderAndCancelButton()
                                 clearSharedPreferences()

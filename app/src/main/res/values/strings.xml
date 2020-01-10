@@ -98,14 +98,14 @@
     <string name="short_lived_task_is_done" translatable="false">Short lived task is done.</string>
     <string name="default_notification_channel_id" translatable="false">6969</string>
     <string name="notification_channel" translatable="false">Marketplace Desa Notification</string>
-    <string name="yout_have_a_new_order">You Have a New Order</string>
+    <string name="you_have_a_new_order">You Have a New Order</string>
     <string name="you_have_a_new_order_with_order_number">You have a new order with order number</string>
     <string name="from">from</string>
     <string name="order_history">Order History</string>
     <string name="order_received">Order Received</string>
     <string name="add_new_product">Add New Product</string>
     <string name="edit_product_information">Edit Product Information</string>
-    <string name="photo_product_allert">Photo Product Can Not Empty!!</string>
+    <string name="photo_product_alert">Photo Product Can Not Empty!!</string>
     <string name="delete">Delete</string>
     <string name="message_delete_product">Are you sure want to delete this product ?</string>
     <string name="title_delete_product">Delete this product ?</string>
@@ -126,4 +126,10 @@
     <string name="paid_off_status">Paid off</string>
     <string name="not_yet_paid_off_status">Not yet paid off</string>
     <string name="store">Store</string>
+    <string name="finish_order">Order completed / paid</string>
+    <string name="order_progress_status">Order Progress Status</string>
+    <string name="update_order_status_success">Update order status success</string>
+    <string name="update_status">Update Status</string>
+    <string name="your_order_status_title">Your order status:</string>
+    <string name="update_order_status">Update Order Status</string>
 </resources>

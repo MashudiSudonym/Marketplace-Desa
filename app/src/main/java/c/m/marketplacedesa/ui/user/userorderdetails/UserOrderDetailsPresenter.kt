@@ -45,7 +45,10 @@ class UserOrderDetailsPresenter : Presenter<UserOrderDetailsView> {
                         db?.collection("store")
                             ?.whereEqualTo("uid", response.store_uid)
                             ?.addSnapshotListener { snapshot, firestoreException ->
-                                if (exception != null) Log.e(Constants.ERROR_TAG, "$exception")
+                                if (firestoreException != null) Log.e(
+                                    Constants.ERROR_TAG,
+                                    "$firestoreException"
+                                )
 
                                 val storeList = snapshot?.toObjects(StoreResponse::class.java)
 

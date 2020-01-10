@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_seller_store_order_received.*
+import org.jetbrains.anko.startActivity
 
 class SellerStoreOrderReceivedActivity : AppCompatActivity(), SellerStoreOrderReceivedView {
 
@@ -50,7 +52,11 @@ class SellerStoreOrderReceivedActivity : AppCompatActivity(), SellerStoreOrderRe
             presenter.getUserOrder(storeUID.toString())
         }
 
-        adapter = SellerStoreOrderReceivedAdapter(content) {}
+        adapter = SellerStoreOrderReceivedAdapter(content) {
+            startActivity<SellerStoreOrderDetailsActivity>(
+                Constants.ORDER_NUMBER to it.order_number
+            )
+        }
         rv_seller_store_order_received.setHasFixedSize(true)
         rv_seller_store_order_received.adapter = adapter
     }

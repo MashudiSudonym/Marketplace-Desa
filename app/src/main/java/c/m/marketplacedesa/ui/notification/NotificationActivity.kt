@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.model.NotificationCollectionResponse
+import c.m.marketplacedesa.ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity
+import c.m.marketplacedesa.ui.user.userorderdetails.UserOrderDetailsActivity
+import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.gone
 import c.m.marketplacedesa.util.visible
 import kotlinx.android.synthetic.main.activity_notification.*
+import org.jetbrains.anko.startActivity
 
 class NotificationActivity : AppCompatActivity(), NotificationView {
 
@@ -54,6 +58,20 @@ class NotificationActivity : AppCompatActivity(), NotificationView {
         adapter = NotificationAdapter(content) {
             // update notification read status
             presenter.setNotificationAsRead(it.order_number.toString())
+
+            if (it.order_title_message == "You Have a New Order") {
+                startActivity<SellerStoreOrderDetailsActivity>(
+                    Constants.ORDER_NUMBER to it.order_number
+                )
+            } else if (it.order_title_message == "Anda Memiliki Pesanan Baru") {
+                startActivity<SellerStoreOrderDetailsActivity>(
+                    Constants.ORDER_NUMBER to it.order_number
+                )
+            } else {
+                startActivity<UserOrderDetailsActivity>(
+                    Constants.ORDER_NUMBER to it.order_number
+                )
+            }
         }
         rv_notification.adapter = adapter
         rv_notification.setHasFixedSize(true)

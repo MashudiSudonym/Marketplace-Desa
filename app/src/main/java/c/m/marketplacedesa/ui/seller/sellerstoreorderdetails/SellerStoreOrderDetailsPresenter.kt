@@ -1,9 +1,8 @@
-package c.m.marketplacedesa.ui.user.userordercart
+package c.m.marketplacedesa.ui.seller.sellerstoreorderdetails
 
 import android.util.Log
 import c.m.marketplacedesa.model.MessageNotification
 import c.m.marketplacedesa.model.Notification
-import c.m.marketplacedesa.model.NotificationCollectionResponse
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
@@ -15,14 +14,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UserOrderCartPresenter : Presenter<UserOrderCartView> {
-    private var mView: UserOrderCartView? = null
+class SellerStoreOrderDetailsPresenter : Presenter<SellerStoreOrderDetailsView> {
+    private var mView: SellerStoreOrderDetailsView? = null
     private var db: FirebaseFirestore? = null
     private var authentication: FirebaseAuth? = null
     private val apiService =
         RetrofitService.getInstance("https://fcm.googleapis.com/").create(ApiInterface::class.java)
 
-    override fun onAttach(view: UserOrderCartView) {
+    override fun onAttach(view: SellerStoreOrderDetailsView) {
         mView = view
     }
 
@@ -52,7 +51,7 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
         }
     }
 
-    fun sendOrderNotification(
+    fun sendOrderStatusNotification(
         storeUID: String,
         orderNumber: String,
         storeOwnerUID: String,
@@ -89,8 +88,11 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
         }
     }
 
-    fun updateDeliveryOption(orderNumber: String, deliveryOption: Int) {
-        val updateData = mapOf("delivery_option" to deliveryOption)
+    fun updateCancelOrderStatus(orderNumber: String) {
+        val updateData = mapOf(
+            "is_canceled" to true,
+            "order_status" to 3
+        )
 
         if (userAuthentication()) {
             db?.collection("temporary_order_item_product")
@@ -106,7 +108,7 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
                             ?.update(updateData)
                             ?.addOnSuccessListener {
                                 Log.d(Constants.DEBUG_TAG, "Success update data")
-                                mView?.returnToMainActivity()
+                                mView?.alertUpdateSuccess()
                             }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }
@@ -115,7 +117,11 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
         }
     }
 
-    fun deleteOrder(orderNumber: String) {
+    fun updateProgressOrderStatus(orderNumber: String, orderStatus: Int) {
+        val updateData = mapOf(
+            "order_status" to orderStatus
+        )
+
         if (userAuthentication()) {
             db?.collection("temporary_order_item_product")
                 ?.whereEqualTo("order_number", orderNumber)
@@ -127,41 +133,46 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
                     temporaryOrderList?.forEach { response ->
                         db?.collection("temporary_order_item_product")
                             ?.document(response.uid.toString())
-                            ?.delete()
+                            ?.update(updateData)
                             ?.addOnSuccessListener {
-                                Log.d(Constants.DEBUG_TAG, "Success delete data")
-                                db?.collection("order_by_order_number")
-                                    ?.document(orderNumber)
-                                    ?.delete()
-                                    ?.addOnSuccessListener {
-                                        Log.d(Constants.DEBUG_TAG, "Success delete data")
-                                        mView?.returnToMainActivity()
-                                    }
-                                    ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                                Log.d(Constants.DEBUG_TAG, "Success update data")
+                                mView?.alertUpdateSuccess()
                             }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }
                 }
                 ?.addOnFailureListener { Log.e(Constants.ERROR_TAG, "$it") }
+        }
+    }
 
-            db?.collection("notification_collections")
+    fun updatePaymentOrderStatus(orderNumber: String) {
+        val updateData = mapOf(
+            "payment_status" to true,
+            "order_status" to 3
+        )
+
+        if (userAuthentication()) {
+            db?.collection("temporary_order_item_product")
                 ?.whereEqualTo("order_number", orderNumber)
                 ?.get()
                 ?.addOnSuccessListener { snapshot ->
-                    val notificationCollectionList =
-                        snapshot?.toObjects(NotificationCollectionResponse::class.java)
+                    val temporaryOrderList =
+                        snapshot?.toObjects(TemporaryOrderItemProductResponse::class.java)
 
-                    notificationCollectionList?.forEach { response ->
-                        db?.collection("notification_collections")
+                    temporaryOrderList?.forEach { response ->
+                        db?.collection("temporary_order_item_product")
                             ?.document(response.uid.toString())
-                            ?.delete()
+                            ?.update(updateData)
                             ?.addOnSuccessListener {
-                                Log.d(Constants.DEBUG_TAG, "Success delete data")
+                                Log.d(Constants.DEBUG_TAG, "Success update data")
+                                mView?.alertUpdateSuccess()
                             }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }
                 }
-                ?.addOnFailureListener { Log.e(Constants.ERROR_TAG, "$it") }
+                ?.addOnFailureListener {
+                    Log.e(Constants.ERROR_TAG, "$it")
+                }
         }
     }
 }
