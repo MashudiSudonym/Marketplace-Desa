@@ -8,14 +8,11 @@
     <string name="image_product_description" translatable="false">Image Product</string>
     <string name="background_gradient_description" translatable="false">Background Gradient</string>
     <string name="background_solid_description" translatable="false">Background Solid</string>
-    <string name="search">Search</string>
     <string name="product_title">Product Title</string>
     <string name="stock_title">Stock : </string>
     <string name="number_of_stock" translatable="false">-</string>
     <string name="price_title">Price : Rp.</string>
     <string name="number_of_price" translatable="false">-</string>
-    <string name="search_product_query_hint">Search product here…</string>
-    <string name="search_store_query_hint">Search store here…</string>
     <string name="title_activity_settings">Settings</string>
     <string name="seller">Seller</string>
     <string name="not_a_seller">Not a seller</string>
@@ -62,7 +59,6 @@
     <string name="id_default_country" translatable="false">id</string>
     <string name="name_field_error">Name cannot be empty</string>
     <string name="address_field_error">Address cannot be empty</string>
-    <string name="permission_checked" translatable="false">Permission Checked</string>
     <string name="take_or_choose">Take Photo or Choose from Gallery</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="take_from_camera">Take from Camera</string>
@@ -81,8 +77,6 @@
     <string name="phone_field_error">Phone number cannot be empty</string>
     <string name="select_store_location_alert">Select your store location on map</string>
     <string name="title_select_store_location_alert">Location store not selected</string>
-    <string name="store_location">Store Location</string>
-    <string name="order_number_key" translatable="false">orderNumber</string>
     <string name="badge_shared_preferences_value_key" translatable="false">badgeSharedPreferencesValue</string>
     <string name="order_shared_preferences_name" translatable="false">order_shared_preferences</string>
     <string name="user_store_order_shared_preferences_name" translatable="false">user_store_order_shared_preferences</string>

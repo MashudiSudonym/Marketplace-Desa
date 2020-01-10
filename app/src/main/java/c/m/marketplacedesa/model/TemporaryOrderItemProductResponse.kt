@@ -19,4 +19,5 @@ class TemporaryOrderItemProductResponse {
     var delivery_option: Int? = 1
     var store_owner_uid: String? = ""
     var store_uid: String? = ""
+    var user_order_uid: String? = ""
 }

@@ -4,11 +4,13 @@ import android.util.Log
 import c.m.marketplacedesa.model.MessageNotification
 import c.m.marketplacedesa.model.Notification
 import c.m.marketplacedesa.model.TemporaryOrderItemProductResponse
+import c.m.marketplacedesa.model.UsersResponse
 import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
 import c.m.marketplacedesa.util.webservice.ApiInterface
 import c.m.marketplacedesa.util.webservice.RetrofitService
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,19 +56,11 @@ class SellerStoreOrderDetailsPresenter : Presenter<SellerStoreOrderDetailsView> 
     fun sendOrderStatusNotification(
         storeUID: String,
         orderNumber: String,
-        storeOwnerUID: String,
+        orderBy: String,
+        userOrderUID: String,
         orderBodyMessage: String,
         orderTitleMessage: String
     ) {
-        val messageNotification = MessageNotification(
-            "/topics/$storeOwnerUID",
-            Notification(orderBodyMessage, orderTitleMessage)
-        )
-
-        CoroutineScope(Dispatchers.IO).launch {
-            apiService.postMessage(messageNotification)
-        }
-
         if (userAuthentication()) {
             val notificationKey =
                 db?.collection("notification_collections")?.document()?.id.toString()
@@ -74,16 +68,37 @@ class SellerStoreOrderDetailsPresenter : Presenter<SellerStoreOrderDetailsView> 
                 "order_title_message" to orderTitleMessage,
                 "order_body_message" to orderBodyMessage,
                 "order_number" to orderNumber,
-                "user_uid" to storeOwnerUID,
+                "user_order_uid" to userOrderUID,
                 "store_uid" to storeUID,
                 "read_notification" to false,
-                "uid" to notificationKey
+                "uid" to notificationKey,
+                "timestamp" to FieldValue.serverTimestamp()
             )
 
             db?.collection("notification_collections")
                 ?.document(notificationKey)
                 ?.set(data)
                 ?.addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+
+            // get user order uid
+            db?.collection("users")
+                ?.whereEqualTo("name", orderBy)
+                ?.get()
+                ?.addOnSuccessListener { snapshot ->
+                    val usersData = snapshot?.toObjects(UsersResponse::class.java)
+
+                    usersData?.forEach { usersResponse ->
+                        val messageNotification = MessageNotification(
+                            "/topics/${usersResponse.uid}",
+                            Notification(orderBodyMessage, orderTitleMessage)
+                        )
+
+                        CoroutineScope(Dispatchers.IO).launch {
+                            apiService.postMessage(messageNotification)
+                        }
+                    }
+                }
                 ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
         }
     }

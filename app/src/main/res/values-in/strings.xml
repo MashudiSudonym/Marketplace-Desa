@@ -3,11 +3,8 @@
     <string name="cart">Keranjang Belanja</string>
     <string name="setting">Pengaturan</string>
     <string name="no_data">Tidak ada data</string>
-    <string name="search">Cari</string>
     <string name="product_title">Judul Produk</string>
     <string name="stock_title">"Stok : "</string>
-    <string name="search_product_query_hint">Cari produk disini…</string>
-    <string name="search_store_query_hint">Cari toko disini…</string>
     <string name="title_activity_settings">Pengaturan</string>
     <string name="seller">Penjual</string>
     <string name="not_a_seller">Bukan penjual</string>
@@ -64,7 +61,6 @@
     <string name="phone_field_error">Nomor telepon tidak boleh kosong</string>
     <string name="select_store_location_alert">Pilih lokasi tokomu di peta</string>
     <string name="title_select_store_location_alert">Lokasi peta tidak ditentukan</string>
-    <string name="store_location">Lokasi Toko</string>
     <string name="alert_message_order">Anda memiliki pesanan yang belum diselesaikan di toko lain. Harap selesaikan pesanan atau batalkan.</string>
     <string name="available_stock_status">tersedia</string>
     <string name="not_available_stock_status">tidak tersedia</string>

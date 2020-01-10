@@ -10,6 +10,7 @@ import c.m.marketplacedesa.util.base.Presenter
 import c.m.marketplacedesa.util.webservice.ApiInterface
 import c.m.marketplacedesa.util.webservice.RetrofitService
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,10 +76,10 @@ class UserOrderCartPresenter : Presenter<UserOrderCartView> {
                 "order_title_message" to orderTitleMessage,
                 "order_body_message" to orderBodyMessage,
                 "order_number" to orderNumber,
-                "user_uid" to storeOwnerUID,
                 "store_uid" to storeUID,
                 "read_notification" to false,
-                "uid" to notificationKey
+                "uid" to notificationKey,
+                "timestamp" to FieldValue.serverTimestamp()
             )
 
             db?.collection("notification_collections")

@@ -6,6 +6,7 @@ import c.m.marketplacedesa.util.Constants
 import c.m.marketplacedesa.util.base.Presenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class NotificationPresenter : Presenter<NotificationView> {
     private var mView: NotificationView? = null
@@ -34,7 +35,8 @@ class NotificationPresenter : Presenter<NotificationView> {
             mView?.showLoading()
 
             db?.collection("notification_collections")
-                ?.whereEqualTo("user_uid", userUID)
+                ?.whereEqualTo("user_order_uid", userUID)
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
                 ?.addSnapshotListener { snapshot, firestoreException ->
                     if (firestoreException != null) mView?.showNoNotificationResult()
 
@@ -57,12 +59,8 @@ class NotificationPresenter : Presenter<NotificationView> {
         if (userAuthentication()) {
             db?.collection("notification_collections")
                 ?.whereEqualTo("order_number", orderNumber)
-                ?.addSnapshotListener { snapshot, firestoreException ->
-                    if (firestoreException != null) Log.e(
-                        Constants.ERROR_TAG,
-                        "$firestoreException"
-                    )
-
+                ?.get()
+                ?.addOnSuccessListener { snapshot ->
                     val notificationData =
                         snapshot?.toObjects(NotificationCollectionResponse::class.java)
 
@@ -75,6 +73,12 @@ class NotificationPresenter : Presenter<NotificationView> {
                             }
                             ?.addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
                     }
+                }
+                ?.addOnFailureListener {
+                    Log.e(
+                        Constants.ERROR_TAG,
+                        "$it"
+                    )
                 }
         }
     }

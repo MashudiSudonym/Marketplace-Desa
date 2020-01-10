@@ -5,7 +5,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import c.m.marketplacedesa.R
 import c.m.marketplacedesa.util.Constants
-import c.m.marketplacedesa.util.newOrderNotificationSetup
+import c.m.marketplacedesa.util.notificationSetup
 import c.m.marketplacedesa.util.updateOrderStatusNotificationSetup
 import c.m.marketplacedesa.util.worker.MyWorker
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -32,8 +32,8 @@ class ApplicationFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage.notification?.let {
             Log.d(Constants.APP_FIREBASE_MESSAGING_SERVICE, "Message Notification Body: ${it.body}")
 
-            if (it.title == getString(R.string.you_have_a_new_order)) {
-                newOrderNotificationSetup(
+            if (it.title == "You Have a New Order" || it.title == "Anda Memiliki Pesanan Baru") {
+                notificationSetup(
                     this,
                     it.title,
                     it.body,

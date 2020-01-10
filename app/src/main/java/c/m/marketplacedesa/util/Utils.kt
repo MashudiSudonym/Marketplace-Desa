@@ -13,8 +13,8 @@ import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import c.m.marketplacedesa.R
-import c.m.marketplacedesa.ui.seller.sellerstoreorderreceived.SellerStoreOrderReceivedActivity
-import c.m.marketplacedesa.ui.user.userorder.UserOrderActivity
+import c.m.marketplacedesa.ui.notification.NotificationActivity
+import c.m.marketplacedesa.ui.user.userprofile.UserProfileActivity
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
@@ -35,7 +35,7 @@ fun View.gone() {
     visibility = View.GONE
 }
 
-fun newOrderNotificationSetup(
+fun notificationSetup(
     context: Context?,
     title: String?,
     content: String?,
@@ -43,7 +43,7 @@ fun newOrderNotificationSetup(
     notificationChannel: String?
 ) {
     // Declaration Notification
-    val intentApp = Intent(context, SellerStoreOrderReceivedActivity::class.java).apply {
+    val intentApp = Intent(context, UserProfileActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
     val pendingIntent = PendingIntent.getActivity(
@@ -103,7 +103,7 @@ fun updateOrderStatusNotificationSetup(
     notificationChannel: String?
 ) {
     // Declaration Notification
-    val intentApp = Intent(context, UserOrderActivity::class.java).apply {
+    val intentApp = Intent(context, NotificationActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
     val pendingIntent = PendingIntent.getActivity(

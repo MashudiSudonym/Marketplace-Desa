@@ -27,6 +27,7 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
     private var orderPaymentStatus: Boolean = false
     private var orderCanceled: Boolean = false
     private var totalPrice: Int = 0
+    private var userOrderUID: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +90,7 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
             orderStatus = response.order_status
             storeUID = response.store_uid
             storeOwnerUID = response.store_owner_uid
+            userOrderUID = response.user_order_uid
         }
 
         // count total price
@@ -130,7 +132,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
             presenter.sendOrderStatusNotification(
                 storeUID.toString(),
                 orderNumber.toString(),
-                storeOwnerUID.toString(),
+                orderBy.toString(),
+                userOrderUID.toString(),
                 "${getString(R.string.your_order_status_title)} ${getString(R.string.paid_off_status)}",
                 "${getString(R.string.update_order_status)} : $orderNumber"
             )
@@ -144,7 +147,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
             presenter.sendOrderStatusNotification(
                 storeUID.toString(),
                 orderNumber.toString(),
-                storeOwnerUID.toString(),
+                orderBy.toString(),
+                userOrderUID.toString(),
                 "${getString(R.string.your_order_status_title)} ${getString(R.string.order_cancel_status)}",
                 "${getString(R.string.update_order_status)} : $orderNumber"
             )
@@ -190,7 +194,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
                         presenter.sendOrderStatusNotification(
                             storeUID.toString(),
                             orderNumber.toString(),
-                            storeOwnerUID.toString(),
+                            orderBy.toString(),
+                            userOrderUID.toString(),
                             "${getString(R.string.your_order_status_title)} ${getString(R.string.waiting_status)}",
                             "${getString(R.string.update_order_status)} : $orderNumber"
                         )
@@ -201,7 +206,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
                         presenter.sendOrderStatusNotification(
                             storeUID.toString(),
                             orderNumber.toString(),
-                            storeOwnerUID.toString(),
+                            orderBy.toString(),
+                            userOrderUID.toString(),
                             "${getString(R.string.your_order_status_title)} ${getString(R.string.order_accept_status)}",
                             "${getString(R.string.update_order_status)} : $orderNumber"
                         )
@@ -212,7 +218,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
                         presenter.sendOrderStatusNotification(
                             storeUID.toString(),
                             orderNumber.toString(),
-                            storeOwnerUID.toString(),
+                            orderBy.toString(),
+                            userOrderUID.toString(),
                             "${getString(R.string.your_order_status_title)} ${getString(R.string.process_status)}",
                             "${getString(R.string.update_order_status)} : $orderNumber"
                         )
@@ -223,7 +230,8 @@ class SellerStoreOrderDetailsActivity : AppCompatActivity(), SellerStoreOrderDet
                         presenter.sendOrderStatusNotification(
                             storeUID.toString(),
                             orderNumber.toString(),
-                            storeOwnerUID.toString(),
+                            orderBy.toString(),
+                            userOrderUID.toString(),
                             "${getString(R.string.your_order_status_title)} ${getString(R.string.order_complete_status)}",
                             "${getString(R.string.update_order_status)} : $orderNumber"
                         )

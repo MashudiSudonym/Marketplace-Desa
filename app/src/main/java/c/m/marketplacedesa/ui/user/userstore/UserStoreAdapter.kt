@@ -16,6 +16,7 @@ import c.m.marketplacedesa.util.invisible
 import c.m.marketplacedesa.util.visible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.extensions.LayoutContainer
@@ -67,6 +68,8 @@ class UserStoreAdapter(
                         storeOwnerUID = response.owner.toString()
                     }
                 }
+            // user uid
+            val userUID = FirebaseAuth.getInstance().currentUser?.uid
             // check user order status
             val userStoreOrderSharedPreferences = itemView.context.getSharedPreferences(
                 itemView.context.getString(R.string.user_store_order_shared_preferences_name),
@@ -170,28 +173,31 @@ class UserStoreAdapter(
                     "order_by" to userName,
                     "store_owner_uid" to storeOwnerUID,
                     "delivery_option" to 1,
-                    "store_uid" to contentProduct.store
+                    "store_uid" to contentProduct.store,
+                    "user_order_uid" to userUID
                 )
                 val orderByOrderNumber = mapOf(
                     temporaryOrderItemProductKey to true
                 )
 
                 // send data to firebase
-                db.collection("temporary_order_item_product")
-                    .document(temporaryOrderItemProductKey)
-                    .set(temporaryOrderItemProduct)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                if (FirebaseAuth.getInstance().currentUser != null) {
+                    db.collection("temporary_order_item_product")
+                        .document(temporaryOrderItemProductKey)
+                        .set(temporaryOrderItemProduct)
+                        .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success add data") }
+                        .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
 
-                db.collection("order_by_order_number")
-                    .document(getOrderNumberValue.toString())
-                    .set(orderByOrderNumber, SetOptions.merge())
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
-                    .addOnFailureListener { e ->
-                        Log.e("ERROR!!", "$e")
-                    }
+                    db.collection("order_by_order_number")
+                        .document(getOrderNumberValue.toString())
+                        .set(orderByOrderNumber, SetOptions.merge())
+                        .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                        .addOnFailureListener { e ->
+                            Log.e("ERROR!!", "$e")
+                        }
 
-                Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
+                    Log.d(Constants.DEBUG_TAG, temporaryOrderItemProductKey)
+                }
             }
 
             btn_plus_sign_order.setOnClickListener {
@@ -222,14 +228,16 @@ class UserStoreAdapter(
                     "total_price" to contentProduct.price?.times(productOrderCount)
                 )
 
-                // send data to firebase
-                db.collection("temporary_order_item_product")
-                    .document(firebaseTemporaryOrderItemProductKey.toString())
-                    .update(temporaryOrderItemProduct)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
+                if (FirebaseAuth.getInstance().currentUser != null) {
+                    // send data to firebase
+                    db.collection("temporary_order_item_product")
+                        .document(firebaseTemporaryOrderItemProductKey.toString())
+                        .update(temporaryOrderItemProduct)
+                        .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                        .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
 
-                Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
+                    Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
+                }
             }
 
             btn_minus_sign_order.setOnClickListener {
@@ -257,33 +265,34 @@ class UserStoreAdapter(
                     "total_price" to contentProduct.price?.times(productOrderCount)
                 )
 
-                // send data to firebase
-                db.collection("temporary_order_item_product")
-                    .document(firebaseTemporaryOrderItemProductKey.toString())
-                    .update(temporaryOrderItemProduct)
-                    .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
-                    .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
-
-                Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
-
-                // visible and invisible button button
-                if (productOrderCount == 0) {
-                    btn_add_to_shopping_basket_order.visible()
-                    btn_plus_sign_order.invisible()
-                    btn_minus_sign_order.invisible()
-                    tv_order_count_order.invisible()
-                    itemView.snackbar("Remove ${contentProduct.name} to shopping cart")
-
+                if (FirebaseAuth.getInstance().currentUser != null) {
                     // send data to firebase
                     db.collection("temporary_order_item_product")
                         .document(firebaseTemporaryOrderItemProductKey.toString())
-                        .delete()
+                        .update(temporaryOrderItemProduct)
+                        .addOnSuccessListener { Log.d(Constants.DEBUG_TAG, "Success update data") }
+                        .addOnFailureListener { e -> Log.e("ERROR!!", "$e") }
 
-                    db.collection("order_by_order_number")
-                        .document(getOrderNumberValue.toString())
-                        .delete()
+                    Log.d(Constants.DEBUG_TAG, firebaseTemporaryOrderItemProductKey.toString())
+
+                    // visible and invisible button button
+                    if (productOrderCount == 0) {
+                        btn_add_to_shopping_basket_order.visible()
+                        btn_plus_sign_order.invisible()
+                        btn_minus_sign_order.invisible()
+                        tv_order_count_order.invisible()
+                        itemView.snackbar("Remove ${contentProduct.name} to shopping cart")
+
+                        // send data to firebase
+                        db.collection("temporary_order_item_product")
+                            .document(firebaseTemporaryOrderItemProductKey.toString())
+                            .delete()
+
+                        db.collection("order_by_order_number")
+                            .document(getOrderNumberValue.toString())
+                            .delete()
+                    }
                 }
-
                 // show product order count
                 tv_order_count_order.text = productOrderCount.toString()
             }
