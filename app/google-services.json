@@ -8,12 +8,65 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:285740881901:android:6880169603b1cc75bab9e4",
+        "android_client_info": {
+          "package_name": "c.m.lapaksembakodonorojojepara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285740881901-nrv4spu0kparq0fhgdual8m56ci997mk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "c.m.lapaksembakodonorojojepara",
+            "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
+          }
+        },
+        {
+          "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:285740881901:android:277aa8bf6e0b443abab9e4",
         "android_client_info": {
           "package_name": "c.m.marketplacedesa"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "285740881901-bt5h0c6v3jjd3n46ncgoqbr1vold84h0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "c.m.marketplacedesa",
+            "certificate_hash": "5abed8ad4594b781dbf49f696a07e2513b3ab04c"
+          }
+        },
+        {
+          "client_id": "285740881901-rkdtg5pht52b6t5eiqd5m7i4rbcnfik0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "c.m.marketplacedesa",
+            "certificate_hash": "ae7bdf723c2f430593f1839c10f1f22aa1726d06"
+          }
+        },
         {
           "client_id": "285740881901-bhl7aq7365esks7n37s1f227qlb9buba.apps.googleusercontent.com",
           "client_type": 1,
@@ -29,7 +82,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAoJLwoalP8jF4VeAiH0tgSfMCv-7MkCZw"
+          "current_key": "AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U"
         }
       ],
       "services": {
