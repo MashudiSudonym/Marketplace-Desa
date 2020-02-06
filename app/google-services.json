@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285740881901:android:6880169603b1cc75bab9e4",
+        "mobilesdk_app_id": "1:285740881901:android:2b8af5d548a3b5b2bab9e4",
         "android_client_info": {
-          "package_name": "c.m.lapaksembakodonorojojepara"
+          "package_name": "c.m.lapaksembakodonorojo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "285740881901-nrv4spu0kparq0fhgdual8m56ci997mk.apps.googleusercontent.com",
+          "client_id": "285740881901-n0nmeubn03si0oqmsij3bum5br6gjats.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.lapaksembakodonorojojepara",
+            "package_name": "c.m.lapaksembakodonorojo",
             "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
           }
         },
@@ -45,33 +45,33 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285740881901:android:277aa8bf6e0b443abab9e4",
+        "mobilesdk_app_id": "1:285740881901:android:6880169603b1cc75bab9e4",
         "android_client_info": {
-          "package_name": "c.m.marketplacedesa"
+          "package_name": "c.m.lapaksembakodonorojojepara"
         }
       },
       "oauth_client": [
         {
-          "client_id": "285740881901-bt5h0c6v3jjd3n46ncgoqbr1vold84h0.apps.googleusercontent.com",
+          "client_id": "285740881901-6acs3etdq094q5a8k41t5bt5lr42bqrl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.marketplacedesa",
-            "certificate_hash": "5abed8ad4594b781dbf49f696a07e2513b3ab04c"
+            "package_name": "c.m.lapaksembakodonorojojepara",
+            "certificate_hash": "2a9a75b58f151da28d8ffb8ccbfda1832ca33074"
           }
         },
         {
-          "client_id": "285740881901-rkdtg5pht52b6t5eiqd5m7i4rbcnfik0.apps.googleusercontent.com",
+          "client_id": "285740881901-mro28tf9sa8jquq04g8p5btu1ecuk9vo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.marketplacedesa",
-            "certificate_hash": "ae7bdf723c2f430593f1839c10f1f22aa1726d06"
+            "package_name": "c.m.lapaksembakodonorojojepara",
+            "certificate_hash": "f76f85014d7511dca5a3fcd4f562bc27d38e059e"
           }
         },
         {
-          "client_id": "285740881901-bhl7aq7365esks7n37s1f227qlb9buba.apps.googleusercontent.com",
+          "client_id": "285740881901-nrv4spu0kparq0fhgdual8m56ci997mk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.marketplacedesa",
+            "package_name": "c.m.lapaksembakodonorojojepara",
             "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
           }
         },

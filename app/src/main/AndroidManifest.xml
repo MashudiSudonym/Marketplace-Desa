@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="c.m.lapaksembakodonorojojepara">
+    package="c.m.lapaksembakodonorojo">
 
     <dist:module dist:instant="true" />
 
@@ -27,19 +27,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellerstoreorderhistory.SellerStoreOrderHistoryActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellerstoreorderreceived.SellerStoreOrderReceivedActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.userorderdetails.UserOrderDetailsActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.userorderhistory.UserOrderHistoryActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.userorder.UserOrderActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.notification.NotificationActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellereditstoreinformation.SellerEditStoreInformationActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellereditproduct.SellerEditProductActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.selleraddproduct.SellerAddProductActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellerstoreorderdetails.SellerStoreOrderDetailsActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellerstoreorderhistory.SellerStoreOrderHistoryActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellerstoreorderreceived.SellerStoreOrderReceivedActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.userorderdetails.UserOrderDetailsActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.userorderhistory.UserOrderHistoryActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.userorder.UserOrderActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.notification.NotificationActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellereditstoreinformation.SellerEditStoreInformationActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellereditproduct.SellerEditProductActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.selleraddproduct.SellerAddProductActivity" />
 
         <service
-            android:name="c.m.lapaksembakodonorojojepara.util.service.ApplicationFirebaseMessagingService"
+            android:name="c.m.lapaksembakodonorojo.util.service.ApplicationFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -70,42 +70,42 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_maps" />
 
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.sellerstoreinformation.SellerStoreInformationActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.userordercart.UserOrderCartActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.userstoredetails.UserStoreDetailsActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.sellerstoreinformation.SellerStoreInformationActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.seller.completesellerstoreinformation.CompleteSellerStoreInformationActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.userordercart.UserOrderCartActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.userstoredetails.UserStoreDetailsActivity" />
         <activity
-            android:name="c.m.lapaksembakodonorojojepara.ui.user.completeuserprofile.CompleteUserProfileActivity"
-            android:parentActivityName="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity">
+            android:name="c.m.lapaksembakodonorojo.ui.user.completeuserprofile.CompleteUserProfileActivity"
+            android:parentActivityName="c.m.lapaksembakodonorojo.ui.user.main.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity" />
+                android:value="c.m.lapaksembakodonorojo.ui.user.main.MainActivity" />
         </activity>
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.usereditprofile.UserEditProfileActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.usereditprofile.UserEditProfileActivity" />
         <activity
-            android:name="c.m.lapaksembakodonorojojepara.ui.settings.SettingsActivity"
+            android:name="c.m.lapaksembakodonorojo.ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:value=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity" />
+                android:value="c.m.lapaksembakodonorojo.ui.user.main.MainActivity" />
         </activity>
         <activity
-            android:name="c.m.lapaksembakodonorojojepara.ui.user.userprofile.UserProfileActivity"
+            android:name="c.m.lapaksembakodonorojo.ui.user.userprofile.UserProfileActivity"
             android:theme="@style/ProfileTheme.NoActionBar" />
         <activity
-            android:name="c.m.lapaksembakodonorojojepara.ui.user.userstore.UserStoreActivity"
-            android:parentActivityName="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity">
+            android:name="c.m.lapaksembakodonorojo.ui.user.userstore.UserStoreActivity"
+            android:parentActivityName="c.m.lapaksembakodonorojo.ui.user.main.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity" />
+                android:value="c.m.lapaksembakodonorojo.ui.user.main.MainActivity" />
         </activity>
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.signin.SignInActivity" />
-        <activity android:name="c.m.lapaksembakodonorojojepara.ui.user.main.MainActivity">
+        <activity android:name="c.m.lapaksembakodonorojo.ui.signin.SignInActivity" />
+        <activity android:name="c.m.lapaksembakodonorojo.ui.user.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
