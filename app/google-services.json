@@ -15,63 +15,26 @@
       },
       "oauth_client": [
         {
-          "client_id": "285740881901-n0nmeubn03si0oqmsij3bum5br6gjats.apps.googleusercontent.com",
+          "client_id": "285740881901-3tsrq98be672og3pqtk25uo0lqrt9555.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "c.m.lapaksembakodonorojo",
-            "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
+            "certificate_hash": "1d5b650ee5be4990d9f3cd4dcd4444eb9dc5725e"
           }
         },
         {
-          "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDvGo9RhZmRTPVZqXgqVRLSephFcyVhI8U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "285740881901-gs0dkgnii2nbveeg52elqtae099i0et3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:285740881901:android:6880169603b1cc75bab9e4",
-        "android_client_info": {
-          "package_name": "c.m.lapaksembakodonorojojepara"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "285740881901-6acs3etdq094q5a8k41t5bt5lr42bqrl.apps.googleusercontent.com",
+          "client_id": "285740881901-ob2kr0l2681v0cqhieebjt2psjkvo10t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.lapaksembakodonorojojepara",
+            "package_name": "c.m.lapaksembakodonorojo",
             "certificate_hash": "2a9a75b58f151da28d8ffb8ccbfda1832ca33074"
           }
         },
         {
-          "client_id": "285740881901-mro28tf9sa8jquq04g8p5btu1ecuk9vo.apps.googleusercontent.com",
+          "client_id": "285740881901-n0nmeubn03si0oqmsij3bum5br6gjats.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "c.m.lapaksembakodonorojojepara",
-            "certificate_hash": "f76f85014d7511dca5a3fcd4f562bc27d38e059e"
-          }
-        },
-        {
-          "client_id": "285740881901-nrv4spu0kparq0fhgdual8m56ci997mk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "c.m.lapaksembakodonorojojepara",
+            "package_name": "c.m.lapaksembakodonorojo",
             "certificate_hash": "05815e90900cbdc75f0ec65fee2caca4e3642742"
           }
         },
